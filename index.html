@@ -12,7 +12,7 @@
 
 <style>
 /* ============================================================
-   PLUTO 2.0 — DESIGN TOKENS
+   PLUTO 2.0 — DESIGN TOKENS (unchanged)
    ============================================================ */
 :root{
   --p-void:      #090014;
@@ -84,29 +84,21 @@ p{ margin:0; }
   opacity:.6;
 }
 
-/* reveal utility (JS toggles .is-visible) */
+/* reveal utility */
 .reveal{ opacity:0; transform:translateY(36px); transition:opacity 1s var(--ease-out), transform 1.1s var(--ease-out); }
 .reveal.is-visible{ opacity:1; transform:translateY(0); }
 .reveal-scale{ opacity:0; transform:scale(.94); transition:opacity 1.1s var(--ease-out), transform 1.2s var(--ease-out); }
 .reveal-scale.is-visible{ opacity:1; transform:scale(1); }
 .stagger > *{ transition-delay:calc(var(--i,0) * 90ms); }
 
-/* ============================================================
-   SVG PLUTO P — brand geometry system (defined once, reused)
-   ============================================================ */
 .svg-defs{ position:absolute; width:0; height:0; overflow:hidden; }
 
-/* ============================================================
-   NOISE / GRAIN
-   ============================================================ */
 .grain{
   position:fixed; inset:0; pointer-events:none; z-index:998; opacity:.035; mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ============================================================
-   CUSTOM CURSOR (desktop only)
-   ============================================================ */
+/* Custom cursor */
 .cursor{
   position:fixed; top:0; left:0; width:26px; height:26px; border-radius:50%;
   border:1px solid rgba(201,182,255,.55);
@@ -123,7 +115,7 @@ p{ margin:0; }
 @media (hover:none), (pointer:coarse){ .cursor{ display:none; } }
 
 /* ============================================================
-   NAVIGATION — floating glass
+   NAVIGATION — with new logo
    ============================================================ */
 .nav{
   position:fixed; top:16px; left:50%; transform:translateX(-50%);
@@ -144,8 +136,34 @@ p{ margin:0; }
   background:linear-gradient(180deg, rgba(20,6,40,.72), rgba(10,3,20,.72));
   box-shadow:0 24px 70px -18px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.08), 0 0 0 1px rgba(157,78,255,.08);
 }
-.nav-brand{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-size:17px; font-weight:600; letter-spacing:.01em; }
-.nav-brand .p-mark{ width:24px; height:auto; filter:drop-shadow(0 0 10px rgba(157,78,255,.7)); }
+.nav-brand{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  font-family:var(--font-display);
+  line-height:1.1;
+}
+.nav-brand .logo-main{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:.04em;
+  color:#fff;
+}
+.nav-brand .logo-sub{
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.12em;
+  color:var(--p-lavender);
+  opacity:.7;
+}
+.nav-brand .logo-tagline{
+  font-size:8px;
+  font-weight:400;
+  letter-spacing:.18em;
+  color:var(--p-silver);
+  opacity:.5;
+  margin-left:4px;
+}
 .nav-links{ display:flex; align-items:center; gap:2px; list-style:none; margin:0; padding:0; }
 .nav-links a{
   display:block; padding:10px 16px; font-size:13.5px; font-weight:500; color:var(--p-silver);
@@ -172,7 +190,6 @@ p{ margin:0; }
   .nav-toggle span::before{ top:-5px; } .nav-toggle span::after{ top:5px; }
 }
 
-/* mobile menu overlay */
 .mnav{
   position:fixed; inset:0; z-index:1200;
   background:radial-gradient(120% 120% at 80% 0%, rgba(94,44,165,.5), transparent 60%), linear-gradient(180deg, #0f0022, #05000d);
@@ -186,17 +203,12 @@ p{ margin:0; }
 .mnav a{ font-family:var(--font-display); font-size:clamp(28px,9vw,44px); font-weight:600; color:#fff; padding:10px 0; opacity:.9; }
 .mnav-foot{ margin-top:40px; display:flex; flex-direction:column; gap:6px; color:var(--p-silver); font-size:14px; }
 
-/* ============================================================
-   SECTION BASE
-   ============================================================ */
+/* Sections (unchanged) */
 section{ position:relative; }
 .pad-xl{ padding:170px 0; }
 .pad-lg{ padding:130px 0; }
 @media (max-width:768px){ .pad-xl{ padding:110px 0; } .pad-lg{ padding:88px 0; } }
 
-/* ============================================================
-   GLASS COMPONENTS
-   ============================================================ */
 .glass{
   background:linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02) 60%);
   border:1px solid rgba(255,255,255,.14);
@@ -254,28 +266,30 @@ section{ position:relative; }
 .btn-dark .arrow{ background:rgba(94,44,165,.12); }
 .btn-dark:hover{ transform:translateY(-3px); box-shadow:0 26px 55px -18px rgba(43,7,84,.4); }
 
-/* magnetic wrapper target */
 .magnetic{ display:inline-block; }
 
-/* ============================================================
-   NAV SPACER
-   ============================================================ */
 .nav-spacer{ height:0; }
 
 /* ============================================================
-   01 — HERO
+   01 — HERO (with background image)
    ============================================================ */
 .hero{
   min-height:100vh;
   display:flex; flex-direction:column; justify-content:center;
-  background:
-    radial-gradient(60% 55% at 78% 18%, rgba(157,78,255,.28), transparent 60%),
-    radial-gradient(50% 45% at 15% 85%, rgba(94,44,165,.22), transparent 60%),
-    linear-gradient(180deg, var(--p-void) 0%, #0c001d 60%, var(--p-deep) 100%);
   overflow:hidden;
   padding-top:var(--nav-h);
+  position:relative;
 }
-.hero-field{ position:absolute; inset:0; overflow:hidden; }
+.hero-bg{
+  position:absolute; inset:0; z-index:0;
+  width:100%; height:100%;
+  object-fit:cover;
+}
+.hero-overlay{
+  position:absolute; inset:0; z-index:1;
+  background:rgba(0,0,0,0.55);
+}
+.hero-field{ position:absolute; inset:0; overflow:hidden; z-index:2; }
 .hero-p{
   position:absolute; top:50%; right:-6%; width:min(52vw,760px);
   transform:translateY(-50%);
@@ -327,7 +341,7 @@ section{ position:relative; }
 }
 
 /* ============================================================
-   02 — BRAND STATEMENT
+   02 — BRAND STATEMENT (unchanged)
    ============================================================ */
 .statement{
   background:linear-gradient(180deg, var(--p-deep) 0%, var(--p-royal) 55%, #3a0f6e 100%);
@@ -355,7 +369,7 @@ section{ position:relative; }
 .statement-copy + .statement-copy{ margin-top:22px; }
 
 /* ============================================================
-   03 — THE PEOPLE
+   03 — THE PEOPLE (with background images)
    ============================================================ */
 .people{
   background:linear-gradient(180deg, #3a0f6e 0%, var(--p-light) 22%, var(--p-platinum) 100%);
@@ -372,22 +386,24 @@ section{ position:relative; }
   min-height:360px; display:flex; flex-direction:column; justify-content:flex-end;
   border:1px solid rgba(94,44,165,.14);
   transition:transform .6s var(--ease-spring), box-shadow .6s ease;
+  background-size:cover; background-position:center;
 }
 .people-card:hover{ transform:translateY(-8px); box-shadow:0 40px 70px -30px rgba(43,7,84,.35); }
-.people-card .aura{
+.people-card .card-overlay{
   position:absolute; inset:0; z-index:0;
+  background:rgba(0,0,0,0.45);
+  border-radius:28px;
 }
-.people-card:nth-child(1) .aura{ background:radial-gradient(120% 100% at 20% 0%, #cbb3ff, #efe8ff 70%); }
-.people-card:nth-child(2) .aura{ background:radial-gradient(120% 100% at 80% 0%, #b493ff, #e9e0ff 70%); }
-.people-card:nth-child(3) .aura{ background:radial-gradient(120% 100% at 50% 0%, #9d6fff, #ded0ff 70%); }
-.people-card .pmark{ position:absolute; top:26px; right:26px; width:46px; opacity:.35; }
-.people-card-content{ position:relative; z-index:1; }
-.people-card .num{ font-family:var(--font-display); font-size:13px; letter-spacing:.2em; color:var(--p-mid); opacity:.7; }
-.people-card h3{ font-size:26px; margin-top:14px; color:var(--p-ink); }
-.people-card p{ margin-top:10px; font-size:14.5px; line-height:1.6; color:#4a3d63; }
+.people-card .pmark{
+  position:absolute; top:26px; right:26px; width:46px; opacity:.15; z-index:1;
+}
+.people-card-content{ position:relative; z-index:1; color:#fff; }
+.people-card .num{ font-family:var(--font-display); font-size:13px; letter-spacing:.2em; color:rgba(255,255,255,.7); }
+.people-card h3{ font-size:26px; margin-top:14px; color:#fff; }
+.people-card p{ margin-top:10px; font-size:14.5px; line-height:1.6; color:rgba(255,255,255,.8); }
 
 /* ============================================================
-   04 — HOW PLUTO HELPS (services)
+   04 — SERVICES (with real images as icons)
    ============================================================ */
 .services{
   background:linear-gradient(180deg, var(--p-platinum) 0%, #efe7ff 12%, var(--p-mid) 46%, var(--p-royal) 100%);
@@ -406,8 +422,10 @@ section{ position:relative; }
 .service-row:hover .row-bg{ transform:scaleX(1); }
 .service-row > *{ position:relative; z-index:1; }
 .service-num{ font-family:var(--font-display); font-size:14px; color:var(--p-lavender); opacity:.7; }
-.service-icon{ width:44px; height:44px; display:grid; place-items:center; border-radius:14px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); }
-.service-icon svg{ width:20px; height:20px; stroke:#fff; }
+.service-icon-img{
+  width:44px; height:44px; border-radius:14px; object-fit:cover;
+  border:1px solid rgba(255,255,255,.2); flex-shrink:0;
+}
 .service-name{ font-family:var(--font-display); font-size:clamp(20px,2.6vw,28px); color:#fff; display:flex; align-items:center; gap:16px; }
 .service-desc{ font-size:14.5px; line-height:1.65; color:var(--p-lilac); max-width:420px; }
 .service-cta{ justify-self:end; display:flex; align-items:center; gap:8px; font-size:13px; color:#fff; opacity:.75; transition:opacity .3s ease, transform .3s ease; }
@@ -420,7 +438,7 @@ section{ position:relative; }
 }
 
 /* ============================================================
-   05 — TRUST
+   05 — TRUST (unchanged)
    ============================================================ */
 .trust{
   background:linear-gradient(180deg, var(--p-royal) 0%, #12001f 30%, var(--p-void) 100%);
@@ -445,7 +463,7 @@ section{ position:relative; }
 .stat .lbl{ font-size:12.5px; color:var(--p-silver); margin-top:8px; letter-spacing:.03em; }
 
 /* ============================================================
-   06 — APPROACH (timeline)
+   06 — APPROACH (unchanged)
    ============================================================ */
 .approach{
   background:linear-gradient(180deg, var(--p-void) 0%, #0e0020 100%);
@@ -470,10 +488,11 @@ section{ position:relative; }
 .t-step p{ font-size:14.5px; line-height:1.7; color:var(--p-silver); }
 
 /* ============================================================
-   07 — PROFESSIONALS (careers)
+   07 — PROFESSIONALS (with background image)
    ============================================================ */
 .professionals{
-  background:linear-gradient(180deg, #0e0020 0%, var(--p-deep) 40%, var(--p-royal) 100%);
+  background:linear-gradient(180deg, rgba(14,0,32,0.88) 0%, rgba(22,0,43,0.88) 40%, rgba(43,7,84,0.88) 100%), url('/images/pluto/staffing-solutions--5.jpg');
+  background-size:cover; background-position:center;
   padding:150px 0;
   overflow:hidden;
   position:relative;
@@ -491,7 +510,7 @@ section{ position:relative; }
 .p-step span{ display:block; margin-top:6px; font-size:13.5px; color:var(--p-silver); line-height:1.55; }
 
 /* ============================================================
-   08 — STORIES / TESTIMONIALS
+   08 — STORIES (unchanged)
    ============================================================ */
 .stories{
   background:linear-gradient(180deg, var(--p-royal) 0%, var(--p-light) 30%, var(--p-platinum) 100%);
@@ -513,10 +532,11 @@ section{ position:relative; }
 .story-meta span{ font-size:13px; color:#5b4c78; letter-spacing:.02em; }
 
 /* ============================================================
-   09 — FINAL CTA
+   09 — FINAL CTA (with background image)
    ============================================================ */
 .final-cta{
-  background:radial-gradient(60% 60% at 50% 30%, rgba(157,78,255,.35), transparent 65%), linear-gradient(180deg, var(--p-void), #05000d 70%, var(--p-black));
+  background:radial-gradient(60% 60% at 50% 30%, rgba(157,78,255,.35), transparent 65%), url('/images/pluto/contact--3.jpg');
+  background-size:cover; background-position:center;
   padding:200px 0 170px; text-align:center; position:relative; overflow:hidden;
 }
 .final-p{ position:absolute; top:50%; left:50%; width:min(70vw,900px); transform:translate(-50%,-50%); opacity:.14; }
@@ -527,7 +547,7 @@ section{ position:relative; }
 .final-phone{ margin-top:36px; font-family:var(--font-display); font-size:22px; color:var(--p-lilac); letter-spacing:.02em; }
 
 /* ============================================================
-   FOOTER
+   FOOTER (with new logo)
    ============================================================ */
 footer{
   background:var(--p-black); padding:80px 0 30px; position:relative;
@@ -536,8 +556,33 @@ footer{
 .foot-top{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:50px; padding-bottom:60px; }
 @media (max-width:860px){ .foot-top{ grid-template-columns:1fr 1fr; row-gap:44px; } }
 @media (max-width:560px){ .foot-top{ grid-template-columns:1fr; } }
-.foot-brand{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-size:19px; color:#fff; }
-.foot-brand .p-mark{ width:26px; }
+.foot-brand{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.foot-brand .logo-main{
+  font-family:var(--font-display);
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:.06em;
+  color:#fff;
+}
+.foot-brand .logo-sub{
+  font-size:12px;
+  font-weight:400;
+  letter-spacing:.14em;
+  color:var(--p-lavender);
+  opacity:.6;
+}
+.foot-brand .logo-tagline{
+  font-size:9px;
+  font-weight:400;
+  letter-spacing:.2em;
+  color:var(--p-silver);
+  opacity:.4;
+  margin-top:2px;
+}
 .foot-desc{ margin-top:18px; font-size:13.5px; line-height:1.7; color:var(--p-silver); max-width:280px; }
 .foot-col h5{ font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--p-lavender); margin-bottom:18px; font-weight:600; }
 .foot-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px; }
@@ -549,7 +594,6 @@ footer{
 .foot-legal a{ font-size:12.5px; color:var(--p-silver); }
 .foot-legal a:hover{ color:#fff; }
 
-/* misc */
 .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
 </style>
 </head>
@@ -558,7 +602,7 @@ footer{
 <div class="grain"></div>
 <div class="cursor" id="cursor"></div>
 
-<!-- ============ SVG BRAND ASSET LIBRARY ============ -->
+<!-- ============ SVG BRAND ASSET LIBRARY (kept for P mark, still used in hero and other places) ============ -->
 <svg class="svg-defs" aria-hidden="true">
   <defs>
     <linearGradient id="pGradPrimary" x1="0" y1="0" x2="1" y2="1">
@@ -569,10 +613,6 @@ footer{
     <linearGradient id="pGradGhost" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
       <stop offset="100%" stop-color="#B073FF" stop-opacity="0.35"/>
-    </linearGradient>
-    <linearGradient id="pGradDark" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#3a1c6b"/>
-      <stop offset="100%" stop-color="#0c0018"/>
     </linearGradient>
     <mask id="pMask" maskUnits="objectBoundingBox" maskContentUnits="userSpaceOnUse">
       <rect x="0" y="0" width="200" height="260" fill="black"/>
@@ -594,11 +634,12 @@ footer{
   </defs>
 </svg>
 
-<!-- ============ NAV ============ -->
+<!-- ============ NAVIGATION (new text logo) ============ -->
 <nav class="nav" id="nav">
   <a href="#hero" class="nav-brand">
-    <svg class="p-mark" viewBox="0 0 200 260"><use href="#plutoP"/></svg>
-    PLUTO
+    <span class="logo-main">PLUTO</span>
+    <span class="logo-sub">BVLTD</span>
+    <span class="logo-tagline">CARE.PURPOSE.TRUST.</span>
   </a>
   <ul class="nav-links">
     <li><a href="#services" class="magnetic">Care Services</a></li>
@@ -615,6 +656,7 @@ footer{
   </div>
 </nav>
 
+<!-- Mobile menu -->
 <div class="mnav" id="mnav">
   <button class="mnav-close" id="mnavClose" aria-label="Close menu">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg>
@@ -633,8 +675,10 @@ footer{
   </div>
 </div>
 
-<!-- ============ 01 HERO ============ -->
+<!-- ============ 01 HERO (with background image) ============ -->
 <section class="hero" id="hero">
+  <img class="hero-bg" src="/images/pluto/home-8.jpg" alt="Pluto care team">
+  <div class="hero-overlay"></div>
   <div class="hero-field">
     <div class="hero-p" id="heroP">
       <svg viewBox="0 0 200 260" style="filter:url(#softGlow)"><use href="#plutoP"/></svg>
@@ -677,7 +721,7 @@ footer{
   </div>
 </section>
 
-<!-- ============ 03 THE PEOPLE ============ -->
+<!-- ============ 03 THE PEOPLE (with background images) ============ -->
 <section class="people pad-xl" id="people">
   <div class="wrap">
     <div class="people-head">
@@ -685,8 +729,8 @@ footer{
       <h2 class="reveal">Care built around people.</h2>
     </div>
     <div class="people-grid">
-      <div class="people-card reveal-scale">
-        <div class="aura"></div>
+      <div class="people-card reveal-scale" style="background-image:url('/images/pluto/about-us--1.jpg');">
+        <div class="card-overlay"></div>
         <svg class="pmark" viewBox="0 0 200 260"><use href="#plutoP"/></svg>
         <div class="people-card-content">
           <div class="num">01 — INDIVIDUALS &amp; FAMILIES</div>
@@ -694,8 +738,8 @@ footer{
           <p>Compassionate, one-to-one support for people who want to keep living life on their own terms — in the comfort of home.</p>
         </div>
       </div>
-      <div class="people-card reveal-scale">
-        <div class="aura"></div>
+      <div class="people-card reveal-scale" style="background-image:url('/images/pluto/about-us--2.jpg');">
+        <div class="card-overlay"></div>
         <svg class="pmark" viewBox="0 0 200 260"><use href="#plutoP"/></svg>
         <div class="people-card-content">
           <div class="num">02 — NHS &amp; CARE ORGANISATIONS</div>
@@ -703,8 +747,8 @@ footer{
           <p>Vetted, dependable social care professionals for local authorities, the NHS and private residential homes, backed by 24/7 account support.</p>
         </div>
       </div>
-      <div class="people-card reveal-scale">
-        <div class="aura"></div>
+      <div class="people-card reveal-scale" style="background-image:url('/images/pluto/about-us--6.jpg');">
+        <div class="card-overlay"></div>
         <svg class="pmark" viewBox="0 0 200 260"><use href="#plutoP"/></svg>
         <div class="people-card-content">
           <div class="num">03 — CARE PROFESSIONALS</div>
@@ -716,7 +760,7 @@ footer{
   </div>
 </section>
 
-<!-- ============ 04 HOW PLUTO HELPS ============ -->
+<!-- ============ 04 SERVICES (with real image icons) ============ -->
 <section class="services pad-xl" id="services">
   <div class="wrap">
     <div class="services-head">
@@ -724,44 +768,45 @@ footer{
       <p class="reveal">Four ways we help people stay independent, connected and well supported — at home or in the setting that suits them best.</p>
     </div>
     <div class="services-list">
+      <!-- Live-in Care -->
       <div class="service-row reveal" data-target="live-in">
         <div class="row-bg"></div>
         <div class="service-num">01</div>
         <div class="service-name">
-          <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg></span>
+          <img class="service-icon-img" src="/images/pluto/services-live-in-care--1.jpg" alt="Live-in Care">
           Live-in Care
         </div>
         <div class="service-desc">Round-the-clock support in the comfort of your own home, so you can keep living life on your terms.</div>
         <div class="service-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       </div>
-
+      <!-- Domiciliary Care -->
       <div class="service-row reveal" data-target="domiciliary">
         <div class="row-bg"></div>
         <div class="service-num">02</div>
         <div class="service-name">
-          <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 22V12h6v10M3 10l9-7 9 7"/></svg></span>
+          <img class="service-icon-img" src="/images/pluto/services-domiciliary-care--1.jpg" alt="Domiciliary Care">
           Domiciliary Care
         </div>
         <div class="service-desc">Support with daily activities and household tasks for people who live independently at home.</div>
         <div class="service-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       </div>
-
+      <!-- Companionship Care -->
       <div class="service-row reveal" data-target="companionship">
         <div class="row-bg"></div>
         <div class="service-num">03</div>
         <div class="service-name">
-          <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></span>
+          <img class="service-icon-img" src="/images/pluto/services-companionship-care--1.jpg" alt="Companionship Care">
           Companionship Care
         </div>
         <div class="service-desc">Because nobody should feel alone — conversation, activities and consistent human connection.</div>
         <div class="service-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       </div>
-
+      <!-- Autism Support -->
       <div class="service-row reveal" data-target="autism">
         <div class="row-bg"></div>
         <div class="service-num">04</div>
         <div class="service-name">
-          <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+          <img class="service-icon-img" src="/images/pluto/services-autism--1.jpg" alt="Autism Support">
           Autism &amp; Specialist Support
         </div>
         <div class="service-desc">Person-centred support for individuals with autism, complex needs and behaviours that challenge others.</div>
@@ -826,7 +871,7 @@ footer{
   </div>
 </section>
 
-<!-- ============ 07 PROFESSIONALS ============ -->
+<!-- ============ 07 PROFESSIONALS (with background image) ============ -->
 <section class="professionals" id="professionals">
   <div class="wrap prof-grid">
     <div class="prof-left">
@@ -870,12 +915,12 @@ footer{
   </div>
 </section>
 
-<!-- ============ 09 FINAL CTA ============ -->
+<!-- ============ 09 FINAL CTA (with background image) ============ -->
 <section class="final-cta" id="contact">
   <div class="final-p">
     <svg viewBox="0 0 200 260" style="filter:url(#softGlow)"><use href="#plutoP"/></svg>
   </div>
-  <div class="wrap" style="position:relative;">
+  <div class="wrap" style="position:relative; z-index:1;">
     <div class="eyebrow reveal">Not sure where to start?</div>
     <h2 class="reveal">Let's talk.</h2>
     <p class="sub reveal">Whether you're looking for care, staffing support, or your next role — we're a phone call away.</p>
@@ -887,12 +932,16 @@ footer{
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
+<!-- ============ FOOTER (new logo) ============ -->
 <footer>
   <div class="wrap">
     <div class="foot-top">
       <div>
-        <div class="foot-brand"><svg class="p-mark" viewBox="0 0 200 260"><use href="#plutoP"/></svg>PLUTO</div>
+        <div class="foot-brand">
+          <span class="logo-main">PLUTO</span>
+          <span class="logo-sub">BVLTD</span>
+          <span class="logo-tagline">CARE.PURPOSE.TRUST.</span>
+        </div>
         <p class="foot-desc">Recruitment of temporary and permanent social care professionals for local authorities, the NHS and private residential homes — and direct care support for individuals and families.</p>
       </div>
       <div class="foot-col">
@@ -940,22 +989,20 @@ footer{
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ---------- Nav scroll state ---------- */
+  /* Nav scroll state */
   var nav = document.getElementById('nav');
   ScrollTrigger.create({
     start: 'top -60',
-    onUpdate: function(self){
-      nav.classList.toggle('is-scrolled', self.scroll() > 60);
-    }
+    onUpdate: function(self){ nav.classList.toggle('is-scrolled', self.scroll() > 60); }
   });
 
-  /* ---------- Mobile menu ---------- */
+  /* Mobile menu */
   var mnav = document.getElementById('mnav');
   document.getElementById('mnavOpen').addEventListener('click', function(){ mnav.classList.add('is-open'); });
   document.getElementById('mnavClose').addEventListener('click', function(){ mnav.classList.remove('is-open'); });
   mnav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ mnav.classList.remove('is-open'); }); });
 
-  /* ---------- Reveal on scroll ---------- */
+  /* Reveal on scroll */
   document.querySelectorAll('.reveal, .reveal-scale').forEach(function(el, i){
     ScrollTrigger.create({
       trigger: el,
@@ -964,12 +1011,12 @@ footer{
     });
   });
 
-  /* stagger index for grouped elements */
+  /* Stagger index */
   document.querySelectorAll('.people-grid, .trust-orgs, .stories-grid, .timeline-grid, .prof-steps').forEach(function(group){
     Array.prototype.forEach.call(group.children, function(child, i){ child.style.setProperty('--i', i); });
   });
 
-  /* ---------- Hero particles ---------- */
+  /* Hero particles */
   var field = document.getElementById('heroParticles');
   if(field){
     for(var i=0;i<26;i++){
@@ -982,7 +1029,7 @@ footer{
     }
   }
 
-  /* ---------- Hero P parallax on cursor + scroll ---------- */
+  /* Hero P parallax */
   var heroP = document.getElementById('heroP');
   if(heroP && !reduced){
     window.addEventListener('mousemove', function(e){
@@ -1000,7 +1047,7 @@ footer{
     });
   }
 
-  /* ---------- Statement background P drift ---------- */
+  /* Statement P drift */
   if(!reduced){
     gsap.to('.statement-p-bg', {
       yPercent: -14, rotate: 6, ease:'none',
@@ -1012,14 +1059,14 @@ footer{
     });
   }
 
-  /* ---------- Timeline fill ---------- */
+  /* Timeline fill */
   ScrollTrigger.create({
     trigger: '.timeline',
     start: 'top 70%',
     onEnter: function(){ document.getElementById('timelineFill').style.width = '100%'; }
   });
 
-  /* ---------- Count-up stat ---------- */
+  /* Count-up */
   document.querySelectorAll('[data-count]').forEach(function(el){
     var target = parseInt(el.getAttribute('data-count'),10);
     ScrollTrigger.create({
@@ -1033,7 +1080,7 @@ footer{
     });
   });
 
-  /* ---------- Magnetic buttons ---------- */
+  /* Magnetic buttons */
   if(!reduced){
     document.querySelectorAll('.magnetic').forEach(function(btn){
       btn.addEventListener('mousemove', function(e){
@@ -1048,13 +1095,13 @@ footer{
     });
   }
 
-  /* ---------- Service row expand-ish tilt ---------- */
+  /* Service row padding */
   document.querySelectorAll('.service-row').forEach(function(row){
     row.addEventListener('mouseenter', function(){ gsap.to(row, { paddingLeft: 26, duration:.5, ease:'power3.out' }); });
     row.addEventListener('mouseleave', function(){ gsap.to(row, { paddingLeft: 10, duration:.5, ease:'power3.out' }); });
   });
 
-  /* ---------- Custom cursor ---------- */
+  /* Custom cursor */
   var cursor = document.getElementById('cursor');
   if(cursor && window.matchMedia('(hover:hover)').matches){
     window.addEventListener('mousemove', function(e){
@@ -1066,7 +1113,7 @@ footer{
     });
   }
 
-  /* ---------- Smooth in-page anchor offset for fixed nav ---------- */
+  /* Smooth anchor scroll */
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener('click', function(e){
       var id = a.getAttribute('href');
@@ -1081,26 +1128,20 @@ footer{
     });
   });
 
-  // ============================================================
-  // CONTACT FORM SUBMISSION (PLUTO 2.0)
-  // ============================================================
+  /* Contact form submission (Pluto 2.0) */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-
       const formData = new FormData(this);
       const data = Object.fromEntries(formData.entries());
-
       try {
         const response = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
-
         const result = await response.json();
-
         if (result.success) {
           alert('Message sent successfully! We\'ll be in touch.');
           this.reset();

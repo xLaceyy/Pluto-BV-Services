@@ -14,8 +14,349 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/styles.css">
 
+<style>
+  /* ============================================================
+     PLUTO BV SERVICES — FULL EMBEDDED STYLES
+     ============================================================ */
+  :root {
+    --purple: #5B2A86;
+    --purple-light: #6D3BAA;
+    --purple-dark: #2A123F;
+    --purple-deep: #1a0a2a;
+    --violet-accent: #7C4DFF;
+    --lavender: #F1EBFA;
+    --surface-soft: #FAF9FC;
+    --text-dark: #17131D;
+    --text-muted: #68616F;
+    --white: #FFFFFF;
+    --glass-bg: rgba(255,255,255,0.72);
+    --glass-border: rgba(255,255,255,0.45);
+    --shadow: rgba(35,18,52,0.08);
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-full: 9999px;
+    --font: 'Inter', -apple-system, sans-serif;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family: var(--font);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { max-width:100%; display:block; }
+  a { color:var(--purple); text-decoration:none; }
+  ul, ol { list-style:none; }
+
+  .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+  .section-tight { padding:32px 0; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding: 0.75rem 1.75rem; border-radius: var(--radius-full);
+    font-family: var(--font); font-size: 0.875rem; font-weight:600;
+    border: none; cursor: pointer; transition: all 0.2s ease;
+    text-decoration: none; min-height:48px;
+  }
+  .btn-primary { background:var(--purple); color:var(--white); box-shadow:0 4px 16px rgba(91,42,134,0.30); }
+  .btn-primary:hover { background:var(--purple-light); transform:translateY(-2px); box-shadow:0 8px 28px rgba(91,42,134,0.35); }
+  .btn-secondary { background:var(--white); color:var(--purple); border:1.5px solid var(--purple); }
+  .btn-secondary:hover { background:var(--lavender); transform:translateY(-2px); }
+  .btn-ghost { background:transparent; color:var(--purple); border:1.5px solid var(--purple); }
+  .btn-ghost:hover { background:var(--lavender); transform:translateY(-2px); }
+  .btn-on-dark { background:var(--white); color:var(--purple-dark); border:1.5px solid rgba(255,255,255,0.3); }
+  .btn-on-dark:hover { background:rgba(255,255,255,0.9); transform:translateY(-2px); }
+  .btn-sm { padding:0.5rem 1.25rem; min-height:40px; font-size:0.8rem; }
+  .btn-block { width:100%; justify-content:center; }
+
+  /* Nav */
+  .nav-wrap {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    padding:12px 0; background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(16px); border-bottom:1px solid rgba(0,0,0,0.04);
+  }
+  .nav {
+    max-width:1200px; margin:0 auto; padding:0 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-brand {
+    display:flex; align-items:center; gap:8px;
+    font-weight:700; font-size:1.2rem; color:var(--purple-dark);
+  }
+  .nav-brand .mark img { height:32px; width:auto; }
+  .nav-links { display:flex; align-items:center; gap:4px; }
+  .nav-links a {
+    padding:8px 14px; border-radius: var(--radius-full);
+    font-size:0.875rem; font-weight:500; color:var(--text-dark);
+    transition: all 0.2s ease;
+  }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { background:var(--lavender); color:var(--purple); }
+  .has-dropdown { position:relative; }
+  .has-dropdown .dropdown {
+    display:none; position:absolute; top:100%; left:0;
+    background:var(--white); border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.08);
+    padding:8px 0; min-width:200px; border:1px solid rgba(0,0,0,0.04);
+  }
+  .has-dropdown:hover .dropdown { display:block; }
+  .has-dropdown .dropdown a {
+    display:block; padding:10px 20px; color:var(--text-dark); font-weight:400;
+    transition: background 0.2s ease;
+  }
+  .has-dropdown .dropdown a:hover { background:var(--lavender); color:var(--purple); }
+  .nav-cta { margin-left:12px; }
+  .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:8px; }
+  .nav-toggle svg { width:24px; height:24px; stroke:var(--text-dark); }
+
+  /* Mobile sheet */
+  .mobile-sheet { display:none; }
+  .mobile-sheet-backdrop {
+    position:fixed; inset:0; z-index:1100;
+    background:rgba(0,0,0,0.2); backdrop-filter:blur(4px);
+  }
+  .mobile-sheet-panel {
+    position:fixed; top:0; right:-100%; width:85%; max-width:360px; height:100%;
+    background:var(--white); z-index:1200; padding:24px;
+    transition: right 0.3s ease; overflow-y:auto;
+    box-shadow:-8px 0 32px rgba(0,0,0,0.08);
+  }
+  .mobile-sheet.open .mobile-sheet-panel { right:0; }
+  .mobile-sheet.open .mobile-sheet-backdrop { display:block; }
+  .mobile-sheet-head {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:24px;
+  }
+  .mobile-sheet-close { background:none; border:none; font-size:1.5rem; cursor:pointer; }
+  .mobile-link, .mobile-sublink {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 0; border-bottom:1px solid rgba(0,0,0,0.04);
+    font-size:1.1rem; font-weight:500; color:var(--text-dark);
+  }
+  .mobile-sublink { padding-left:20px; font-size:0.95rem; font-weight:400; }
+  .mobile-group-label {
+    font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--text-muted); margin-top:24px; margin-bottom:8px;
+  }
+  .mobile-contact {
+    margin-top:24px; padding-top:16px; border-top:1px solid rgba(0,0,0,0.04);
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .mobile-contact a { display:flex; align-items:center; gap:8px; color:var(--text-dark); }
+
+  /* Hero */
+  .hero { padding:120px 0 60px; background:var(--surface-soft); }
+  .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .eyebrow {
+    font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--text-muted); margin-bottom:12px;
+  }
+  .hero h1 { font-size:3rem; font-weight:800; line-height:1.1; letter-spacing:-0.02em; margin-bottom:20px; }
+  .lede { font-size:1.1rem; color:var(--text-muted); line-height:1.7; max-width:540px; }
+  .hero-ctas { display:flex; gap:12px; margin:24px 0 20px; flex-wrap:wrap; }
+  .hero-paths { display:flex; gap:20px; flex-wrap:wrap; font-size:0.9rem; color:var(--text-muted); }
+  .hero-path { display:flex; align-items:center; gap:6px; }
+  .hero-path .dot { width:6px; height:6px; border-radius:50%; background:var(--purple); opacity:0.4; }
+  .hero-media { position:relative; }
+  .hero-media picture img { border-radius:var(--radius-xl); width:100%; height:auto; }
+  .hero-panel {
+    margin-top:16px; padding:12px 20px; background:var(--glass-bg);
+    backdrop-filter:blur(12px); border-radius:var(--radius-lg);
+    border:1px solid var(--glass-border); font-weight:500; color:var(--purple-dark);
+  }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:12px; padding:6px 16px;
+    background:var(--purple); color:var(--white); border-radius:var(--radius-full);
+    font-weight:600; font-size:0.8rem;
+  }
+  .hero-badge strong { font-weight:700; }
+
+  /* Trust strip */
+  .trust-strip { background:var(--surface-soft); border-bottom:1px solid rgba(0,0,0,0.04); }
+  .trust-heading {
+    font-size:1.1rem; font-weight:600; text-align:center; margin-bottom:20px;
+    color:var(--purple-dark);
+  }
+  .trust-grid {
+    display:flex; flex-wrap:wrap; justify-content:center; gap:24px;
+  }
+  .trust-item {
+    display:flex; align-items:center; gap:8px;
+    font-size:0.9rem; font-weight:500; color:var(--text-muted);
+  }
+  .trust-item .icon { color:var(--purple); }
+  .trust-media { margin-top:24px; }
+  .trust-media picture img { border-radius:var(--radius-lg); width:100%; }
+
+  /* Split sections */
+  .split {
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+    padding:80px 0;
+  }
+  .reverse { direction:rtl; }
+  .reverse > * { direction:ltr; }
+  .split-media picture img { border-radius:var(--radius-xl); width:100%; height:auto; }
+  .split-list {
+    list-style:none; padding:0; margin:20px 0;
+  }
+  .split-list li {
+    display:flex; align-items:center; gap:10px;
+    padding:6px 0; font-size:0.95rem; color:var(--text-muted);
+  }
+  .split-list .check { color:var(--purple); flex-shrink:0; }
+
+  /* Section head */
+  .section-head { max-width:720px; margin:0 auto 48px; text-align:center; }
+  .section-head h2 { font-size:2.5rem; font-weight:700; letter-spacing:-0.02em; margin:12px 0; }
+  .section-head .lede { margin:0 auto; }
+
+  /* Services grid */
+  .grid-3 {
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px;
+  }
+  .service-card {
+    background:var(--white); border-radius:var(--radius-lg);
+    overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration:none; color:inherit; display:block;
+  }
+  .service-card:hover { transform:translateY(-6px); box-shadow:0 12px 32px rgba(0,0,0,0.08); }
+  .service-card .img picture img { width:100%; height:200px; object-fit:cover; }
+  .service-card .body { padding:20px; }
+  .service-card .tag-icon { color:var(--purple); margin-bottom:8px; }
+  .service-card h4 { font-size:1.2rem; font-weight:700; margin-bottom:6px; }
+  .service-card p { font-size:0.9rem; color:var(--text-muted); line-height:1.6; }
+  .service-card .link {
+    display:inline-flex; align-items:center; gap:4px;
+    margin-top:12px; font-weight:600; color:var(--purple);
+    transition: gap 0.2s ease;
+  }
+  .service-card .link:hover { gap:10px; }
+
+  /* Journey */
+  .journey-split {
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+    padding:80px 0;
+  }
+  .journey-track { display:flex; flex-direction:column; gap:24px; }
+  .journey-step {
+    display:flex; align-items:flex-start; gap:16px;
+    padding:12px 0; border-bottom:1px solid rgba(0,0,0,0.04);
+  }
+  .journey-num {
+    font-weight:700; font-size:1.5rem; color:var(--purple);
+    min-width:48px;
+  }
+  .journey-step h4 { font-size:1.1rem; font-weight:600; }
+  .journey-step p { font-size:0.9rem; color:var(--text-muted); }
+  .journey-media picture img { border-radius:var(--radius-xl); width:100%; }
+
+  /* Testimonials */
+  .testimonial-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:24px;
+  }
+  .testimonial-card {
+    background:var(--white); padding:24px; border-radius:var(--radius-lg);
+    box-shadow:0 4px 16px rgba(0,0,0,0.04);
+  }
+  .quote-mark { font-size:2.5rem; color:var(--purple); opacity:0.2; line-height:1; }
+  .quote { font-size:1rem; font-style:italic; color:var(--text-dark); margin:8px 0; }
+  .attribution { font-weight:600; color:var(--text-muted); }
+  .testimonial-media { margin-bottom:24px; }
+  .testimonial-media picture img { border-radius:var(--radius-lg); width:100%; }
+
+  /* CTA band */
+  .cta-band {
+    padding:48px; background:var(--purple-deep); border-radius:var(--radius-xl);
+    text-align:center; color:var(--white); margin:60px 0;
+  }
+  .cta-band h2 { font-size:2rem; font-weight:700; color:var(--white); }
+  .cta-band p { color:rgba(255,255,255,0.7); margin:12px 0 24px; }
+  .ctas { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+
+  /* Footer */
+  footer {
+    background:var(--purple-dark); color:rgba(255,255,255,0.7);
+    padding:48px 0 24px; position:relative;
+  }
+  .footer-top {
+    display:grid; grid-template-columns:2fr 1fr 1fr 1.5fr; gap:40px;
+    padding-bottom:32px; border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .footer-brand .nav-brand { color:var(--white); }
+  .footer-brand p { font-size:0.85rem; line-height:1.6; max-width:300px; margin-top:8px; }
+  .footer-social { display:flex; gap:12px; margin-top:12px; }
+  .footer-social a { color:rgba(255,255,255,0.5); transition:color 0.2s ease; }
+  .footer-social a:hover { color:var(--white); }
+  .footer-col h5 { font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--white); opacity:0.6; margin-bottom:12px; }
+  .footer-col ul li { margin-bottom:8px; }
+  .footer-col a { color:rgba(255,255,255,0.6); font-size:0.85rem; transition:color 0.2s ease; }
+  .footer-col a:hover { color:var(--white); }
+  .footer-bottom {
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:20px; font-size:0.8rem; flex-wrap:wrap; gap:12px;
+  }
+  .footer-legal { display:flex; gap:20px; }
+  .footer-legal a { color:rgba(255,255,255,0.4); }
+  .footer-legal a:hover { color:var(--white); }
+
+  /* Responsive */
+  @media (max-width:1024px) {
+    .hero-grid, .split, .journey-split { grid-template-columns:1fr; gap:40px; }
+    .hero h1 { font-size:2.5rem; }
+    .grid-3 { grid-template-columns:1fr 1fr; }
+    .footer-top { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:768px) {
+    .nav-links { display:none; }
+    .nav-toggle { display:block; }
+    .mobile-sheet { display:block; }
+    .hero { padding:100px 0 40px; }
+    .hero h1 { font-size:2rem; }
+    .grid-3 { grid-template-columns:1fr; }
+    .testimonial-grid { grid-template-columns:1fr; }
+    .footer-top { grid-template-columns:1fr; }
+    .cta-band { padding:32px 20px; }
+  }
+  @media (max-width:480px) {
+    .hero-ctas .btn { width:100%; justify-content:center; }
+    .hero-paths { flex-direction:column; gap:8px; }
+  }
+
+  /* Reveal animation (simple) */
+  .reveal { opacity:0; transform:translateY(20px); transition: all 0.8s ease; }
+  .reveal.is-visible { opacity:1; transform:translateY(0); }
+
+  /* Ambient background (purple orbs) */
+  .ambient {
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    overflow:hidden;
+  }
+  .orb {
+    position:absolute; border-radius:50%; filter:blur(80px); opacity:0.08;
+  }
+  .orb-a { width:60vw; height:60vw; top:-20%; right:-10%; background:var(--purple); }
+  .orb-b { width:50vw; height:50vw; bottom:-20%; left:-10%; background:var(--violet-accent); }
+  .orb-c { width:40vw; height:40vw; top:40%; left:50%; transform:translateX(-50%); background:var(--purple-light); }
+  .grain {
+    position:absolute; inset:0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+  .ambient-dark { display:none; }
+
+  /* Special for dark sections */
+  [style*="--purple-deep"] { background:var(--purple-deep) !important; }
+  [style*="--lavender"] { background:var(--lavender) !important; }
+</style>
 </head>
 <body>
 
@@ -30,18 +371,18 @@
 <a class="skip-link" href="#main">Skip to main content</a>
 <div class="nav-wrap">
   <nav class="nav" aria-label="Primary">
-    <a href="/index.html" class="nav-brand"><span class="mark"><img src="/assets/images/logo.jpg" alt="Pluto BV Services logo"></span>Pluto BV Services</a>
+    <a href="/index.html" class="nav-brand"><span class="mark"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Crect width='120' height='40' rx='8' fill='%235B2A86'/%3E%3Ctext x='60' y='26' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3EPLUTO%3C/text%3E%3C/svg%3E" alt="Pluto BV Services logo"></span>Pluto BV Services</a>
     <div class="nav-links"><a href="/index.html" aria-current="page">Home</a><a href="/areas-we-support.html">Areas We Support</a><a href="/about.html">About</a><div class="has-dropdown"><a href="/care-services/index.html">Care Services</a><div class="dropdown"><a href="/care-services/live-in-care.html">Live-in Care</a><a href="/care-services/domiciliary-care.html">Domiciliary Care</a><a href="/care-services/companionship-care.html">Companionship Care</a><a href="/care-services/autism-specialist-support.html">Autism & Specialist Support</a></div></div><a href="/staffing-solutions.html">Staffing Solutions</a><a href="/careers.html">Careers</a><a href="/resources.html">Resources</a><a href="/contact.html">Contact</a></div>
     <a href="/contact.html" class="btn btn-primary btn-sm nav-cta">Contact Us</a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
   </nav>
 </div>
 
-<div class="mobile-sheet">
+<div class="mobile-sheet" id="mobileSheet">
   <div class="mobile-sheet-backdrop"></div>
   <div class="mobile-sheet-panel" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="mobile-sheet-head">
-      <a href="/index.html" class="nav-brand"><span class="mark"><img src="/assets/images/logo.jpg" alt="Pluto BV Services logo"></span>Pluto BV Services</a>
+      <a href="/index.html" class="nav-brand"><span class="mark"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Crect width='120' height='40' rx='8' fill='%235B2A86'/%3E%3Ctext x='60' y='26' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3EPLUTO%3C/text%3E%3C/svg%3E" alt="Pluto BV Services logo"></span>Pluto BV Services</a>
       <button class="mobile-sheet-close" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
     </div>
     <nav aria-label="Mobile"><a class="mobile-link" href="/index.html">Home <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="mobile-link" href="/areas-we-support.html">Areas We Support <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="mobile-link" href="/about.html">About <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="mobile-link" href="/care-services/index.html">Care Services <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="mobile-sublink" href="/care-services/live-in-care.html">Live-in Care</a><a class="mobile-sublink" href="/care-services/domiciliary-care.html">Domiciliary Care</a><a class="mobile-sublink" href="/care-services/companionship-care.html">Companionship Care</a><a class="mobile-sublink" href="/care-services/autism-specialist-support.html">Autism & Specialist Support</a><a class="mobile-link" href="/staffing-solutions.html">Staffing Solutions <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="mobile-link" href="/careers.html">Careers <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="mobile-link" href="/resources.html">Resources <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="mobile-link" href="/contact.html">Contact <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></nav>
@@ -75,7 +416,7 @@
       </div>
     </div>
     <div class="reveal hero-media">
-      <picture data-img-key="hero"><img class="pluto-img" data-img-key="hero" src="/images/placeholders/hero.svg" sizes="(max-width: 1024px) 100vw, 50vw" alt="A support worker sharing a warm conversation with a client at home" style="object-position:center 40%" loading="eager" decoding="async" fetchpriority="high"></picture>
+      <picture data-img-key="hero"><img class="pluto-img" data-img-key="hero" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23F1EBFA'/%3E%3Ccircle cx='400' cy='300' r='200' fill='%235B2A86' opacity='0.08'/%3E%3Ccircle cx='250' cy='200' r='80' fill='%237C4DFF' opacity='0.06'/%3E%3Ccircle cx='550' cy='400' r='100' fill='%236D3BAA' opacity='0.05'/%3E%3Crect x='300' y='250' width='200' height='100' rx='12' fill='%235B2A86' opacity='0.10'/%3E%3C/svg%3E" sizes="(max-width: 1024px) 100vw, 50vw" alt="A support worker sharing a warm conversation with a client at home" style="object-position:center 40%" loading="eager" decoding="async" fetchpriority="high"></picture>
       <div class="hero-panel">Care built around people, delivered with professionalism.</div>
       <div class="hero-badge"><strong>24/7</strong><span>Account Support</span></div>
     </div>
@@ -93,12 +434,12 @@
       <div class="trust-item reveal"><span class="icon"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span><span>Private Organisations</span></div>
     </div>
   </div>
-<div class="trust-media-band reveal"><div class="reveal trust-media"><picture data-img-key="trust.hero"><img class="pluto-img" data-img-key="trust.hero" src="/images/placeholders/trust.svg" sizes="(max-width: 768px) 100vw, 45vw" alt="" loading="lazy" decoding="async"></picture></div></div>
+<div class="trust-media-band reveal"><div class="reveal trust-media"><picture data-img-key="trust.hero"><img class="pluto-img" data-img-key="trust.hero" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23F1EBFA'/%3E%3Ccircle cx='400' cy='200' r='120' fill='%235B2A86' opacity='0.06'/%3E%3Ccircle cx='200' cy='150' r='60' fill='%237C4DFF' opacity='0.04'/%3E%3Ccircle cx='600' cy='250' r='80' fill='%236D3BAA' opacity='0.03'/%3E%3Crect x='300' y='160' width='200' height='80' rx='8' fill='%235B2A86' opacity='0.08'/%3E%3C/svg%3E" sizes="(max-width: 768px) 100vw, 45vw" alt="" loading="lazy" decoding="async"></picture></div></div>
 </section>
 
 <section>
   <div class="container split">
-    <div class="reveal split-media"><picture data-img-key="about.main"><img class="pluto-img" data-img-key="about.main" src="/images/placeholders/about.svg" sizes="(max-width: 768px) 100vw, 50vw" alt="A Pluto BV care professional at work" style="object-position:center 35%" loading="lazy" decoding="async"></picture></div>
+    <div class="reveal split-media"><picture data-img-key="about.main"><img class="pluto-img" data-img-key="about.main" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23F1EBFA'/%3E%3Ccircle cx='400' cy='300' r='150' fill='%235B2A86' opacity='0.05'/%3E%3Ccircle cx='250' cy='200' r='70' fill='%237C4DFF' opacity='0.04'/%3E%3Ccircle cx='550' cy='400' r='90' fill='%236D3BAA' opacity='0.03'/%3E%3Crect x='280' y='250' width='240' height='100' rx='12' fill='%235B2A86' opacity='0.07'/%3E%3C/svg%3E" sizes="(max-width: 768px) 100vw, 50vw" alt="A Pluto BV care professional at work" style="object-position:center 35%" loading="lazy" decoding="async"></picture></div>
     <div class="reveal">
       <p class="eyebrow">Who we are</p>
       <h2>Care built around people.</h2>
@@ -124,7 +465,7 @@
     <div class="grid-3">
       
       <a href="/care-services/live-in-care.html" class="service-card reveal">
-        <div class="img"><picture data-img-key="services.liveInCare.card"><img class="pluto-img" data-img-key="services.liveInCare.card" src="/images/placeholders/live-in-care.svg" sizes="(max-width: 768px) 100vw, 25vw" alt="Live-in Care" style="object-position:center" loading="lazy" decoding="async"></picture></div>
+        <div class="img"><picture data-img-key="services.liveInCare.card"><img class="pluto-img" data-img-key="services.liveInCare.card" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23F1EBFA'/%3E%3Ccircle cx='200' cy='100' r='60' fill='%235B2A86' opacity='0.06'/%3E%3Crect x='140' y='120' width='120' height='40' rx='8' fill='%23927ACC' opacity='0.10'/%3E%3C/svg%3E" sizes="(max-width: 768px) 100vw, 25vw" alt="Live-in Care" style="object-position:center" loading="lazy" decoding="async"></picture></div>
         <div class="body">
           <div class="tag-icon"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M4 11l8-7 8 7v8a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1v-8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
           <h4>Live-in Care</h4>
@@ -133,7 +474,7 @@
         </div>
       </a>
       <a href="/care-services/domiciliary-care.html" class="service-card reveal">
-        <div class="img"><picture data-img-key="services.domiciliaryCare.card"><img class="pluto-img" data-img-key="services.domiciliaryCare.card" src="/images/placeholders/domiciliary-care.svg" sizes="(max-width: 768px) 100vw, 25vw" alt="Domiciliary Care" style="object-position:center" loading="lazy" decoding="async"></picture></div>
+        <div class="img"><picture data-img-key="services.domiciliaryCare.card"><img class="pluto-img" data-img-key="services.domiciliaryCare.card" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23F1EBFA'/%3E%3Ccircle cx='200' cy='100' r='60' fill='%236D3BAA' opacity='0.06'/%3E%3Crect x='140' y='120' width='120' height='40' rx='8' fill='%23927ACC' opacity='0.10'/%3E%3C/svg%3E" sizes="(max-width: 768px) 100vw, 25vw" alt="Domiciliary Care" style="object-position:center" loading="lazy" decoding="async"></picture></div>
         <div class="body">
           <div class="tag-icon"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><rect x="6" y="4" width="12" height="17" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="9" y="2.5" width="6" height="3" rx="1" fill="currentColor"/><path d="M9 11h6M9 15h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
           <h4>Domiciliary Care</h4>
@@ -142,7 +483,7 @@
         </div>
       </a>
       <a href="/care-services/companionship-care.html" class="service-card reveal">
-        <div class="img"><picture data-img-key="services.companionship.card"><img class="pluto-img" data-img-key="services.companionship.card" src="/images/placeholders/companionship.svg" sizes="(max-width: 768px) 100vw, 25vw" alt="Companionship Care" style="object-position:center" loading="lazy" decoding="async"></picture></div>
+        <div class="img"><picture data-img-key="services.companionship.card"><img class="pluto-img" data-img-key="services.companionship.card" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23F1EBFA'/%3E%3Ccircle cx='200' cy='100' r='60' fill='%23B388FF' opacity='0.06'/%3E%3Crect x='140' y='120' width='120' height='40' rx='8' fill='%23927ACC' opacity='0.10'/%3E%3C/svg%3E" sizes="(max-width: 768px) 100vw, 25vw" alt="Companionship Care" style="object-position:center" loading="lazy" decoding="async"></picture></div>
         <div class="body">
           <div class="tag-icon"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 20s-7-4.4-9.5-8.8C.8 7.8 2.6 4.5 6 4c2-.3 3.7.7 6 3 2.3-2.3 4-3.3 6-3 3.4.5 5.2 3.8 3.5 7.2C19 15.6 12 20 12 20z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
           <h4>Companionship Care</h4>
@@ -151,7 +492,7 @@
         </div>
       </a>
       <a href="/care-services/autism-specialist-support.html" class="service-card reveal">
-        <div class="img"><picture data-img-key="services.specialistSupport.card"><img class="pluto-img" data-img-key="services.specialistSupport.card" src="/images/placeholders/specialist-support.svg" sizes="(max-width: 768px) 100vw, 25vw" alt="Autism & Specialist Support" style="object-position:center" loading="lazy" decoding="async"></picture></div>
+        <div class="img"><picture data-img-key="services.specialistSupport.card"><img class="pluto-img" data-img-key="services.specialistSupport.card" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23F1EBFA'/%3E%3Ccircle cx='200' cy='100' r='60' fill='%235B2A86' opacity='0.06'/%3E%3Crect x='140' y='120' width='120' height='40' rx='8' fill='%23927ACC' opacity='0.10'/%3E%3C/svg%3E" sizes="(max-width: 768px) 100vw, 25vw" alt="Autism & Specialist Support" style="object-position:center" loading="lazy" decoding="async"></picture></div>
         <div class="body">
           <div class="tag-icon"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
           <h4>Autism &amp; Specialist Support</h4>
@@ -177,7 +518,7 @@
       <div class="journey-step reveal"><span class="journey-num">04</span><h4>Continue</h4><p>We stay in touch, so support keeps pace as needs change.</p></div>
     </div>
     </div>
-    <div class="reveal journey-media"><picture data-img-key="journey.hero"><img class="pluto-img" data-img-key="journey.hero" src="/images/placeholders/journey.svg" sizes="(max-width: 768px) 100vw, 45vw" alt="" loading="lazy" decoding="async"></picture></div>
+    <div class="reveal journey-media"><picture data-img-key="journey.hero"><img class="pluto-img" data-img-key="journey.hero" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23F1EBFA'/%3E%3Ccircle cx='400' cy='300' r='120' fill='%235B2A86' opacity='0.05'/%3E%3Ccircle cx='200' cy='200' r='60' fill='%237C4DFF' opacity='0.04'/%3E%3Ccircle cx='600' cy='400' r='80' fill='%236D3BAA' opacity='0.03'/%3E%3Crect x='300' y='240' width='200' height='80' rx='8' fill='%235B2A86' opacity='0.06'/%3E%3C/svg%3E" sizes="(max-width: 768px) 100vw, 45vw" alt="" loading="lazy" decoding="async"></picture></div>
   </div>
 </section>
 
@@ -191,13 +532,13 @@
         <a href="/staffing-solutions.html" class="btn btn-on-dark">Talk to Our Staffing Team</a>
       </div>
     </div>
-    <div class="reveal split-media"><picture data-img-key="organisations.hero"><img class="pluto-img" data-img-key="organisations.hero" src="/images/placeholders/organisations.svg" sizes="(max-width: 768px) 100vw, 50vw" alt="A care home manager reviewing a staffing schedule" style="object-position:center" loading="lazy" decoding="async"></picture></div>
+    <div class="reveal split-media"><picture data-img-key="organisations.hero"><img class="pluto-img" data-img-key="organisations.hero" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23F1EBFA'/%3E%3Ccircle cx='400' cy='300' r='150' fill='%235B2A86' opacity='0.05'/%3E%3Ccircle cx='200' cy='200' r='70' fill='%237C4DFF' opacity='0.04'/%3E%3Ccircle cx='600' cy='400' r='100' fill='%236D3BAA' opacity='0.03'/%3E%3Crect x='280' y='260' width='240' height='80' rx='8' fill='%235B2A86' opacity='0.06'/%3E%3C/svg%3E" sizes="(max-width: 768px) 100vw, 50vw" alt="A care home manager reviewing a staffing schedule" style="object-position:center" loading="lazy" decoding="async"></picture></div>
   </div>
 </section>
 
 <section>
   <div class="container split reverse">
-    <div class="reveal split-media"><picture data-img-key="careers.hero"><img class="pluto-img" data-img-key="careers.hero" src="/images/placeholders/careers.svg" sizes="(max-width: 768px) 100vw, 50vw" alt="A healthcare assistant reviewing notes before a visit" style="object-position:center" loading="lazy" decoding="async"></picture></div>
+    <div class="reveal split-media"><picture data-img-key="careers.hero"><img class="pluto-img" data-img-key="careers.hero" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23F1EBFA'/%3E%3Ccircle cx='400' cy='300' r='130' fill='%235B2A86' opacity='0.05'/%3E%3Ccircle cx='250' cy='180' r='60' fill='%237C4DFF' opacity='0.04'/%3E%3Ccircle cx='550' cy='420' r='90' fill='%236D3BAA' opacity='0.03'/%3E%3Crect x='310' y='250' width='180' height='80' rx='8' fill='%235B2A86' opacity='0.06'/%3E%3C/svg%3E" sizes="(max-width: 768px) 100vw, 50vw" alt="A healthcare assistant reviewing notes before a visit" style="object-position:center" loading="lazy" decoding="async"></picture></div>
     <div class="reveal">
       <p class="eyebrow">For care professionals</p>
       <h2>Build a career where your work matters.</h2>
@@ -216,7 +557,7 @@
       <p class="eyebrow">In their words</p>
       <h2>Our Testimonials</h2>
     </div>
-<div class="reveal testimonial-media"><picture data-img-key="testimonials.hero"><img class="pluto-img" data-img-key="testimonials.hero" src="/images/placeholders/testimonials.svg" sizes="(max-width: 768px) 100vw, 45vw" alt="" loading="lazy" decoding="async"></picture></div>
+<div class="reveal testimonial-media"><picture data-img-key="testimonials.hero"><img class="pluto-img" data-img-key="testimonials.hero" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23F1EBFA'/%3E%3Ccircle cx='400' cy='200' r='100' fill='%235B2A86' opacity='0.05'/%3E%3Ccircle cx='200' cy='150' r='50' fill='%237C4DFF' opacity='0.04'/%3E%3Ccircle cx='600' cy='250' r='70' fill='%236D3BAA' opacity='0.03'/%3E%3Crect x='300' y='160' width='200' height='60' rx='8' fill='%235B2A86' opacity='0.06'/%3E%3C/svg%3E" sizes="(max-width: 768px) 100vw, 45vw" alt="" loading="lazy" decoding="async"></picture></div>
     <div class="testimonial-grid">
       <div class="testimonial-card reveal">
         <div class="quote-mark">&ldquo;</div>
@@ -251,7 +592,7 @@
   <div class="ambient-dark" aria-hidden="true"></div>
   <div class="container footer-top">
     <div class="footer-brand">
-      <a href="/index.html" class="nav-brand"><span class="mark"><img src="/assets/images/logo.jpg" alt="Pluto BV Services logo"></span>Pluto BV Services</a>
+      <a href="/index.html" class="nav-brand"><span class="mark"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Crect width='120' height='40' rx='8' fill='%235B2A86'/%3E%3Ctext x='60' y='26' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3EPLUTO%3C/text%3E%3C/svg%3E" alt="Pluto BV Services logo"></span>Pluto BV Services</a>
       <p>Recruitment of temporary and permanent social care professionals for local authorities, the NHS and private residential homes across the public and private sectors.</p>
       <div class="footer-social">
         <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v6h3v-6H16l.5-3h-3V9.7c0-.4.3-.7.5-.7z" fill="currentColor"/></svg></a>
@@ -309,6 +650,33 @@
   </div>
 </footer>
 
-<script src="/assets/script.js"></script>
+<script>
+  (function() {
+    // Mobile sheet toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const sheet = document.getElementById('mobileSheet');
+    const closeBtn = sheet.querySelector('.mobile-sheet-close');
+    const backdrop = sheet.querySelector('.mobile-sheet-backdrop');
+
+    function openSheet() { sheet.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeSheet() { sheet.classList.remove('open'); document.body.style.overflow = ''; }
+
+    toggle.addEventListener('click', openSheet);
+    closeBtn.addEventListener('click', closeSheet);
+    backdrop.addEventListener('click', closeSheet);
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  })();
+</script>
+
 </body>
 </html>

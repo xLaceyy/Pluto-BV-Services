@@ -16,29 +16,29 @@
 
   <style>
     /* ============================================================
-       PLUTO BV LTD — PREMIUM DESIGN TOKENS
+       PLUTO BV LTD — PREMIUM LIGHT DESIGN TOKENS
        ============================================================ */
     :root {
-      --bg-body: #0A0612;
-      --bg-card: rgba(255, 255, 255, 0.03);
-      --bg-glass: rgba(255, 255, 255, 0.04);
-      --text-primary: #F5F0F0;
-      --text-secondary: #C6B8D4;
-      --text-muted: #8A7D9C;
-      --border-light: rgba(139, 94, 186, 0.12);
-      --border-glass: rgba(255, 255, 255, 0.04);
-      --shadow-soft: 0 8px 40px rgba(0, 0, 0, 0.4);
-      --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
-      --p-uv: #8B5EBA;
-      --p-uv-light: #B088D4;
-      --p-uv-soft: #E8E0F2;
+      --bg-body: #FCFAF8;
+      --bg-secondary: #F6F1FA;
+      --bg-card: #FFFFFF;
+      --text-primary: #1A1124;
+      --text-secondary: #3D3052;
+      --text-muted: #7A6A8C;
+      --border-light: rgba(106, 70, 148, 0.08);
+      --border-glass: rgba(106, 70, 148, 0.06);
+      --shadow-soft: 0 8px 40px rgba(106, 70, 148, 0.06);
+      --shadow-glass: 0 8px 32px rgba(106, 70, 148, 0.04);
+      --p-uv: #6A4694;
+      --p-uv-light: #8B6EB0;
+      --p-uv-soft: #EDE4F4;
       --p-ember: #B8865A;
       --p-ember-light: #D4A87A;
       --p-mint: #7AB8A8;
-      --glass-bg: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.04);
-      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      --glass-blur: 24px;
+      --glass-bg: rgba(255, 255, 255, 0.5);
+      --glass-border: rgba(106, 70, 148, 0.06);
+      --glass-shadow: 0 8px 32px rgba(106, 70, 148, 0.04);
+      --glass-blur: 20px;
       --glass-saturate: 140%;
       --font-display: 'Syne', 'Inter', sans-serif;
       --font-body: 'Inter', sans-serif;
@@ -100,10 +100,7 @@
       color: #fff;
     }
 
-    h1,
-    h2,
-    h3,
-    h4 {
+    h1, h2, h3, h4 {
       font-family: var(--font-display);
       margin: 0;
       font-weight: 600;
@@ -134,7 +131,7 @@
       letter-spacing: 0.32em;
       text-transform: uppercase;
       font-weight: 600;
-      opacity: 0.5;
+      opacity: 0.6;
       display: inline-flex;
       align-items: center;
       gap: 10px;
@@ -145,7 +142,7 @@
       width: 28px;
       height: 1px;
       background: var(--p-uv);
-      opacity: 0.4;
+      opacity: 0.3;
     }
 
     /* ---- Reveal animations ---- */
@@ -171,18 +168,18 @@
       transition-delay: calc(var(--i, 0) * 100ms);
     }
 
-    /* ---- Grain texture ---- */
+    /* ---- Grain texture (light) ---- */
     .grain {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 999;
-      opacity: 0.015;
+      opacity: 0.008;
       mix-blend-mode: overlay;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.3'/%3E%3C/svg%3E");
     }
 
-    /* ---- Floating gradient orbs ---- */
+    /* ---- Floating gradient orbs (pastel) ---- */
     .orb {
       position: fixed;
       border-radius: 50%;
@@ -190,7 +187,7 @@
       pointer-events: none;
       z-index: 0;
       mix-blend-mode: screen;
-      opacity: 0.12;
+      opacity: 0.08;
       will-change: transform, opacity;
     }
     .orb-1 {
@@ -198,7 +195,7 @@
       height: 60vw;
       top: -20%;
       right: -10%;
-      background: radial-gradient(circle, rgba(139, 94, 186, 0.15), transparent 70%);
+      background: radial-gradient(circle, rgba(106, 70, 148, 0.08), transparent 70%);
       animation: orbFloat 18s ease-in-out infinite alternate;
     }
     .orb-2 {
@@ -206,7 +203,7 @@
       height: 50vw;
       bottom: -10%;
       left: -15%;
-      background: radial-gradient(circle, rgba(184, 134, 90, 0.08), transparent 70%);
+      background: radial-gradient(circle, rgba(184, 134, 90, 0.06), transparent 70%);
       animation: orbFloat 22s ease-in-out infinite alternate-reverse;
     }
     .orb-3 {
@@ -215,19 +212,15 @@
       top: 40%;
       left: 50%;
       transform: translateX(-50%);
-      background: radial-gradient(circle, rgba(122, 184, 168, 0.06), transparent 70%);
+      background: radial-gradient(circle, rgba(122, 184, 168, 0.04), transparent 70%);
       animation: orbFloat 26s ease-in-out infinite alternate;
     }
     @keyframes orbFloat {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-      100% {
-        transform: translate(3%, 3%) scale(1.08);
-      }
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(3%, 3%) scale(1.08); }
     }
 
-    /* ---- Custom cursor ---- */
+    /* ---- Custom cursor (light version) ---- */
     .cursor {
       position: fixed;
       top: 0;
@@ -236,21 +229,21 @@
       height: 8px;
       border-radius: 50%;
       background: var(--p-uv);
-      opacity: 0.5;
+      opacity: 0.4;
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
       transition: width 0.4s var(--ease-spring), height 0.4s var(--ease-spring),
         background 0.3s ease, box-shadow 0.3s ease;
       will-change: transform;
-      box-shadow: 0 0 16px rgba(139, 94, 186, 0.1);
+      box-shadow: 0 0 16px rgba(106, 70, 148, 0.05);
     }
     .cursor.is-active {
       width: 32px;
       height: 32px;
-      background: rgba(139, 94, 186, 0.12);
-      box-shadow: 0 0 24px rgba(139, 94, 186, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(106, 70, 148, 0.06);
+      box-shadow: 0 0 24px rgba(106, 70, 148, 0.02);
+      border: 1px solid rgba(106, 70, 148, 0.06);
     }
     .cursor .label {
       position: absolute;
@@ -260,7 +253,7 @@
       font-size: 7px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       white-space: nowrap;
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -269,42 +262,39 @@
     .cursor.is-active .label {
       opacity: 1;
     }
-    @media (hover:none),
-    (pointer:coarse) {
-      .cursor {
-        display: none;
-      }
+    @media (hover:none), (pointer:coarse) {
+      .cursor { display: none; }
     }
 
-    /* ---- Glass system ---- */
+    /* ---- Glass system (subtle) ---- */
     .glass {
-      background: var(--bg-glass);
+      background: var(--glass-bg);
       backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
       -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-      border: 1px solid var(--border-glass);
-      box-shadow: var(--shadow-glass);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
       border-radius: 24px;
     }
     .glass-card {
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(20px) saturate(140%);
-      -webkit-backdrop-filter: blur(20px) saturate(140%);
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      border: 1px solid rgba(106, 70, 148, 0.04);
+      box-shadow: 0 8px 32px rgba(106, 70, 148, 0.02);
       border-radius: 28px;
       padding: var(--space-xl);
-      transition: all 0.6s var(--ease-out);
+      transition: all 0.5s var(--ease-out);
       will-change: transform, box-shadow, border-color;
     }
     .glass-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
-      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 16px 48px rgba(106, 70, 148, 0.04);
+      border-color: rgba(106, 70, 148, 0.08);
     }
 
     /* ---- Buttons ---- */
     .btn {
-      --glow: rgba(139, 94, 186, 0.2);
+      --glow: rgba(106, 70, 148, 0.15);
       position: relative;
       display: inline-flex;
       align-items: center;
@@ -320,7 +310,6 @@
       will-change: transform;
       border: 1px solid transparent;
       font-family: var(--font-body);
-      color: #fff;
     }
     .btn .arrow {
       display: grid;
@@ -329,49 +318,51 @@
       height: 26px;
       border-radius: 50%;
       transition: transform 0.5s var(--ease-spring);
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(106, 70, 148, 0.04);
     }
     .btn:hover .arrow {
       transform: translateX(4px);
     }
     .btn-primary {
       background: var(--p-uv);
-      border-color: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.1);
       box-shadow: 0 4px 20px -6px var(--glow);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 36px -8px rgba(139, 94, 186, 0.2);
-      background: #9A6EC8;
+      box-shadow: 0 12px 36px -8px rgba(106, 70, 148, 0.15);
+      background: #7A56A0;
     }
     .btn-ghost {
       background: transparent;
-      border-color: rgba(255, 255, 255, 0.06);
-      color: var(--text-secondary);
+      color: var(--p-uv);
+      border-color: rgba(106, 70, 148, 0.08);
     }
     .btn-ghost .arrow {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(106, 70, 148, 0.04);
     }
     .btn-ghost:hover {
       transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(106, 70, 148, 0.15);
+      background: rgba(106, 70, 148, 0.02);
     }
     .btn-ember {
       background: var(--p-ember);
-      border-color: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 4px 20px -6px rgba(184, 134, 90, 0.15);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px -6px rgba(184, 134, 90, 0.1);
     }
     .btn-ember:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 36px -8px rgba(184, 134, 90, 0.2);
+      box-shadow: 0 12px 36px -8px rgba(184, 134, 90, 0.15);
       background: #C9996A;
     }
     .magnetic {
       display: inline-block;
     }
 
-    /* ---- Navigation ---- */
+    /* ---- Navigation (light glass) ---- */
     .nav {
       position: fixed;
       top: 16px;
@@ -384,19 +375,19 @@
       justify-content: space-between;
       padding: 10px 14px 10px 20px;
       border-radius: 999px;
-      background: rgba(10, 6, 18, 0.6);
-      backdrop-filter: blur(24px) saturate(140%);
-      -webkit-backdrop-filter: blur(24px) saturate(140%);
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid rgba(106, 70, 148, 0.04);
+      box-shadow: 0 4px 24px rgba(106, 70, 148, 0.02);
       transition: padding 0.5s var(--ease-out), background 0.6s var(--ease-out),
         box-shadow 0.6s var(--ease-out), border-color 0.6s var(--ease-out);
     }
     .nav.is-scrolled {
       padding: 6px 10px 6px 16px;
-      background: rgba(10, 6, 18, 0.8);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-      border-color: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 40px rgba(106, 70, 148, 0.04);
+      border-color: rgba(106, 70, 148, 0.06);
     }
     .nav-brand {
       display: flex;
@@ -409,7 +400,7 @@
       font-size: 18px;
       font-weight: 700;
       letter-spacing: 0.08em;
-      color: #fff;
+      color: var(--text-primary);
     }
     .nav-brand .logo-sub {
       font-size: 9px;
@@ -446,12 +437,12 @@
       cursor: pointer;
     }
     .nav-links a:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.03);
+      color: var(--p-uv);
+      background: rgba(106, 70, 148, 0.03);
     }
     .nav-links a.active-link {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.03);
+      color: var(--p-uv);
+      background: rgba(106, 70, 148, 0.03);
     }
     .nav-indicator {
       position: absolute;
@@ -481,38 +472,36 @@
       border-radius: 50%;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(106, 70, 148, 0.04);
       color: var(--text-muted);
       background: rgba(255, 255, 255, 0.01);
       transition: all 0.3s ease;
     }
     .nav-icon-btn:hover {
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.02);
+      color: var(--p-uv);
+      border-color: rgba(106, 70, 148, 0.08);
+      background: rgba(106, 70, 148, 0.02);
     }
     .nav-toggle {
       display: none;
     }
 
     @media (max-width: 980px) {
-      .nav-links {
-        display: none;
-      }
+      .nav-links { display: none; }
       .nav-toggle {
         display: grid;
         place-items: center;
         width: 38px;
         height: 38px;
         border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(106, 70, 148, 0.04);
         background: rgba(255, 255, 255, 0.01);
       }
       .nav-toggle span {
         display: block;
         width: 16px;
         height: 1px;
-        background: #fff;
+        background: var(--text-primary);
         position: relative;
       }
       .nav-toggle span::before,
@@ -522,23 +511,19 @@
         left: 0;
         width: 16px;
         height: 1px;
-        background: #fff;
+        background: var(--text-primary);
         transition: transform 0.3s ease;
       }
-      .nav-toggle span::before {
-        top: -5px;
-      }
-      .nav-toggle span::after {
-        top: 5px;
-      }
+      .nav-toggle span::before { top: -5px; }
+      .nav-toggle span::after { top: 5px; }
     }
 
-    /* Mobile menu */
+    /* Mobile menu (light) */
     .mnav {
       position: fixed;
       inset: 0;
       z-index: 1200;
-      background: rgba(10, 6, 18, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(40px) saturate(140%);
       -webkit-backdrop-filter: blur(40px) saturate(140%);
       display: flex;
@@ -547,11 +532,9 @@
       padding: 40px;
       transform: translateY(-100%);
       transition: transform 0.6s var(--ease-out);
-      border: 1px solid rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(106, 70, 148, 0.02);
     }
-    .mnav.is-open {
-      transform: translateY(0);
-    }
+    .mnav.is-open { transform: translateY(0); }
     .mnav-close {
       position: absolute;
       top: 24px;
@@ -559,10 +542,10 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(106, 70, 148, 0.04);
       display: grid;
       place-items: center;
-      color: #fff;
+      color: var(--text-primary);
       background: rgba(255, 255, 255, 0.01);
     }
     .mnav ul {
@@ -577,15 +560,13 @@
       font-family: var(--font-display);
       font-size: clamp(28px, 9vw, 44px);
       font-weight: 600;
-      color: #fff;
+      color: var(--text-primary);
       padding: 8px 0;
       opacity: 0.7;
       transition: opacity 0.3s ease;
       cursor: pointer;
     }
-    .mnav a:hover {
-      opacity: 1;
-    }
+    .mnav a:hover { opacity: 1; }
     .mnav-foot {
       margin-top: 40px;
       display: flex;
@@ -593,7 +574,7 @@
       gap: 6px;
       color: var(--text-muted);
       font-size: 13px;
-      opacity: 0.4;
+      opacity: 0.5;
     }
 
     /* ---- Scroll progress ---- */
@@ -606,7 +587,7 @@
       z-index: 1001;
       width: 0%;
       transition: width 0.1s linear;
-      box-shadow: 0 0 20px rgba(139, 94, 186, 0.08);
+      box-shadow: 0 0 20px rgba(106, 70, 148, 0.05);
     }
 
     /* ---- Page system (SPA) ---- */
@@ -616,18 +597,10 @@
       min-height: 100vh;
       animation: fadeIn 0.6s var(--ease-out);
     }
-    .page.active {
-      display: block;
-    }
+    .page.active { display: block; }
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* ---- Reusable section styles ---- */
@@ -646,7 +619,7 @@
       justify-content: center;
     }
 
-    /* ---- HERO (on home page) ---- */
+    /* ---- HERO (home) ---- */
     .hero {
       min-height: 80vh;
       display: flex;
@@ -664,14 +637,13 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.12;
-      mix-blend-mode: overlay;
+      opacity: 0.15;
     }
     .hero-overlay {
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: linear-gradient(160deg, rgba(10, 6, 18, 0.6) 0%, rgba(10, 6, 18, 0.2) 100%);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 100%);
     }
     .hero-field {
       position: absolute;
@@ -686,8 +658,8 @@
       right: -6%;
       width: min(48vw, 700px);
       transform: translateY(-50%);
-      filter: drop-shadow(0 0 80px rgba(139, 94, 186, 0.06));
-      opacity: 0.08;
+      filter: drop-shadow(0 0 80px rgba(106, 70, 148, 0.02));
+      opacity: 0.03;
       will-change: transform;
     }
     .hero-p svg {
@@ -701,20 +673,13 @@
       height: 2px;
       border-radius: 50%;
       background: var(--p-uv);
-      opacity: 0.06;
-      box-shadow: 0 0 8px 1px rgba(139, 94, 186, 0.03);
+      opacity: 0.04;
+      box-shadow: 0 0 8px 1px rgba(106, 70, 148, 0.02);
       animation: drift 18s ease-in-out infinite;
     }
     @keyframes drift {
-      0%,
-      100% {
-        transform: translateY(0) translateX(0);
-        opacity: 0.02;
-      }
-      50% {
-        transform: translateY(-50px) translateX(18px);
-        opacity: 0.12;
-      }
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.02; }
+      50% { transform: translateY(-50px) translateX(18px); opacity: 0.08; }
     }
     .hero-inner {
       position: relative;
@@ -734,10 +699,10 @@
       gap: 8px;
       font-size: 10px;
       color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(106, 70, 148, 0.02);
       padding: 3px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(106, 70, 148, 0.02);
       letter-spacing: 0.04em;
       opacity: 0.6;
     }
@@ -746,27 +711,20 @@
       height: 6px;
       border-radius: 50%;
       background: var(--p-mint);
-      box-shadow: 0 0 12px rgba(122, 184, 168, 0.15);
+      box-shadow: 0 0 12px rgba(122, 184, 168, 0.1);
       display: inline-block;
       animation: pulse-dot 2s ease-in-out infinite;
     }
     @keyframes pulse-dot {
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 0.4;
-        transform: scale(0.7);
-      }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
     }
     .hero-title {
       font-size: clamp(72px, 15vw, 200px);
       line-height: 0.84;
       letter-spacing: -0.03em;
       font-weight: 700;
-      color: #fff;
+      color: var(--text-primary);
     }
     .hero-title .highlight {
       background: linear-gradient(135deg, var(--p-uv), var(--p-uv-light));
@@ -789,7 +747,7 @@
       font-size: 15.5px;
       line-height: 1.8;
       color: var(--text-secondary);
-      opacity: 0.6;
+      opacity: 0.7;
     }
     .hero-ctas {
       display: flex;
@@ -839,18 +797,11 @@
       animation: scrolldrop 2.4s ease-in-out infinite;
     }
     @keyframes scrolldrop {
-      0% {
-        top: -100%;
-      }
-      60%,
-      100% {
-        top: 100%;
-      }
+      0% { top: -100%; }
+      60%, 100% { top: 100%; }
     }
     @media (max-width: 768px) {
-      .hero-scroll {
-        display: none;
-      }
+      .hero-scroll { display: none; }
     }
     .hero-audience {
       position: absolute;
@@ -863,304 +814,143 @@
       text-align: right;
     }
     @media (max-width: 1180px) {
-      .hero-audience {
-        display: none;
-      }
+      .hero-audience { display: none; }
     }
     .hero-audience .tag {
       font-size: 10px;
       padding: 6px 12px;
       border-radius: 999px;
       color: var(--text-secondary);
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(106, 70, 148, 0.02);
     }
 
-    /* ---- How it works (on about page) ---- */
-    .how-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    @media (max-width: 860px) {
-      .how-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    .how-item {
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      border-radius: 20px;
-      padding: 28px 24px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      transition: background 0.3s ease, border-color 0.3s ease;
-    }
-    .how-item:hover {
-      background: rgba(255, 255, 255, 0.02);
-      border-color: rgba(139, 94, 186, 0.08);
-    }
-    .how-item .icon {
-      flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(139, 94, 186, 0.08);
-      display: grid;
-      place-items: center;
-      color: var(--p-uv);
-      font-size: 16px;
-    }
-    .how-item h4 {
-      font-size: 15px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-    .how-item p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      opacity: 0.6;
-      line-height: 1.5;
-    }
-
-    /* ---- Staffing page ---- */
-    .staffing-grid {
+    /* ---- Layout components ---- */
+    .split-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
       align-items: center;
     }
     @media (max-width: 960px) {
-      .staffing-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
+      .split-grid { grid-template-columns: 1fr; gap: 40px; }
     }
-    .staffing-content h2 {
-      font-size: clamp(36px, 5vw, 52px);
-      margin-top: 16px;
-    }
-    .staffing-content p {
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text-secondary);
-      opacity: 0.7;
-      margin-top: 16px;
-    }
-    .staffing-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 24px;
-    }
-    @media (max-width: 600px) {
-      .staffing-features {
-        grid-template-columns: 1fr;
-      }
-    }
-    .staffing-features .feature {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--text-secondary);
-      opacity: 0.7;
-    }
-    .staffing-features .feature .check {
-      color: var(--p-uv);
-      font-size: 14px;
-    }
-    .staffing-image {
+    .split-grid .image-wrap {
       border-radius: 28px;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      background: var(--bg-secondary);
     }
-    .staffing-image img {
+    .split-grid .image-wrap img {
       width: 100%;
       height: 380px;
       object-fit: cover;
-      opacity: 0.7;
       transition: opacity 0.5s ease;
     }
-    .staffing-image:hover img {
-      opacity: 1;
+    .split-grid .image-wrap:hover img {
+      opacity: 0.85;
     }
 
-    /* ---- News page ---- */
-    .news-grid {
+    .grid-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 24px;
     }
     @media (max-width: 960px) {
-      .news-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
-      .news-grid {
-        grid-template-columns: 1fr;
-      }
+      .grid-3 { grid-template-columns: 1fr; }
     }
-    .news-card {
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid rgba(255, 255, 255, 0.03);
+
+    .card {
+      background: var(--bg-card);
       border-radius: 24px;
-      padding: 24px;
-      transition: background 0.3s ease, transform 0.4s var(--ease-spring);
+      padding: 28px 24px;
+      border: 1px solid rgba(106, 70, 148, 0.04);
+      transition: transform 0.4s var(--ease-spring), box-shadow 0.4s ease;
     }
-    .news-card:hover {
-      background: rgba(255, 255, 255, 0.02);
+    .card:hover {
       transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(106, 70, 148, 0.04);
     }
-    .news-card .meta {
+
+    /* ---- Service page content ---- */
+    .service-detail {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .service-detail ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    @media (max-width: 600px) {
+      .service-detail ul { grid-template-columns: 1fr; }
+    }
+    .service-detail ul li {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 11px;
-      color: var(--text-muted);
-      opacity: 0.5;
-      margin-bottom: 12px;
-    }
-    .news-card .meta .date {
-      font-weight: 600;
-    }
-    .news-card h4 {
-      font-size: 17px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
-    .news-card p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      opacity: 0.5;
-      line-height: 1.6;
-    }
-    .news-card .read-more {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 16px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--p-uv);
-      opacity: 0.5;
-      transition: opacity 0.3s ease, gap 0.3s ease;
-    }
-    .news-card:hover .read-more {
-      opacity: 1;
       gap: 10px;
-    }
-
-    /* ---- Testimonials page ---- */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 24px;
-    }
-    @media (max-width: 960px) {
-      .testimonials-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    @media (max-width: 600px) {
-      .testimonials-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    .testimonial-card {
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      border-radius: 24px;
-      padding: 32px;
-      transition: background 0.3s ease, transform 0.4s var(--ease-spring);
-    }
-    .testimonial-card:hover {
-      background: rgba(255, 255, 255, 0.02);
-      transform: translateY(-4px);
-    }
-    .testimonial-card .quote-mark {
-      font-size: 32px;
-      color: var(--p-uv);
-      opacity: 0.15;
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-    .testimonial-card .quote {
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      opacity: 0.8;
-      margin-bottom: 16px;
-      font-style: italic;
-    }
-    .testimonial-card .attribution {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .testimonial-card .attribution .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(139, 94, 186, 0.08);
-      display: grid;
-      place-items: center;
       font-size: 14px;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(106, 70, 148, 0.02);
+    }
+    .service-detail ul li::before {
+      content: '✦';
       color: var(--p-uv);
-    }
-    .testimonial-card .attribution .name {
-      font-size: 13px;
-      font-weight: 600;
-      color: #fff;
-    }
-    .testimonial-card .attribution .role {
-      font-size: 11px;
-      color: var(--text-muted);
-      opacity: 0.5;
+      font-size: 12px;
     }
 
-    /* ---- Staff Portal page ---- */
+    /* ---- News & Stories ---- */
+    .story-content {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .story-content .story-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      display: flex;
+      gap: 20px;
+      opacity: 0.6;
+    }
+    .story-content .story-body {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    .story-content .story-body p {
+      margin-bottom: 18px;
+    }
+
+    /* ---- Staff Portal ---- */
     .portal-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
     }
     @media (max-width: 860px) {
-      .portal-grid {
-        grid-template-columns: 1fr;
-      }
+      .portal-grid { grid-template-columns: 1fr; }
     }
     .portal-card {
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      background: var(--bg-card);
       border-radius: 24px;
       padding: 32px;
-    }
-    .portal-card h4 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-    .portal-card p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      opacity: 0.5;
-      margin-bottom: 16px;
+      border: 1px solid rgba(106, 70, 148, 0.04);
     }
     .portal-card input,
     .portal-card textarea {
       width: 100%;
       padding: 12px 16px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: var(--bg-body);
+      border: 1px solid rgba(106, 70, 148, 0.04);
       color: var(--text-primary);
       font-family: var(--font-body);
       font-size: 13px;
@@ -1171,21 +961,21 @@
     .portal-card input:focus,
     .portal-card textarea:focus {
       outline: none;
-      border-color: rgba(139, 94, 186, 0.15);
-      background: rgba(255, 255, 255, 0.03);
+      border-color: var(--p-uv);
+      background: rgba(106, 70, 148, 0.02);
     }
     .portal-card .file-upload {
       display: flex;
       align-items: center;
       gap: 12px;
       padding: 12px 16px;
-      border: 1px dashed rgba(255, 255, 255, 0.04);
+      border: 1px dashed rgba(106, 70, 148, 0.04);
       border-radius: 12px;
       cursor: pointer;
       transition: border-color 0.3s ease;
     }
     .portal-card .file-upload:hover {
-      border-color: rgba(139, 94, 186, 0.1);
+      border-color: rgba(106, 70, 148, 0.1);
     }
     .portal-card .file-upload input[type="file"] {
       display: none;
@@ -1200,28 +990,14 @@
       justify-content: center;
     }
 
-    /* ---- Contact page ---- */
+    /* ---- Contact ---- */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
     }
     @media (max-width: 860px) {
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-    }
-    .contact-info h3 {
-      font-size: 22px;
-      margin-bottom: 16px;
-    }
-    .contact-info p {
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text-secondary);
-      opacity: 0.6;
-      margin-bottom: 24px;
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
     }
     .contact-info .detail {
       display: flex;
@@ -1230,23 +1006,23 @@
       margin-bottom: 12px;
       font-size: 14px;
       color: var(--text-secondary);
-      opacity: 0.6;
+      opacity: 0.7;
     }
     .contact-info .detail .icon {
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: rgba(139, 94, 186, 0.06);
+      background: rgba(106, 70, 148, 0.04);
       display: grid;
       place-items: center;
       color: var(--p-uv);
       font-size: 14px;
     }
     .contact-form {
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      background: var(--bg-card);
       border-radius: 24px;
       padding: 32px;
+      border: 1px solid rgba(106, 70, 148, 0.04);
     }
     .contact-form input,
     .contact-form textarea,
@@ -1254,8 +1030,8 @@
       width: 100%;
       padding: 12px 16px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: var(--bg-body);
+      border: 1px solid rgba(106, 70, 148, 0.04);
       color: var(--text-primary);
       font-family: var(--font-body);
       font-size: 13px;
@@ -1267,12 +1043,12 @@
     .contact-form textarea:focus,
     .contact-form select:focus {
       outline: none;
-      border-color: rgba(139, 94, 186, 0.15);
-      background: rgba(255, 255, 255, 0.03);
+      border-color: var(--p-uv);
+      background: rgba(106, 70, 148, 0.02);
     }
     .contact-form select option {
-      background: #0A0612;
-      color: #fff;
+      background: #fff;
+      color: var(--text-primary);
     }
     .contact-form textarea {
       resize: vertical;
@@ -1306,7 +1082,7 @@
     footer {
       background: var(--bg-body);
       padding: 70px 0 28px;
-      border-top: 1px solid rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(106, 70, 148, 0.04);
     }
     .foot-top {
       display: grid;
@@ -1315,15 +1091,10 @@
       padding-bottom: 50px;
     }
     @media (max-width: 860px) {
-      .foot-top {
-        grid-template-columns: 1fr 1fr;
-        row-gap: 38px;
-      }
+      .foot-top { grid-template-columns: 1fr 1fr; row-gap: 38px; }
     }
     @media (max-width: 560px) {
-      .foot-top {
-        grid-template-columns: 1fr;
-      }
+      .foot-top { grid-template-columns: 1fr; }
     }
     .foot-brand {
       display: flex;
@@ -1335,7 +1106,7 @@
       font-size: 18px;
       font-weight: 700;
       letter-spacing: 0.08em;
-      color: #fff;
+      color: var(--text-primary);
     }
     .foot-brand .logo-sub {
       font-size: 10px;
@@ -1358,7 +1129,7 @@
       line-height: 1.7;
       color: var(--text-secondary);
       max-width: 280px;
-      opacity: 0.3;
+      opacity: 0.4;
     }
     .foot-col h5 {
       font-size: 10px;
@@ -1381,25 +1152,25 @@
       font-size: 12.5px;
       color: var(--text-secondary);
       transition: color 0.3s ease;
-      opacity: 0.3;
+      opacity: 0.4;
     }
     .foot-col a:hover {
-      color: #fff;
-      opacity: 0.8;
+      color: var(--p-uv);
+      opacity: 1;
     }
     .foot-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-top: 28px;
-      border-top: 1px solid rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(106, 70, 148, 0.02);
       flex-wrap: wrap;
       gap: 14px;
     }
     .foot-bottom p {
       font-size: 10.5px;
       color: var(--text-muted);
-      opacity: 0.15;
+      opacity: 0.2;
     }
     .foot-legal {
       display: flex;
@@ -1408,25 +1179,10 @@
     .foot-legal a {
       font-size: 10.5px;
       color: var(--text-muted);
-      opacity: 0.15;
+      opacity: 0.2;
       transition: opacity 0.3s ease;
     }
-    .foot-legal a:hover {
-      opacity: 0.6;
-    }
-
-    /* ---- Grid lines ---- */
-    .grid-lines {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.008;
-      background-image:
-        linear-gradient(rgba(139, 94, 186, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 94, 186, 0.03) 1px, transparent 1px);
-      background-size: 80px 80px;
-    }
+    .foot-legal a:hover { opacity: 0.6; }
 
     .sr-only {
       position: absolute;
@@ -1447,15 +1203,27 @@
       font-weight: 600;
       z-index: 10000;
     }
-    .skip-link:focus {
-      top: 20px;
+    .skip-link:focus { top: 20px; }
+
+    /* ---- Responsive tweaks ---- */
+    @media (max-width: 768px) {
+      .hero-title { font-size: clamp(48px, 12vw, 72px); }
+      .hero-copy { font-size: 14px; }
+      .btn { padding: 12px 20px; font-size: 12px; }
+      .section-head h2 { font-size: clamp(28px, 6vw, 36px); }
+      .split-grid .image-wrap img { height: 240px; }
+      .service-detail ul { grid-template-columns: 1fr; }
+      .nav-brand .logo-tagline { display: none; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { font-size: 36px; }
+      .hero-audience-links .btn { font-size: 10px; padding: 8px 14px; }
     }
   </style>
 </head>
 <body>
 
   <a class="skip-link" href="#main">Skip to main content</a>
-  <div class="grid-lines"></div>
   <div class="grain"></div>
   <div class="cursor" id="cursor"><span class="label" id="cursorLabel">Explore</span></div>
   <div class="scroll-progress" id="scrollProgress"></div>
@@ -1511,8 +1279,9 @@
       <li><a data-page="home" class="active-link magnetic">Home <span class="nav-indicator"></span></a></li>
       <li><a data-page="about" class="magnetic">About <span class="nav-indicator"></span></a></li>
       <li><a data-page="staffing" class="magnetic">Staffing <span class="nav-indicator"></span></a></li>
+      <li><a data-page="services" class="magnetic">Care Services <span class="nav-indicator"></span></a></li>
+      <li><a data-page="stories" class="magnetic">Stories <span class="nav-indicator"></span></a></li>
       <li><a data-page="news" class="magnetic">News <span class="nav-indicator"></span></a></li>
-      <li><a data-page="testimonials" class="magnetic">Testimonials <span class="nav-indicator"></span></a></li>
       <li><a data-page="staff-portal" class="magnetic">Staff Portal <span class="nav-indicator"></span></a></li>
       <li><a data-page="contact" class="magnetic">Contact <span class="nav-indicator"></span></a></li>
     </ul>
@@ -1533,8 +1302,9 @@
       <li><a data-page="home">Home</a></li>
       <li><a data-page="about">About</a></li>
       <li><a data-page="staffing">Staffing</a></li>
+      <li><a data-page="services">Care Services</a></li>
+      <li><a data-page="stories">Stories</a></li>
       <li><a data-page="news">News</a></li>
-      <li><a data-page="testimonials">Testimonials</a></li>
       <li><a data-page="staff-portal">Staff Portal</a></li>
       <li><a data-page="contact">Contact</a></li>
     </ul>
@@ -1548,7 +1318,8 @@
   <!-- ============ PAGE: HOME ============ -->
   <div class="page active" id="page-home">
     <section class="hero">
-      <img class="hero-bg" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=800&fit=crop&crop=center&auto=format" alt="Caregiver supporting an elderly client at home" loading="eager" />
+      <!-- Hero image from your reference -->
+      <img class="hero-bg" src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/carer-smiling-at-elderly-customer-in-kitchen_2x3.jpg" alt="Caregiver supporting an elderly client at home" loading="eager" />
       <div class="hero-overlay"></div>
       <div class="hero-field">
         <div class="hero-p" id="heroP">
@@ -1586,24 +1357,144 @@
       </div>
       <div class="hero-scroll"><span>Scroll</span><span class="line"></span></div>
     </section>
+
+    <!-- Home – About preview -->
+    <div class="wrap section-pad">
+      <div class="split-grid">
+        <div class="image-wrap reveal">
+          <img src="https://static.wixstatic.com/media/0d4cd0_055a0cb26f464c0282d5cc311ec692c8~mv2.jpg" alt="Caregiver and client sharing a moment" loading="lazy" />
+        </div>
+        <div class="reveal">
+          <div class="eyebrow">Who we are</div>
+          <h2>Care built around people.</h2>
+          <p style="margin-top:16px;font-size:15px;line-height:1.8;color:var(--text-secondary);">
+            Pluto BV Ltd is a specialist social‑care recruitment and staffing organisation. We provide temporary and permanent professionals to local authorities, the NHS, residential homes and social‑care providers across the UK.
+          </p>
+          <p style="margin-top:12px;font-size:15px;line-height:1.8;color:var(--text-secondary);">
+            Our purpose is not simply to supply staff – it's to ensure that vulnerable adults and children receive the compassionate, skilled support they deserve.
+          </p>
+          <a href="#about" class="btn btn-primary magnetic" data-page="about" style="margin-top:24px;">Discover Pluto <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Home – Services preview -->
+    <div style="background:var(--bg-secondary);">
+      <div class="wrap section-pad">
+        <div class="section-head reveal">
+          <div class="eyebrow">Our Services</div>
+          <h2>Support that meets people where they are.</h2>
+        </div>
+        <div class="grid-3">
+          <a href="#services" data-page="services" class="card reveal" style="text-decoration:none;cursor:pointer;">
+            <div style="font-size:28px;margin-bottom:12px;">🏠</div>
+            <h4 style="font-size:18px;">Live‑in Care</h4>
+            <p style="font-size:13px;color:var(--text-secondary);margin-top:8px;opacity:0.7;">Round‑the‑clock support in the comfort of home.</p>
+          </a>
+          <a href="#services" data-page="services" class="card reveal" style="text-decoration:none;cursor:pointer;">
+            <div style="font-size:28px;margin-bottom:12px;">🕊️</div>
+            <h4 style="font-size:18px;">Domiciliary Care</h4>
+            <p style="font-size:13px;color:var(--text-secondary);margin-top:8px;opacity:0.7;">Support with daily activities and household tasks.</p>
+          </a>
+          <a href="#services" data-page="services" class="card reveal" style="text-decoration:none;cursor:pointer;">
+            <div style="font-size:28px;margin-bottom:12px;">🤝</div>
+            <h4 style="font-size:18px;">Companionship Care</h4>
+            <p style="font-size:13px;color:var(--text-secondary);margin-top:8px;opacity:0.7;">Meaningful connection and social interaction.</p>
+          </a>
+          <a href="#services" data-page="services" class="card reveal" style="text-decoration:none;cursor:pointer;grid-column:1/3;justify-self:center;max-width:300px;">
+            <div style="font-size:28px;margin-bottom:12px;">🌟</div>
+            <h4 style="font-size:18px;">Autism &amp; Specialist Support</h4>
+            <p style="font-size:13px;color:var(--text-secondary);margin-top:8px;opacity:0.7;">Person‑centred, respectful support for complex needs.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Home – Staffing teaser -->
+    <div class="wrap section-pad">
+      <div class="split-grid reverse">
+        <div class="reveal">
+          <div class="eyebrow">For Organisations</div>
+          <h2>Reliable people for the teams that need them.</h2>
+          <p style="margin-top:16px;font-size:15px;line-height:1.8;color:var(--text-secondary);">
+            We supply vetted, trained and supported care professionals across all social‑care disciplines. From temporary cover to permanent recruitment, our approach is built around your service.
+          </p>
+          <ul style="list-style:none;padding:0;margin:20px 0;">
+            <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary);padding:6px 0;">✦ Vetting &amp; screening</li>
+            <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary);padding:6px 0;">✦ DBS &amp; Right to Work</li>
+            <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary);padding:6px 0;">✦ TUPE &amp; transfer management</li>
+            <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary);padding:6px 0;">✦ 24/7 account support</li>
+          </ul>
+          <a href="#staffing" class="btn btn-primary magnetic" data-page="staffing">Explore Staffing <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        </div>
+        <div class="image-wrap reveal">
+          <img src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/male-social-worker-taking-care-old-woman-scaled.jpg" alt="Care professional supporting a client" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Home – Testimonials teaser -->
+    <div style="background:var(--bg-secondary);">
+      <div class="wrap section-pad">
+        <div class="section-head reveal">
+          <div class="eyebrow">In Their Words</div>
+          <h2>Real stories from real people.</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card reveal">
+            <div style="font-size:28px;color:var(--p-uv);opacity:0.2;">“</div>
+            <p style="font-size:15px;line-height:1.7;color:var(--text-secondary);">The live‑in care provided has been exceptional. Our mother is safe, comfortable, and genuinely happy.</p>
+            <div style="margin-top:16px;font-weight:600;">Sarah T.</div>
+            <div style="font-size:12px;color:var(--text-muted);">Family member, Northampton</div>
+          </div>
+          <div class="card reveal">
+            <div style="font-size:28px;color:var(--p-uv);opacity:0.2;">“</div>
+            <p style="font-size:15px;line-height:1.7;color:var(--text-secondary);">Pluto have been a dependable staffing partner. Their team are professional, well‑vetted, and genuinely care.</p>
+            <div style="margin-top:16px;font-weight:600;">James C.</div>
+            <div style="font-size:12px;color:var(--text-muted);">Care Home Manager, Milton Keynes</div>
+          </div>
+          <div class="card reveal">
+            <div style="font-size:28px;color:var(--p-uv);opacity:0.2;">“</div>
+            <p style="font-size:15px;line-height:1.7;color:var(--text-secondary);">The flexibility and responsiveness of Pluto's staffing solutions have been a game‑changer for our organisation.</p>
+            <div style="margin-top:16px;font-weight:600;">Aisha L.</div>
+            <div style="font-size:12px;color:var(--text-muted);">Operations Director, NHS Trust</div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:40px;">
+          <a href="#stories" class="btn btn-ghost magnetic" data-page="stories">Read full stories <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ============ PAGE: ABOUT ============ -->
   <div class="page" id="page-about">
     <div class="wrap section-pad">
       <div class="section-head reveal">
-        <div class="eyebrow">Our Process</div>
-        <h2>How it works — <span style="color:var(--p-uv);">excellence in every step.</span></h2>
+        <div class="eyebrow">About Pluto</div>
+        <h2>Care, staffing and support — <span style="color:var(--p-uv);">built around people.</span></h2>
       </div>
-      <div class="how-grid">
-        <div class="how-item reveal"><span class="icon">✓</span><div><h4>Vetting &amp; Screening</h4><p>Stringent checks including DBS and UK Right to Work for every carer.</p></div></div>
-        <div class="how-item reveal"><span class="icon">✓</span><div><h4>Diverse Specialisations</h4><p>Carers covering EMI, learning disabilities, challenging behaviour, and more.</p></div></div>
-        <div class="how-item reveal"><span class="icon">✓</span><div><h4>Full Discipline Coverage</h4><p>NHS, pre-school nurseries, care homes — all social care settings.</p></div></div>
-        <div class="how-item reveal"><span class="icon">✓</span><div><h4>Care Standards Compliant</h4><p>Service aligned with established care standards and best practices.</p></div></div>
-        <div class="how-item reveal"><span class="icon">✓</span><div><h4>TUPE Expertise</h4><p>Seamless transfer management of outgoing supplier staff.</p></div></div>
-        <div class="how-item reveal"><span class="icon">✓</span><div><h4>24/7 Account Management</h4><p>Dedicated account manager, responsive around the clock.</p></div></div>
-        <div class="how-item reveal"><span class="icon">✓</span><div><h4>Performance Measurement</h4><p>Ongoing monitoring with bespoke client management feedback.</p></div></div>
-        <div class="how-item reveal"><span class="icon">✓</span><div><h4>Flexible Administration</h4><p>Adaptable invoicing and review documentation.</p></div></div>
+      <div style="max-width:800px;margin:0 auto;">
+        <p style="font-size:17px;line-height:1.9;color:var(--text-secondary);margin-bottom:24px;">
+          Pluto BV Ltd is a specialist social‑care recruitment and staffing organisation. We were founded on the belief that quality care starts with the right people – people who are not only skilled and experienced, but also compassionate and committed to making a real difference.
+        </p>
+        <p style="font-size:17px;line-height:1.9;color:var(--text-secondary);margin-bottom:24px;">
+          We work across the public and private sectors, supporting local authorities, NHS trusts, residential care homes and other care organisations. Our service is built around understanding each organisation's unique staffing needs and matching them with professionals who can meet those requirements – consistently and reliably.
+        </p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:60px;">
+        <div class="card reveal"><h4 style="font-size:18px;">Who we support</h4><ul style="list-style:none;padding:0;margin-top:12px;"><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ Individuals &amp; families</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ Local authorities</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ NHS &amp; healthcare</li><li style="padding:6px 0;">✦ Residential &amp; social care</li></ul></div>
+        <div class="card reveal"><h4 style="font-size:18px;">Our approach</h4><ul style="list-style:none;padding:0;margin-top:12px;"><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ Person‑centred recruitment</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ Rigorous vetting &amp; screening</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ Ethical, transparent matching</li><li style="padding:6px 0;">✦ Ongoing support &amp; performance</li></ul></div>
+      </div>
+
+      <div style="margin-top:60px;background:var(--bg-secondary);border-radius:28px;padding:48px 40px;">
+        <h3 style="font-size:24px;text-align:center;">Our standards</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:30px;">
+          <div style="text-align:center;"><div style="font-size:32px;color:var(--p-uv);">✓</div><p style="font-size:13px;color:var(--text-secondary);">DBS &amp; Right to Work checked</p></div>
+          <div style="text-align:center;"><div style="font-size:32px;color:var(--p-uv);">✓</div><p style="font-size:13px;color:var(--text-secondary);">Care Standards compliant</p></div>
+          <div style="text-align:center;"><div style="font-size:32px;color:var(--p-uv);">✓</div><p style="font-size:13px;color:var(--text-secondary);">TUPE experienced</p></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1612,26 +1503,222 @@
   <div class="page" id="page-staffing">
     <div class="wrap section-pad">
       <div class="section-head reveal">
-        <div class="eyebrow">For Care Organisations</div>
-        <h2>Reliable people for the <span style="color:var(--p-uv);">teams that need them.</span></h2>
+        <div class="eyebrow">For Organisations</div>
+        <h2>Staffing solutions <span style="color:var(--p-uv);">built around your service.</span></h2>
       </div>
-      <div class="staffing-grid">
-        <div class="staffing-content reveal">
-          <p>Pluto BV Ltd, as a provider of carers specialising in a wide spectrum of patient conditions, offers a comprehensive range of services to meet the diverse needs of various care settings. Our commitment to excellence is reflected in our meticulous approach to screening and matching carers, as well as our dedication to complying with care standards.</p>
-          <div class="staffing-features">
-            <div class="feature"><span class="check">✦</span> Vetting &amp; Screening</div>
-            <div class="feature"><span class="check">✦</span> Diverse Care Specialisations</div>
-            <div class="feature"><span class="check">✦</span> Full Discipline Coverage</div>
-            <div class="feature"><span class="check">✦</span> Care Standards Compliance</div>
-            <div class="feature"><span class="check">✦</span> TUPE Expertise</div>
-            <div class="feature"><span class="check">✦</span> 24/7 Account Management</div>
-            <div class="feature"><span class="check">✦</span> Performance Measurement</div>
-            <div class="feature"><span class="check">✦</span> Flexible Administration</div>
-          </div>
-          <a href="#contact" class="btn btn-primary magnetic" data-page="contact" style="margin-top:28px;">Talk to Our Staffing Team <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <div style="max-width:800px;margin:0 auto;">
+        <p style="font-size:17px;line-height:1.9;color:var(--text-secondary);">
+          Pluto BV Ltd provides temporary and permanent social‑care professionals to a wide range of settings. Our service is designed to give you confidence that your staffing needs will be met with professionalism, reliability and a genuine understanding of your service users.
+        </p>
+      </div>
+
+      <!-- Who we support -->
+      <div style="margin-top:60px;">
+        <h3 style="font-size:22px;text-align:center;">Who we support</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-top:24px;">
+          <div class="card" style="text-align:center;"><span style="font-size:28px;">🏛️</span><p style="font-size:13px;margin-top:8px;">Local Authorities</p></div>
+          <div class="card" style="text-align:center;"><span style="font-size:28px;">🏥</span><p style="font-size:13px;margin-top:8px;">NHS &amp; Healthcare</p></div>
+          <div class="card" style="text-align:center;"><span style="font-size:28px;">🏠</span><p style="font-size:13px;margin-top:8px;">Residential Care</p></div>
+          <div class="card" style="text-align:center;"><span style="font-size:28px;">🤝</span><p style="font-size:13px;margin-top:8px;">Social Care Orgs</p></div>
         </div>
-        <div class="staffing-image reveal">
-          <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=740&h=380&fit=crop&crop=center&auto=format" alt="Professional care team" loading="lazy" />
+      </div>
+
+      <!-- What we provide -->
+      <div style="margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:30px;">
+        <div class="card"><h4 style="font-size:18px;">Temporary Staffing</h4><p style="font-size:14px;color:var(--text-secondary);margin-top:8px;">Flexible workforce support for short‑term cover, seasonal demand or project‑based needs.</p></div>
+        <div class="card"><h4 style="font-size:18px;">Permanent Recruitment</h4><p style="font-size:14px;color:var(--text-secondary);margin-top:8px;">Long‑term placements for roles that require stability, continuity and deep sector understanding.</p></div>
+      </div>
+
+      <!-- Vetting process -->
+      <div style="margin-top:60px;background:var(--bg-secondary);border-radius:28px;padding:48px 40px;">
+        <h3 style="font-size:22px;text-align:center;">Our vetting &amp; screening process</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:24px;">
+          <div><span style="font-weight:600;color:var(--p-uv);">01.</span> <span style="font-weight:500;">Identify</span><p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">We source candidates through multiple channels.</p></div>
+          <div><span style="font-weight:600;color:var(--p-uv);">02.</span> <span style="font-weight:500;">Screen</span><p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">DBS, Right to Work, references and qualifications.</p></div>
+          <div><span style="font-weight:600;color:var(--p-uv);">03.</span> <span style="font-weight:500;">Verify</span><p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">We check identity, employment history and suitability.</p></div>
+          <div><span style="font-weight:600;color:var(--p-uv);">04.</span> <span style="font-weight:500;">Match</span><p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">We consider your setting, role and service‑user needs.</p></div>
+          <div><span style="font-weight:600;color:var(--p-uv);">05.</span> <span style="font-weight:500;">Place</span><p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">We confirm the placement with all necessary documentation.</p></div>
+          <div><span style="font-weight:600;color:var(--p-uv);">06.</span> <span style="font-weight:500;">Support</span><p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">We stay in contact through your dedicated account manager.</p></div>
+        </div>
+      </div>
+
+      <!-- TUPE -->
+      <div style="margin-top:60px;border-left:4px solid var(--p-uv);padding-left:28px;">
+        <h3 style="font-size:20px;">TUPE &amp; transfer management</h3>
+        <p style="font-size:15px;color:var(--text-secondary);margin-top:8px;">
+          Pluto has comprehensive experience managing staff transitions under TUPE regulations. We help organisations navigate the change of supplier while ensuring minimal disruption to care provision.
+        </p>
+      </div>
+
+      <!-- Account management -->
+      <div style="margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:30px;">
+        <div><h4 style="font-size:18px;">Dedicated account management</h4><p style="font-size:14px;color:var(--text-secondary);margin-top:8px;">Every client has a named account manager available 24/7 to discuss your staffing needs, address issues and provide feedback.</p></div>
+        <div><h4 style="font-size:18px;">Performance &amp; feedback</h4><p style="font-size:14px;color:var(--text-secondary);margin-top:8px;">We provide ongoing performance monitoring and bespoke management information to help you assess the effectiveness of our staffing solutions.</p></div>
+      </div>
+
+      <div style="text-align:center;margin-top:60px;">
+        <a href="#contact" class="btn btn-primary magnetic" data-page="contact">Request Staffing <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE: SERVICES ============ -->
+  <div class="page" id="page-services">
+    <div class="wrap section-pad">
+      <div class="section-head reveal">
+        <div class="eyebrow">Our Care Services</div>
+        <h2>Support that meets people <span style="color:var(--p-uv);">where they are.</span></h2>
+      </div>
+
+      <!-- Live-in Care -->
+      <div style="margin-bottom:80px;">
+        <div class="split-grid">
+          <div class="image-wrap reveal">
+            <img src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/carer-smiling-at-elderly-customer-in-kitchen_2x3.jpg" alt="Live-in Care" loading="lazy" />
+          </div>
+          <div class="reveal service-detail">
+            <h3 style="font-size:28px;">Live‑in Care</h3>
+            <p style="font-size:15px;color:var(--text-secondary);margin-top:12px;">Round‑the‑clock support in the comfort of your own home – so you can keep living life on your terms.</p>
+            <ul>
+              <li>Personal care &amp; daily routines</li>
+              <li>Mobility &amp; medication support</li>
+              <li>Meal preparation &amp; household tasks</li>
+              <li>Companionship &amp; emotional support</li>
+              <li>Family peace of mind</li>
+              <li>Experienced, vetted caregivers</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary magnetic" data-page="contact">Discuss Live‑in Care <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domiciliary Care -->
+      <div style="margin-bottom:80px;">
+        <div class="split-grid reverse">
+          <div class="reveal service-detail">
+            <h3 style="font-size:28px;">Domiciliary Care</h3>
+            <p style="font-size:15px;color:var(--text-secondary);margin-top:12px;">Professional support in the comfort of home – from personal care to household tasks.</p>
+            <ul>
+              <li>Personal care &amp; hygiene</li>
+              <li>Household tasks &amp; meals</li>
+              <li>Medication reminders &amp; support</li>
+              <li>Companionship &amp; conversation</li>
+              <li>Flexible scheduling</li>
+              <li>Promoting independence</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary magnetic" data-page="contact">Talk About Domiciliary Care <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          </div>
+          <div class="image-wrap reveal">
+            <img src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/male-social-worker-taking-care-old-woman-scaled.jpg" alt="Domiciliary Care" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Companionship Care -->
+      <div style="margin-bottom:80px;">
+        <div class="split-grid">
+          <div class="image-wrap reveal">
+            <img src="https://static.wixstatic.com/media/0d4cd0_055a0cb26f464c0282d5cc311ec692c8~mv2.jpg" alt="Companionship Care" loading="lazy" />
+          </div>
+          <div class="reveal service-detail">
+            <h3 style="font-size:28px;">Companionship Care</h3>
+            <p style="font-size:15px;color:var(--text-secondary);margin-top:12px;">Because nobody should feel alone – meaningful connection and consistent human presence.</p>
+            <ul>
+              <li>Conversation &amp; social interaction</li>
+              <li>Shared activities &amp; outings</li>
+              <li>Emotional support &amp; reassurance</li>
+              <li>Respite for family carers</li>
+              <li>Building lasting relationships</li>
+              <li>Flexible, person‑centred visits</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary magnetic" data-page="contact">Explore Companionship <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Autism & Specialist -->
+      <div style="margin-bottom:40px;">
+        <div class="split-grid reverse">
+          <div class="reveal service-detail">
+            <h3 style="font-size:28px;">Autism &amp; Specialist Support</h3>
+            <p style="font-size:15px;color:var(--text-secondary);margin-top:12px;">Person‑centred, respectful support for individuals with autism and complex needs.</p>
+            <ul>
+              <li>Individualised support plans</li>
+              <li>Communication &amp; consistency</li>
+              <li>Promoting independence</li>
+              <li>Complex needs management</li>
+              <li>Family involvement</li>
+              <li>Experienced, specialist carers</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary magnetic" data-page="contact">Discuss Specialist Support <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          </div>
+          <div class="image-wrap reveal">
+            <img src="https://static.wixstatic.com/media/42446d_8b6daf8732ba4dcf93d5b2c88082631f~mv2.jpg" alt="Autism support" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE: STORIES ============ -->
+  <div class="page" id="page-stories">
+    <div class="wrap section-pad">
+      <div class="section-head reveal">
+        <div class="eyebrow">Real Stories</div>
+        <h2>How we made a <span style="color:var(--p-uv);">difference.</span></h2>
+      </div>
+
+      <!-- Story 1 -->
+      <div class="story-content reveal" style="margin-bottom:80px;">
+        <div style="background:var(--bg-secondary);border-radius:28px;padding:40px;">
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;">
+            <span style="background:var(--p-uv);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;font-weight:600;">1</span>
+            <span style="font-weight:600;font-size:18px;">Supporting independence with live‑in care</span>
+          </div>
+          <div class="story-meta">Sarah Thompson · Family member · Northampton · Aug 2026</div>
+          <div class="story-body">
+            <p><strong>The situation:</strong> Our mother, Margaret, had been living alone since our father passed away. She was managing reasonably well, but we were increasingly worried about her falling and her inability to manage her medication reliably.</p>
+            <p><strong>The challenge:</strong> We needed someone who could be with her around the clock, but we didn't want to move her into residential care – she loves her home and her garden.</p>
+            <p><strong>What Pluto did:</strong> Pluto introduced us to Maria, an experienced live‑in carer who matched not only the practical requirements but also Mum's personality and sense of humour. Maria helps with all the daily tasks – preparing meals, sorting medication, and making sure Mum takes her walks – but more than that, she's become a friend.</p>
+            <p><strong>The outcome:</strong> Mum is happier and safer than she's been in years. She still has her independence, but she knows there's always someone there if she needs them. Our family can finally sleep at night.</p>
+            <p><strong>What we learned:</strong> Live‑in care isn't just about having a carer – it's about having the right person. Pluto's matching process made that possible.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 2 -->
+      <div class="story-content reveal" style="margin-bottom:80px;">
+        <div style="background:var(--bg-secondary);border-radius:28px;padding:40px;">
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;">
+            <span style="background:var(--p-uv);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;font-weight:600;">2</span>
+            <span style="font-weight:600;font-size:18px;">A reliable staffing partner for a residential home</span>
+          </div>
+          <div class="story-meta">James Carter · Care Home Manager · Milton Keynes · Jul 2026</div>
+          <div class="story-body">
+            <p><strong>The situation:</strong> We operate a 40‑bed residential home for elderly residents with dementia. Like many care homes, we face persistent challenges with staffing – especially covering sickness and holidays.</p>
+            <p><strong>The challenge:</strong> We needed a staffing partner who could provide reliable, trained staff at short notice, without compromising on quality or continuity.</p>
+            <p><strong>What Pluto did:</strong> Pluto set us up with a dedicated account manager who understood our home's specific needs. They pre‑vetted a pool of carers who were already familiar with dementia care, so when we needed cover, we got people who could hit the ground running.</p>
+            <p><strong>The outcome:</strong> We've reduced our reliance on expensive agency staff and improved our overall continuity for residents. Our staff appreciate the support, and our residents notice the difference.</p>
+            <p><strong>What we learned:</strong> Having a staffing partner who truly understands your setting is worth more than any generic agency service.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 3 -->
+      <div class="story-content reveal">
+        <div style="background:var(--bg-secondary);border-radius:28px;padding:40px;">
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;">
+            <span style="background:var(--p-uv);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;font-weight:600;">3</span>
+            <span style="font-weight:600;font-size:18px;">Specialist support for a young adult with autism</span>
+          </div>
+          <div class="story-meta">Aisha Latif · Operations Director · NHS Trust · Aug 2026</div>
+          <div class="story-body">
+            <p><strong>The situation:</strong> We were asked to support a young adult with autism who had been struggling with transitions between home and day services. He needed consistent, patient support to help him feel safe and engaged.</p>
+            <p><strong>The challenge:</strong> We needed a support worker who could build trust over time and who understood the specific sensory and communication needs of someone with autism.</p>
+            <p><strong>What Pluto did:</strong> Pluto's matching process identified two potential support workers who had both autism training and experience with complex needs. We interviewed both and chose the one who seemed to connect most naturally.</p>
+            <p><strong>The outcome:</strong> The support worker has been with our client for over six months now. He's more confident, more willing to try new activities, and his family is more relaxed. The consistency has been transformative.</p>
+            <p><strong>What we learned:</strong> Specialist support isn't just about having the right qualifications – it's about the right personality and approach. Pluto understood that.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1641,62 +1728,56 @@
   <div class="page" id="page-news">
     <div class="wrap section-pad">
       <div class="section-head reveal">
-        <div class="eyebrow">From the Blog</div>
-        <h2>Recent news feed</h2>
+        <div class="eyebrow">Insights &amp; Updates</div>
+        <h2>Latest news <span style="color:var(--p-uv);">from Pluto.</span></h2>
       </div>
-      <div class="news-grid">
-        <div class="news-card reveal">
-          <div class="meta"><span class="date">01 Aug</span><span>Admin</span></div>
-          <h4>Enhancing Independence and Comfort with Live-in Care</h4>
-          <p>How live-in care helps people stay in the home they love, safely and comfortably.</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-        <div class="news-card reveal">
-          <div class="meta"><span class="date">19 Dec</span><span>Admin</span></div>
-          <h4>Supporting Independence in the Comfort of Home</h4>
-          <p>Practical ways domiciliary care supports day-to-day independence.</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-        <div class="news-card reveal">
-          <div class="meta"><span class="date">19 Dec</span><span>Admin</span></div>
-          <h4>The Power of Companionship Care</h4>
-          <p>Why companionship is one of the most valuable forms of care support.</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ============ PAGE: TESTIMONIALS ============ -->
-  <div class="page" id="page-testimonials">
-    <div class="wrap section-pad">
-      <div class="section-head reveal">
-        <div class="eyebrow">In Their Words</div>
-        <h2>What people say about <span style="color:var(--p-uv);">Pluto.</span></h2>
+      <!-- News Article 1 -->
+      <div class="story-content reveal" style="margin-bottom:60px;">
+        <div style="background:var(--bg-card);border-radius:24px;padding:32px;border:1px solid rgba(106,70,148,0.04);">
+          <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;">
+            <span style="background:var(--p-uv-soft);color:var(--p-uv);padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;">Care Advice</span>
+            <span style="font-size:12px;color:var(--text-muted);">01 Aug 2026</span>
+          </div>
+          <h3 style="font-size:22px;">Enhancing Independence and Comfort with Live‑in Care</h3>
+          <div class="story-body" style="margin-top:16px;">
+            <p>Live‑in care is often the best solution for people who want to remain in their own homes but need consistent support. Unlike visiting care, live‑in care provides continuous presence – which means stability, security and peace of mind.</p>
+            <p>For many older adults, the thought of leaving their home is daunting. Live‑in care allows them to keep their routines, their pets, their garden – everything that makes their life their own. The caregiver becomes part of the household, providing practical assistance and emotional support.</p>
+            <p>Families also benefit – knowing that someone is there around the clock reduces the worry that comes with distance or frailty. It's not just care; it's reassurance.</p>
+            <p>At Pluto, we believe that live‑in care should be tailored to each individual. Whether it's help with mobility, medication management or simply a listening ear, our caregivers are trained to adapt to your needs.</p>
+          </div>
+        </div>
       </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card reveal">
-          <div class="quote-mark">"</div>
-          <p class="quote">The live-in care provided has been exceptional. Our mother is safe, comfortable, and genuinely happy. The team at Pluto really listened to our needs.</p>
-          <div class="attribution">
-            <div class="avatar">ST</div>
-            <div><div class="name">Sarah Thompson</div><div class="role">Family member, Northampton</div></div>
+
+      <!-- News Article 2 -->
+      <div class="story-content reveal" style="margin-bottom:60px;">
+        <div style="background:var(--bg-card);border-radius:24px;padding:32px;border:1px solid rgba(106,70,148,0.04);">
+          <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;">
+            <span style="background:var(--p-uv-soft);color:var(--p-uv);padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;">Wellbeing</span>
+            <span style="font-size:12px;color:var(--text-muted);">19 Dec 2025</span>
+          </div>
+          <h3 style="font-size:22px;">Supporting Independence in the Comfort of Home</h3>
+          <div class="story-body" style="margin-top:16px;">
+            <p>Domiciliary care is about giving people the support they need to stay independent at home. It might be help with getting up, washing, preparing meals or simply having someone to talk to. The goal is always to enable – not to take over.</p>
+            <p>For many people, a small amount of support can make a huge difference. It can mean the difference between managing at home and having to move into residential care. That's why we offer flexible, person‑centred care plans that fit around your life, not the other way round.</p>
+            <p>Our caregivers are trained to promote independence – they encourage people to do as much as they can for themselves, while stepping in when extra help is needed. It's a careful balance, but it's one that our teams handle with skill and sensitivity.</p>
           </div>
         </div>
-        <div class="testimonial-card reveal">
-          <div class="quote-mark">"</div>
-          <p class="quote">Pluto BV Ltd have been a dependable staffing partner. Their team are professional, well-vetted, and genuinely care about the people they support. Highly recommended.</p>
-          <div class="attribution">
-            <div class="avatar">JC</div>
-            <div><div class="name">James Carter</div><div class="role">Care Home Manager, Milton Keynes</div></div>
+      </div>
+
+      <!-- News Article 3 -->
+      <div class="story-content reveal">
+        <div style="background:var(--bg-card);border-radius:24px;padding:32px;border:1px solid rgba(106,70,148,0.04);">
+          <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;">
+            <span style="background:var(--p-uv-soft);color:var(--p-uv);padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;">Companionship</span>
+            <span style="font-size:12px;color:var(--text-muted);">19 Dec 2025</span>
           </div>
-        </div>
-        <div class="testimonial-card reveal">
-          <div class="quote-mark">"</div>
-          <p class="quote">The flexibility and responsiveness of Pluto's staffing solutions have been a game-changer for our organisation. We always have the right people when we need them.</p>
-          <div class="attribution">
-            <div class="avatar">AL</div>
-            <div><div class="name">Aisha Latif</div><div class="role">Operations Director, NHS Trust</div></div>
+          <h3 style="font-size:22px;">The Power of Companionship Care</h3>
+          <div class="story-body" style="margin-top:16px;">
+            <p>Loneliness is one of the most under‑recognised health risks for older people. It affects mental wellbeing, physical health and overall quality of life. That's where companionship care comes in.</p>
+            <p>Companionship is about human connection – having someone to share a cup of tea with, to talk about the day, to go for a walk or to reminisce about the past. It's not about tasks; it's about presence.</p>
+            <p>Our companions are matched not just on skills, but on interests and personality. We believe that genuine connection is the foundation of good care. That's why we take time to understand what matters to you.</p>
+            <p>Whether it's a weekly visit or a daily check‑in, companionship care can make a world of difference – not just for the person receiving care, but also for their family, knowing that someone is there.</p>
           </div>
         </div>
       </div>
@@ -1710,10 +1791,13 @@
         <div class="eyebrow">For Our Team</div>
         <h2>Staff Portal — <span style="color:var(--p-uv);">manage your work.</span></h2>
       </div>
+      <div style="max-width:800px;margin:0 auto;text-align:center;">
+        <p style="font-size:16px;color:var(--text-secondary);margin-bottom:40px;">Are you a staff member? Use this portal to submit timesheets, access resources and manage your employment with Pluto.</p>
+      </div>
       <div class="portal-grid">
         <div class="portal-card reveal">
           <h4>📤 Submit Timesheet</h4>
-          <p>Enter your email and upload your completed timesheet PDF below. Our team will process it promptly.</p>
+          <p style="font-size:13px;color:var(--text-secondary);opacity:0.7;margin-bottom:16px;">Enter your email and upload your completed timesheet PDF. We'll process it and confirm receipt.</p>
           <form id="timesheetForm">
             <input type="email" placeholder="Your Email Address" required />
             <div class="file-upload">
@@ -1725,8 +1809,8 @@
         </div>
         <div class="portal-card reveal">
           <h4>📋 Staff Resources</h4>
-          <p>Access essential documents, policies, and reference materials.</p>
-          <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+          <p style="font-size:13px;color:var(--text-secondary);opacity:0.7;margin-bottom:16px;">Download important documents, policies and reference materials.</p>
+          <div style="display:flex;flex-direction:column;gap:12px;">
             <a href="#" class="btn btn-ghost" style="justify-content:center;width:100%;">📄 Reference Form (PDF)</a>
             <a href="#" class="btn btn-ghost" style="justify-content:center;width:100%;">📘 Staff Handbook</a>
             <a href="#" class="btn btn-ghost" style="justify-content:center;width:100%;">📋 Policies &amp; Procedures</a>
@@ -1745,17 +1829,17 @@
       </div>
       <div class="contact-grid">
         <div class="contact-info reveal">
-          <h3>We'd love to hear from you.</h3>
-          <p>Whether you need care, staffing support, or you're applying for a role — reach out and we'll get back to you promptly.</p>
+          <h3 style="font-size:22px;">We'd love to hear from you.</h3>
+          <p style="font-size:15px;color:var(--text-secondary);margin:16px 0 24px;line-height:1.8;">Whether you need care, staffing support, or you're applying for a role – reach out and we'll get back to you promptly.</p>
           <div class="detail"><span class="icon">📍</span>3 Spencer Parade, Northampton, NN1 5AA</div>
           <div class="detail"><span class="icon">📞</span><a href="tel:01604630916">01604 630 916</a></div>
           <div class="detail"><span class="icon">✉️</span><a href="mailto:admin@plutobvservices.co.uk">admin@plutobvservices.co.uk</a></div>
-          <div style="margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.03);">
-            <p style="font-size:13px;opacity:0.5;">Applying for a role? Head to our <a href="#staff-portal" style="color:var(--p-uv);" data-page="staff-portal">Staff Portal</a> to start your application or download the reference form.</p>
+          <div style="margin-top:24px;padding-top:24px;border-top:1px solid rgba(106,70,148,0.04);">
+            <p style="font-size:13px;color:var(--text-secondary);opacity:0.6;">Applying for a role? Head to our <a href="#staff-portal" style="color:var(--p-uv);" data-page="staff-portal">Staff Portal</a> to start your application.</p>
           </div>
         </div>
         <div class="contact-form reveal">
-          <form id="contactForm" novalidate>
+          <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
             <input type="text" name="fullName" placeholder="Full Name" required />
             <input type="email" name="email" placeholder="Email Address" required />
             <input type="tel" name="phone" placeholder="Phone Number" required />
@@ -1785,20 +1869,21 @@
             <span class="logo-sub">BVLTD</span>
             <span class="logo-tagline">CARE.PURPOSE.TRUST.</span>
           </div>
-          <p class="foot-desc">Recruitment of temporary and permanent social care professionals for local authorities, the NHS and private residential homes — and direct care support for individuals and families.</p>
+          <p class="foot-desc">Recruitment of temporary and permanent social care professionals for local authorities, the NHS and private residential homes – and direct care support for individuals and families.</p>
         </div>
         <div class="foot-col">
           <h5>Services</h5>
           <ul>
             <li><a data-page="staffing">Staffing Solutions</a></li>
-            <li><a data-page="about">How It Works</a></li>
+            <li><a data-page="services">Care Services</a></li>
             <li><a data-page="staff-portal">Staff Portal</a></li>
           </ul>
         </div>
         <div class="foot-col">
           <h5>Company</h5>
           <ul>
-            <li><a data-page="testimonials">Testimonials</a></li>
+            <li><a data-page="about">About</a></li>
+            <li><a data-page="stories">Stories</a></li>
             <li><a data-page="news">News</a></li>
             <li><a data-page="contact">Contact</a></li>
           </ul>
@@ -1850,8 +1935,9 @@
         home: document.getElementById('page-home'),
         about: document.getElementById('page-about'),
         staffing: document.getElementById('page-staffing'),
+        services: document.getElementById('page-services'),
+        stories: document.getElementById('page-stories'),
         news: document.getElementById('page-news'),
-        testimonials: document.getElementById('page-testimonials'),
         'staff-portal': document.getElementById('page-staff-portal'),
         contact: document.getElementById('page-contact')
       };
@@ -1881,10 +1967,11 @@
         }
         var titles = {
           home: 'Pluto BV Ltd — Social Care Recruitment & Support',
-          about: 'About Pluto BV Ltd — How We Work',
+          about: 'About Pluto BV Ltd',
           staffing: 'Staffing Solutions — Pluto BV Ltd',
-          news: 'News — Pluto BV Ltd',
-          testimonials: 'Testimonials — Pluto BV Ltd',
+          services: 'Care Services — Pluto BV Ltd',
+          stories: 'Real Stories — Pluto BV Ltd',
+          news: 'News & Insights — Pluto BV Ltd',
           'staff-portal': 'Staff Portal — Pluto BV Ltd',
           contact: 'Contact — Pluto BV Ltd'
         };
@@ -1925,7 +2012,7 @@
         a.addEventListener('click', function() { mnav.classList.remove('is-open'); });
       });
 
-      // ---- Reveal on scroll (refresh on page change) ----
+      // ---- Reveal on scroll ----
       function initReveals() {
         document.querySelectorAll('.page.active .reveal, .page.active .reveal-scale').forEach(function(el) {
           var rect = el.getBoundingClientRect();
@@ -2010,18 +2097,11 @@
         window.addEventListener('mousemove', function(e) {
           gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.3, ease: 'power2.out' });
         });
-        document.querySelectorAll('a, button, .how-item, .news-card, .testimonial-card, .portal-card .btn, .contact-form .btn, .staffing-features .feature').forEach(function(el) {
+        document.querySelectorAll('a, button, .card, .portal-card .btn, .contact-form .btn').forEach(function(el) {
           el.addEventListener('mouseenter', function() {
             cursor.classList.add('is-active');
-            if (el.classList.contains('how-item')) {
-              cursorLabel.textContent = 'Learn';
-            } else if (el.classList.contains('news-card')) {
-              cursorLabel.textContent = 'Read';
-            } else if (el.classList.contains('testimonial-card')) {
-              cursorLabel.textContent = 'Quote';
-            } else {
-              cursorLabel.textContent = 'View';
-            }
+            if (el.closest('.card')) cursorLabel.textContent = 'View';
+            else cursorLabel.textContent = 'Click';
           });
           el.addEventListener('mouseleave', function() {
             cursor.classList.remove('is-active');
@@ -2039,7 +2119,7 @@
         }, { passive: true });
       }
 
-      // ---- Contact form ----
+      // ---- Contact form (Formspree) ----
       var contactForm = document.getElementById('contactForm');
       var formResponse = document.getElementById('formResponse');
       if (contactForm) {
@@ -2048,13 +2128,29 @@
           var btn = this.querySelector('button[type="submit"]');
           btn.disabled = true;
           btn.textContent = 'Sending...';
-          setTimeout(function() {
-            formResponse.className = 'form-response success';
-            formResponse.textContent = '✅ Thank you! Your message has been sent. We\'ll get back to you shortly.';
+          var formData = new FormData(this);
+          fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          })
+          .then(function(response) {
+            if (response.ok) {
+              formResponse.className = 'form-response success';
+              formResponse.textContent = '✅ Thank you! Your message has been sent. We\'ll get back to you shortly.';
+              contactForm.reset();
+            } else {
+              throw new Error('Network response was not ok.');
+            }
+          })
+          .catch(function(error) {
+            formResponse.className = 'form-response error';
+            formResponse.textContent = '❌ Something went wrong. Please try again or call us directly.';
+          })
+          .finally(function() {
             btn.disabled = false;
             btn.innerHTML = 'Send Message <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
-            contactForm.reset();
-          }, 1500);
+          });
         });
       }
 
@@ -2080,6 +2176,7 @@
             alert('Please fill in your email and upload a PDF file.');
             return;
           }
+          // Simulate submission – in production you could send to a backend.
           alert('✅ Timesheet submitted for ' + email + ' with file: ' + file.name);
           this.reset();
           fileLabel.textContent = '📎 Choose PDF file...';
@@ -2094,6 +2191,5 @@
 
     })();
   </script>
-
 </body>
 </html>

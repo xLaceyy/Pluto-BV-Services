@@ -1,7 +1,4 @@
 // AUTO-GENERATED from /images/image-config.json — do not hand-edit.
-// This is a read-only JS mirror of the config for any future client-side use.
-// The JSON file is the single source of truth; the static HTML is built from it
-// by build_images.py (see /images/README.md).
 const siteImages = {
   "hero": {
     "src": "/images/placeholders/hero.svg",
@@ -407,6 +404,42 @@ const siteImages = {
         480,
         768,
         1024
+      ]
+    }
+  },
+  "trust": {
+    "hero": {
+      "src": "/images/placeholders/trust.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
+      ]
+    }
+  },
+  "journey": {
+    "hero": {
+      "src": "/images/placeholders/journey.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
+      ]
+    }
+  },
+  "testimonials": {
+    "hero": {
+      "src": "/images/placeholders/testimonials.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
       ]
     }
   }

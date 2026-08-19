@@ -1,67 +1,446 @@
 {
   "_readme": "Central image config for Pluto BV Services. To replace a placeholder with a real photo: add the file under /images/<category>/, update that entry's src (and widths/alt/objectPosition as needed), then run: python3 build_images.py. No HTML/CSS files need to be hand-edited.",
-
   "hero": {
     "src": "/images/placeholders/hero.svg",
     "alt": "A support worker sharing a warm conversation with a client at home",
     "decorative": false,
     "objectPosition": "center 40%",
-    "widths": [480, 768, 1024, 1536, 1920]
+    "widths": [
+      480,
+      768,
+      1024,
+      1536,
+      1920
+    ]
   },
   "about": {
-    "main":  { "src": "/images/placeholders/about.svg", "alt": "A Pluto BV care professional at work", "decorative": false, "objectPosition": "center 35%", "widths": [480, 768, 1024, 1536] },
-    "team":  { "src": "/images/placeholders/team.svg",  "alt": "Members of the Pluto BV team", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] }
+    "main": {
+      "src": "/images/placeholders/about.svg",
+      "alt": "A Pluto BV care professional at work",
+      "decorative": false,
+      "objectPosition": "center 35%",
+      "widths": [
+        480,
+        768,
+        1024,
+        1536
+      ]
+    },
+    "team": {
+      "src": "/images/placeholders/team.svg",
+      "alt": "Members of the Pluto BV team",
+      "decorative": false,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768,
+        1024
+      ]
+    }
   },
   "services": {
     "liveInCare": {
-      "card":      { "src": "/images/placeholders/live-in-care.svg", "alt": "Live-in Care", "decorative": false, "objectPosition": "center", "widths": [480, 768] },
-      "hero":      { "src": "/images/placeholders/live-in-care.svg", "alt": "A live-in carer supporting someone in their own home", "decorative": false, "objectPosition": "center 40%", "widths": [480, 768, 1024, 1536] },
-      "lifestyle": { "src": "/images/placeholders/live-in-care.svg", "alt": "Everyday life continuing at home with live-in support", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] },
-      "detail":    { "src": "/images/placeholders/live-in-care.svg", "alt": "A live-in carer assisting with a daily routine", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] },
-      "cta":       { "src": "/images/placeholders/live-in-care.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768, 1024] }
+      "card": {
+        "src": "/images/placeholders/live-in-care.svg",
+        "alt": "Live-in Care",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768
+        ]
+      },
+      "hero": {
+        "src": "/images/placeholders/live-in-care.svg",
+        "alt": "A live-in carer supporting someone in their own home",
+        "decorative": false,
+        "objectPosition": "center 40%",
+        "widths": [
+          480,
+          768,
+          1024,
+          1536
+        ]
+      },
+      "lifestyle": {
+        "src": "/images/placeholders/live-in-care.svg",
+        "alt": "Everyday life continuing at home with live-in support",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      },
+      "detail": {
+        "src": "/images/placeholders/live-in-care.svg",
+        "alt": "A live-in carer assisting with a daily routine",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      },
+      "cta": {
+        "src": "/images/placeholders/live-in-care.svg",
+        "alt": "",
+        "decorative": true,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      }
     },
     "domiciliaryCare": {
-      "card":      { "src": "/images/placeholders/domiciliary-care.svg", "alt": "Domiciliary Care", "decorative": false, "objectPosition": "center", "widths": [480, 768] },
-      "hero":      { "src": "/images/placeholders/domiciliary-care.svg", "alt": "A domiciliary carer visiting a client at home", "decorative": false, "objectPosition": "center 40%", "widths": [480, 768, 1024, 1536] },
-      "lifestyle": { "src": "/images/placeholders/domiciliary-care.svg", "alt": "Support with daily activities while staying independent at home", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] },
-      "detail":    { "src": "/images/placeholders/domiciliary-care.svg", "alt": "A carer helping with household tasks", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] },
-      "cta":       { "src": "/images/placeholders/domiciliary-care.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768, 1024] }
+      "card": {
+        "src": "/images/placeholders/domiciliary-care.svg",
+        "alt": "Domiciliary Care",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768
+        ]
+      },
+      "hero": {
+        "src": "/images/placeholders/domiciliary-care.svg",
+        "alt": "A domiciliary carer visiting a client at home",
+        "decorative": false,
+        "objectPosition": "center 40%",
+        "widths": [
+          480,
+          768,
+          1024,
+          1536
+        ]
+      },
+      "lifestyle": {
+        "src": "/images/placeholders/domiciliary-care.svg",
+        "alt": "Support with daily activities while staying independent at home",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      },
+      "detail": {
+        "src": "/images/placeholders/domiciliary-care.svg",
+        "alt": "A carer helping with household tasks",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      },
+      "cta": {
+        "src": "/images/placeholders/domiciliary-care.svg",
+        "alt": "",
+        "decorative": true,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      }
     },
     "companionship": {
-      "card":      { "src": "/images/placeholders/companionship.svg", "alt": "Companionship Care", "decorative": false, "objectPosition": "center", "widths": [480, 768] },
-      "hero":      { "src": "/images/placeholders/companionship.svg", "alt": "A companion sharing conversation and connection", "decorative": false, "objectPosition": "center 40%", "widths": [480, 768, 1024, 1536] },
-      "lifestyle": { "src": "/images/placeholders/companionship.svg", "alt": "Companionship built around conversation and shared activity", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] },
-      "detail":    { "src": "/images/placeholders/companionship.svg", "alt": "A companion and client enjoying an activity together", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] },
-      "cta":       { "src": "/images/placeholders/companionship.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768, 1024] }
+      "card": {
+        "src": "/images/placeholders/companionship.svg",
+        "alt": "Companionship Care",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768
+        ]
+      },
+      "hero": {
+        "src": "/images/placeholders/companionship.svg",
+        "alt": "A companion sharing conversation and connection",
+        "decorative": false,
+        "objectPosition": "center 40%",
+        "widths": [
+          480,
+          768,
+          1024,
+          1536
+        ]
+      },
+      "lifestyle": {
+        "src": "/images/placeholders/companionship.svg",
+        "alt": "Companionship built around conversation and shared activity",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      },
+      "detail": {
+        "src": "/images/placeholders/companionship.svg",
+        "alt": "A companion and client enjoying an activity together",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      },
+      "cta": {
+        "src": "/images/placeholders/companionship.svg",
+        "alt": "",
+        "decorative": true,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      }
     },
     "specialistSupport": {
-      "card":      { "src": "/images/placeholders/specialist-support.svg", "alt": "Autism & Specialist Support", "decorative": false, "objectPosition": "center", "widths": [480, 768] },
-      "hero":      { "src": "/images/placeholders/specialist-support.svg", "alt": "Person-centred specialist support", "decorative": false, "objectPosition": "center 40%", "widths": [480, 768, 1024, 1536] },
-      "lifestyle": { "src": "/images/placeholders/specialist-support.svg", "alt": "Consistent, individualised specialist support", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] },
-      "detail":    { "src": "/images/placeholders/specialist-support.svg", "alt": "A specialist support worker in a calm, considered setting", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] },
-      "cta":       { "src": "/images/placeholders/specialist-support.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768, 1024] }
+      "card": {
+        "src": "/images/placeholders/specialist-support.svg",
+        "alt": "Autism & Specialist Support",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768
+        ]
+      },
+      "hero": {
+        "src": "/images/placeholders/specialist-support.svg",
+        "alt": "Person-centred specialist support",
+        "decorative": false,
+        "objectPosition": "center 40%",
+        "widths": [
+          480,
+          768,
+          1024,
+          1536
+        ]
+      },
+      "lifestyle": {
+        "src": "/images/placeholders/specialist-support.svg",
+        "alt": "Consistent, individualised specialist support",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      },
+      "detail": {
+        "src": "/images/placeholders/specialist-support.svg",
+        "alt": "A specialist support worker in a calm, considered setting",
+        "decorative": false,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      },
+      "cta": {
+        "src": "/images/placeholders/specialist-support.svg",
+        "alt": "",
+        "decorative": true,
+        "objectPosition": "center",
+        "widths": [
+          480,
+          768,
+          1024
+        ]
+      }
     }
   },
   "organisations": {
-    "hero":      { "src": "/images/placeholders/organisations.svg", "alt": "A care home manager reviewing a staffing schedule", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024, 1536] },
-    "secondary": { "src": "/images/placeholders/organisations.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768, 1024] }
+    "hero": {
+      "src": "/images/placeholders/organisations.svg",
+      "alt": "A care home manager reviewing a staffing schedule",
+      "decorative": false,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768,
+        1024,
+        1536
+      ]
+    },
+    "secondary": {
+      "src": "/images/placeholders/organisations.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768,
+        1024
+      ]
+    }
   },
   "careers": {
-    "hero":      { "src": "/images/placeholders/careers.svg", "alt": "A healthcare assistant reviewing notes before a visit", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024, 1536] },
-    "secondary": { "src": "/images/placeholders/careers.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768, 1024] }
+    "hero": {
+      "src": "/images/placeholders/careers.svg",
+      "alt": "A healthcare assistant reviewing notes before a visit",
+      "decorative": false,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768,
+        1024,
+        1536
+      ]
+    },
+    "secondary": {
+      "src": "/images/placeholders/careers.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768,
+        1024
+      ]
+    }
   },
   "stories": {
-    "hero":  { "src": "/images/placeholders/stories.svg", "alt": "Pluto BV Services resources and articles", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] },
-    "card1": { "src": "/images/placeholders/stories.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768] },
-    "card2": { "src": "/images/placeholders/stories.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768] },
-    "card3": { "src": "/images/placeholders/stories.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768] },
-    "card4": { "src": "/images/placeholders/stories.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768] }
+    "hero": {
+      "src": "/images/placeholders/stories.svg",
+      "alt": "Pluto BV Services resources and articles",
+      "decorative": false,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768,
+        1024
+      ]
+    },
+    "card1": {
+      "src": "/images/placeholders/stories.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
+      ]
+    },
+    "card2": {
+      "src": "/images/placeholders/stories.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
+      ]
+    },
+    "card3": {
+      "src": "/images/placeholders/stories.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
+      ]
+    },
+    "card4": {
+      "src": "/images/placeholders/stories.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
+      ]
+    }
   },
   "areasWeSupport": {
-    "hero":      { "src": "/images/placeholders/areas.svg", "alt": "Areas and sectors Pluto BV Services supports", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] },
-    "secondary": { "src": "/images/placeholders/areas.svg", "alt": "", "decorative": true, "objectPosition": "center", "widths": [480, 768] }
+    "hero": {
+      "src": "/images/placeholders/areas.svg",
+      "alt": "Areas and sectors Pluto BV Services supports",
+      "decorative": false,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768,
+        1024
+      ]
+    },
+    "secondary": {
+      "src": "/images/placeholders/areas.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
+      ]
+    }
   },
   "contact": {
-    "hero": { "src": "/images/placeholders/contact.svg", "alt": "Get in touch with Pluto BV Services", "decorative": false, "objectPosition": "center", "widths": [480, 768, 1024] }
+    "hero": {
+      "src": "/images/placeholders/contact.svg",
+      "alt": "Get in touch with Pluto BV Services",
+      "decorative": false,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768,
+        1024
+      ]
+    }
+  },
+  "trust": {
+    "hero": {
+      "src": "/images/placeholders/trust.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
+      ]
+    }
+  },
+  "journey": {
+    "hero": {
+      "src": "/images/placeholders/journey.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
+      ]
+    }
+  },
+  "testimonials": {
+    "hero": {
+      "src": "/images/placeholders/testimonials.svg",
+      "alt": "",
+      "decorative": true,
+      "objectPosition": "center",
+      "widths": [
+        480,
+        768
+      ]
+    }
   }
 }

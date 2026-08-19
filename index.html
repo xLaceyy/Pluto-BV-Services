@@ -25,10 +25,10 @@
       --text-primary: #1A1124;
       --text-secondary: #3D3052;
       --text-muted: #7A6A8C;
-      --border-light: rgba(106, 70, 148, 0.08);
-      --border-glass: rgba(106, 70, 148, 0.06);
-      --shadow-soft: 0 8px 40px rgba(106, 70, 148, 0.06);
-      --shadow-glass: 0 8px 32px rgba(106, 70, 148, 0.04);
+      --border-light: rgba(106, 70, 148, 0.18);
+      --border-glass: rgba(106, 70, 148, 0.16);
+      --shadow-soft: 0 8px 40px rgba(106, 70, 148, 0.16);
+      --shadow-glass: 0 8px 32px rgba(106, 70, 148, 0.14);
       --p-uv: #6A4694;
       --p-uv-light: #8B6EB0;
       --p-uv-soft: #EDE4F4;
@@ -36,8 +36,8 @@
       --p-ember-light: #D4A87A;
       --p-mint: #7AB8A8;
       --glass-bg: rgba(255, 255, 255, 0.5);
-      --glass-border: rgba(106, 70, 148, 0.06);
-      --glass-shadow: 0 8px 32px rgba(106, 70, 148, 0.04);
+      --glass-border: rgba(106, 70, 148, 0.16);
+      --glass-shadow: 0 8px 32px rgba(106, 70, 148, 0.14);
       --glass-blur: 20px;
       --glass-saturate: 140%;
       --font-display: 'Syne', 'Inter', sans-serif;
@@ -186,8 +186,8 @@
       filter: blur(80px);
       pointer-events: none;
       z-index: 0;
-      mix-blend-mode: screen;
-      opacity: 0.08;
+      mix-blend-mode: multiply;
+      opacity: 0.4;
       will-change: transform, opacity;
     }
     .orb-1 {
@@ -195,7 +195,7 @@
       height: 60vw;
       top: -20%;
       right: -10%;
-      background: radial-gradient(circle, rgba(106, 70, 148, 0.08), transparent 70%);
+      background: radial-gradient(circle, rgba(106, 70, 148, 0.18), transparent 70%);
       animation: orbFloat 18s ease-in-out infinite alternate;
     }
     .orb-2 {
@@ -203,7 +203,7 @@
       height: 50vw;
       bottom: -10%;
       left: -15%;
-      background: radial-gradient(circle, rgba(184, 134, 90, 0.06), transparent 70%);
+      background: radial-gradient(circle, rgba(184, 134, 90, 0.15), transparent 70%);
       animation: orbFloat 22s ease-in-out infinite alternate-reverse;
     }
     .orb-3 {
@@ -212,7 +212,7 @@
       top: 40%;
       left: 50%;
       transform: translateX(-50%);
-      background: radial-gradient(circle, rgba(122, 184, 168, 0.04), transparent 70%);
+      background: radial-gradient(circle, rgba(122, 184, 168, 0.13), transparent 70%);
       animation: orbFloat 26s ease-in-out infinite alternate;
     }
     @keyframes orbFloat {
@@ -236,14 +236,14 @@
       transition: width 0.4s var(--ease-spring), height 0.4s var(--ease-spring),
         background 0.3s ease, box-shadow 0.3s ease;
       will-change: transform;
-      box-shadow: 0 0 16px rgba(106, 70, 148, 0.05);
+      box-shadow: 0 0 16px rgba(106, 70, 148, 0.15);
     }
     .cursor.is-active {
       width: 32px;
       height: 32px;
-      background: rgba(106, 70, 148, 0.06);
-      box-shadow: 0 0 24px rgba(106, 70, 148, 0.02);
-      border: 1px solid rgba(106, 70, 148, 0.06);
+      background: rgba(106, 70, 148, 0.16);
+      box-shadow: 0 0 24px rgba(106, 70, 148, 0.12);
+      border: 1px solid rgba(106, 70, 148, 0.16);
     }
     .cursor .label {
       position: absolute;
@@ -279,8 +279,8 @@
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(16px) saturate(140%);
       -webkit-backdrop-filter: blur(16px) saturate(140%);
-      border: 1px solid rgba(106, 70, 148, 0.04);
-      box-shadow: 0 8px 32px rgba(106, 70, 148, 0.02);
+      border: 1px solid rgba(106, 70, 148, 0.14);
+      box-shadow: 0 8px 32px rgba(106, 70, 148, 0.12);
       border-radius: 28px;
       padding: var(--space-xl);
       transition: all 0.5s var(--ease-out);
@@ -288,8 +288,8 @@
     }
     .glass-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(106, 70, 148, 0.04);
-      border-color: rgba(106, 70, 148, 0.08);
+      box-shadow: 0 16px 48px rgba(106, 70, 148, 0.14);
+      border-color: rgba(106, 70, 148, 0.18);
     }
 
     /* ---- Buttons ---- */
@@ -318,7 +318,7 @@
       height: 26px;
       border-radius: 50%;
       transition: transform 0.5s var(--ease-spring);
-      background: rgba(106, 70, 148, 0.04);
+      background: rgba(106, 70, 148, 0.14);
     }
     .btn:hover .arrow {
       transform: translateX(4px);
@@ -337,15 +337,15 @@
     .btn-ghost {
       background: transparent;
       color: var(--p-uv);
-      border-color: rgba(106, 70, 148, 0.08);
+      border-color: rgba(106, 70, 148, 0.18);
     }
     .btn-ghost .arrow {
-      background: rgba(106, 70, 148, 0.04);
+      background: rgba(106, 70, 148, 0.14);
     }
     .btn-ghost:hover {
       transform: translateY(-2px);
       border-color: rgba(106, 70, 148, 0.15);
-      background: rgba(106, 70, 148, 0.02);
+      background: rgba(106, 70, 148, 0.12);
     }
     .btn-ember {
       background: var(--p-ember);
@@ -378,16 +378,16 @@
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(20px) saturate(140%);
       -webkit-backdrop-filter: blur(20px) saturate(140%);
-      border: 1px solid rgba(106, 70, 148, 0.04);
-      box-shadow: 0 4px 24px rgba(106, 70, 148, 0.02);
+      border: 1px solid rgba(106, 70, 148, 0.14);
+      box-shadow: 0 4px 24px rgba(106, 70, 148, 0.12);
       transition: padding 0.5s var(--ease-out), background 0.6s var(--ease-out),
         box-shadow 0.6s var(--ease-out), border-color 0.6s var(--ease-out);
     }
     .nav.is-scrolled {
       padding: 6px 10px 6px 16px;
       background: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 8px 40px rgba(106, 70, 148, 0.04);
-      border-color: rgba(106, 70, 148, 0.06);
+      box-shadow: 0 8px 40px rgba(106, 70, 148, 0.14);
+      border-color: rgba(106, 70, 148, 0.16);
     }
     .nav-brand {
       display: flex;
@@ -438,11 +438,11 @@
     }
     .nav-links a:hover {
       color: var(--p-uv);
-      background: rgba(106, 70, 148, 0.03);
+      background: rgba(106, 70, 148, 0.13);
     }
     .nav-links a.active-link {
       color: var(--p-uv);
-      background: rgba(106, 70, 148, 0.03);
+      background: rgba(106, 70, 148, 0.13);
     }
     .nav-indicator {
       position: absolute;
@@ -472,15 +472,15 @@
       border-radius: 50%;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(106, 70, 148, 0.04);
+      border: 1px solid rgba(106, 70, 148, 0.14);
       color: var(--text-muted);
       background: rgba(255, 255, 255, 0.01);
       transition: all 0.3s ease;
     }
     .nav-icon-btn:hover {
       color: var(--p-uv);
-      border-color: rgba(106, 70, 148, 0.08);
-      background: rgba(106, 70, 148, 0.02);
+      border-color: rgba(106, 70, 148, 0.18);
+      background: rgba(106, 70, 148, 0.12);
     }
     .nav-toggle {
       display: none;
@@ -494,7 +494,7 @@
         width: 38px;
         height: 38px;
         border-radius: 50%;
-        border: 1px solid rgba(106, 70, 148, 0.04);
+        border: 1px solid rgba(106, 70, 148, 0.14);
         background: rgba(255, 255, 255, 0.01);
       }
       .nav-toggle span {
@@ -532,7 +532,7 @@
       padding: 40px;
       transform: translateY(-100%);
       transition: transform 0.6s var(--ease-out);
-      border: 1px solid rgba(106, 70, 148, 0.02);
+      border: 1px solid rgba(106, 70, 148, 0.12);
     }
     .mnav.is-open { transform: translateY(0); }
     .mnav-close {
@@ -542,7 +542,7 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      border: 1px solid rgba(106, 70, 148, 0.04);
+      border: 1px solid rgba(106, 70, 148, 0.14);
       display: grid;
       place-items: center;
       color: var(--text-primary);
@@ -587,7 +587,7 @@
       z-index: 1001;
       width: 0%;
       transition: width 0.1s linear;
-      box-shadow: 0 0 20px rgba(106, 70, 148, 0.05);
+      box-shadow: 0 0 20px rgba(106, 70, 148, 0.15);
     }
 
     /* ---- Page system (SPA) ---- */
@@ -658,7 +658,7 @@
       right: -6%;
       width: min(48vw, 700px);
       transform: translateY(-50%);
-      filter: drop-shadow(0 0 80px rgba(106, 70, 148, 0.02));
+      filter: drop-shadow(0 0 80px rgba(106, 70, 148, 0.12));
       opacity: 0.03;
       will-change: transform;
     }
@@ -674,7 +674,7 @@
       border-radius: 50%;
       background: var(--p-uv);
       opacity: 0.04;
-      box-shadow: 0 0 8px 1px rgba(106, 70, 148, 0.02);
+      box-shadow: 0 0 8px 1px rgba(106, 70, 148, 0.12);
       animation: drift 18s ease-in-out infinite;
     }
     @keyframes drift {
@@ -699,10 +699,10 @@
       gap: 8px;
       font-size: 10px;
       color: var(--text-muted);
-      background: rgba(106, 70, 148, 0.02);
+      background: rgba(106, 70, 148, 0.12);
       padding: 3px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(106, 70, 148, 0.02);
+      border: 1px solid rgba(106, 70, 148, 0.12);
       letter-spacing: 0.04em;
       opacity: 0.6;
     }
@@ -824,7 +824,7 @@
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(106, 70, 148, 0.02);
+      border: 1px solid rgba(106, 70, 148, 0.12);
     }
 
     /* ---- Layout components ---- */
@@ -868,12 +868,12 @@
       background: var(--bg-card);
       border-radius: 24px;
       padding: 28px 24px;
-      border: 1px solid rgba(106, 70, 148, 0.04);
+      border: 1px solid rgba(106, 70, 148, 0.14);
       transition: transform 0.4s var(--ease-spring), box-shadow 0.4s ease;
     }
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(106, 70, 148, 0.04);
+      box-shadow: 0 12px 40px rgba(106, 70, 148, 0.14);
     }
 
     /* ---- Service page content ---- */
@@ -899,7 +899,7 @@
       font-size: 14px;
       color: var(--text-secondary);
       padding: 8px 0;
-      border-bottom: 1px solid rgba(106, 70, 148, 0.02);
+      border-bottom: 1px solid rgba(106, 70, 148, 0.12);
     }
     .service-detail ul li::before {
       content: '✦';
@@ -942,7 +942,7 @@
       background: var(--bg-card);
       border-radius: 24px;
       padding: 32px;
-      border: 1px solid rgba(106, 70, 148, 0.04);
+      border: 1px solid rgba(106, 70, 148, 0.14);
     }
     .portal-card input,
     .portal-card textarea {
@@ -950,7 +950,7 @@
       padding: 12px 16px;
       border-radius: 12px;
       background: var(--bg-body);
-      border: 1px solid rgba(106, 70, 148, 0.04);
+      border: 1px solid rgba(106, 70, 148, 0.14);
       color: var(--text-primary);
       font-family: var(--font-body);
       font-size: 13px;
@@ -962,14 +962,14 @@
     .portal-card textarea:focus {
       outline: none;
       border-color: var(--p-uv);
-      background: rgba(106, 70, 148, 0.02);
+      background: rgba(106, 70, 148, 0.12);
     }
     .portal-card .file-upload {
       display: flex;
       align-items: center;
       gap: 12px;
       padding: 12px 16px;
-      border: 1px dashed rgba(106, 70, 148, 0.04);
+      border: 1px dashed rgba(106, 70, 148, 0.14);
       border-radius: 12px;
       cursor: pointer;
       transition: border-color 0.3s ease;
@@ -1012,7 +1012,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: rgba(106, 70, 148, 0.04);
+      background: rgba(106, 70, 148, 0.14);
       display: grid;
       place-items: center;
       color: var(--p-uv);
@@ -1022,7 +1022,7 @@
       background: var(--bg-card);
       border-radius: 24px;
       padding: 32px;
-      border: 1px solid rgba(106, 70, 148, 0.04);
+      border: 1px solid rgba(106, 70, 148, 0.14);
     }
     .contact-form input,
     .contact-form textarea,
@@ -1031,7 +1031,7 @@
       padding: 12px 16px;
       border-radius: 12px;
       background: var(--bg-body);
-      border: 1px solid rgba(106, 70, 148, 0.04);
+      border: 1px solid rgba(106, 70, 148, 0.14);
       color: var(--text-primary);
       font-family: var(--font-body);
       font-size: 13px;
@@ -1044,7 +1044,7 @@
     .contact-form select:focus {
       outline: none;
       border-color: var(--p-uv);
-      background: rgba(106, 70, 148, 0.02);
+      background: rgba(106, 70, 148, 0.12);
     }
     .contact-form select option {
       background: #fff;
@@ -1067,13 +1067,13 @@
     }
     .contact-form .form-response.success {
       display: block;
-      background: rgba(122, 184, 168, 0.08);
+      background: rgba(122, 184, 168, 0.17);
       border: 1px solid rgba(122, 184, 168, 0.1);
       color: var(--p-mint);
     }
     .contact-form .form-response.error {
       display: block;
-      background: rgba(184, 134, 90, 0.08);
+      background: rgba(184, 134, 90, 0.17);
       border: 1px solid rgba(184, 134, 90, 0.1);
       color: var(--p-ember);
     }
@@ -1082,7 +1082,7 @@
     footer {
       background: var(--bg-body);
       padding: 70px 0 28px;
-      border-top: 1px solid rgba(106, 70, 148, 0.04);
+      border-top: 1px solid rgba(106, 70, 148, 0.14);
     }
     .foot-top {
       display: grid;
@@ -1163,7 +1163,7 @@
       justify-content: space-between;
       align-items: center;
       padding-top: 28px;
-      border-top: 1px solid rgba(106, 70, 148, 0.02);
+      border-top: 1px solid rgba(106, 70, 148, 0.12);
       flex-wrap: wrap;
       gap: 14px;
     }
@@ -1319,7 +1319,7 @@
   <div class="page active" id="page-home">
     <section class="hero">
       <!-- Hero image from your reference -->
-      <img class="hero-bg" src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/carer-smiling-at-elderly-customer-in-kitchen_2x3.jpg" alt="Caregiver supporting an elderly client at home" loading="eager" />
+      <img class="hero-bg" src="/assets/images/carer-helping-stand.jpg" alt="Carer supporting an elderly client at home" loading="eager" />
       <div class="hero-overlay"></div>
       <div class="hero-field">
         <div class="hero-p" id="heroP">
@@ -1362,7 +1362,7 @@
     <div class="wrap section-pad">
       <div class="split-grid">
         <div class="image-wrap reveal">
-          <img src="https://static.wixstatic.com/media/0d4cd0_055a0cb26f464c0282d5cc311ec692c8~mv2.jpg" alt="Caregiver and client sharing a moment" loading="lazy" />
+          <img src="/assets/images/companions-laundry.jpg" alt="An elderly couple managing everyday tasks together at home" loading="lazy" />
         </div>
         <div class="reveal">
           <div class="eyebrow">Who we are</div>
@@ -1428,7 +1428,7 @@
           <a href="#staffing" class="btn btn-primary magnetic" data-page="staffing">Explore Staffing <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
         </div>
         <div class="image-wrap reveal">
-          <img src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/male-social-worker-taking-care-old-woman-scaled.jpg" alt="Care professional supporting a client" loading="lazy" />
+          <img src="/assets/images/nurse-elderly-table.jpg" alt="Care professional supporting a client" loading="lazy" />
         </div>
       </div>
     </div>
@@ -1474,6 +1474,18 @@
         <div class="eyebrow">About Pluto</div>
         <h2>Care, staffing and support — <span style="color:var(--p-uv);">built around people.</span></h2>
       </div>
+      <div class="split-grid reveal" style="margin-bottom:60px;">
+        <div>
+          <div class="image-wrap">
+            <img src="/assets/images/team-purple-uniforms.jpg" alt="Three Pluto BV Ltd care professionals in a residential setting" loading="lazy" />
+          </div>
+        </div>
+        <div>
+          <p style="font-size:17px;line-height:1.9;color:var(--text-secondary);">
+            Every placement starts with a real person — screened, trained and matched to the setting they're best suited to. That's the standard behind every professional Pluto BV Ltd supplies.
+          </p>
+        </div>
+      </div>
       <div style="max-width:800px;margin:0 auto;">
         <p style="font-size:17px;line-height:1.9;color:var(--text-secondary);margin-bottom:24px;">
           Pluto BV Ltd is a specialist social‑care recruitment and staffing organisation. We were founded on the belief that quality care starts with the right people – people who are not only skilled and experienced, but also compassionate and committed to making a real difference.
@@ -1484,8 +1496,8 @@
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:60px;">
-        <div class="card reveal"><h4 style="font-size:18px;">Who we support</h4><ul style="list-style:none;padding:0;margin-top:12px;"><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ Individuals &amp; families</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ Local authorities</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ NHS &amp; healthcare</li><li style="padding:6px 0;">✦ Residential &amp; social care</li></ul></div>
-        <div class="card reveal"><h4 style="font-size:18px;">Our approach</h4><ul style="list-style:none;padding:0;margin-top:12px;"><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ Person‑centred recruitment</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ Rigorous vetting &amp; screening</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.04);">✦ Ethical, transparent matching</li><li style="padding:6px 0;">✦ Ongoing support &amp; performance</li></ul></div>
+        <div class="card reveal"><h4 style="font-size:18px;">Who we support</h4><ul style="list-style:none;padding:0;margin-top:12px;"><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.14);">✦ Individuals &amp; families</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.14);">✦ Local authorities</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.14);">✦ NHS &amp; healthcare</li><li style="padding:6px 0;">✦ Residential &amp; social care</li></ul></div>
+        <div class="card reveal"><h4 style="font-size:18px;">Our approach</h4><ul style="list-style:none;padding:0;margin-top:12px;"><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.14);">✦ Person‑centred recruitment</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.14);">✦ Rigorous vetting &amp; screening</li><li style="padding:6px 0;border-bottom:1px solid rgba(106,70,148,0.14);">✦ Ethical, transparent matching</li><li style="padding:6px 0;">✦ Ongoing support &amp; performance</li></ul></div>
       </div>
 
       <div style="margin-top:60px;background:var(--bg-secondary);border-radius:28px;padding:48px 40px;">
@@ -1574,7 +1586,7 @@
       <div style="margin-bottom:80px;">
         <div class="split-grid">
           <div class="image-wrap reveal">
-            <img src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/carer-smiling-at-elderly-customer-in-kitchen_2x3.jpg" alt="Live-in Care" loading="lazy" />
+            <img src="/assets/images/live-in-care.jpg" alt="Live-in Care" loading="lazy" />
           </div>
           <div class="reveal service-detail">
             <h3 style="font-size:28px;">Live‑in Care</h3>
@@ -1609,7 +1621,7 @@
             <a href="#contact" class="btn btn-primary magnetic" data-page="contact">Talk About Domiciliary Care <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
           </div>
           <div class="image-wrap reveal">
-            <img src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/male-social-worker-taking-care-old-woman-scaled.jpg" alt="Domiciliary Care" loading="lazy" />
+            <img src="/assets/images/domiciliary-care.jpg" alt="Domiciliary Care" loading="lazy" />
           </div>
         </div>
       </div>
@@ -1618,7 +1630,7 @@
       <div style="margin-bottom:80px;">
         <div class="split-grid">
           <div class="image-wrap reveal">
-            <img src="https://static.wixstatic.com/media/0d4cd0_055a0cb26f464c0282d5cc311ec692c8~mv2.jpg" alt="Companionship Care" loading="lazy" />
+            <img src="/assets/images/companionship-care.jpg" alt="Companionship Care" loading="lazy" />
           </div>
           <div class="reveal service-detail">
             <h3 style="font-size:28px;">Companionship Care</h3>
@@ -1653,7 +1665,7 @@
             <a href="#contact" class="btn btn-primary magnetic" data-page="contact">Discuss Specialist Support <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
           </div>
           <div class="image-wrap reveal">
-            <img src="https://static.wixstatic.com/media/42446d_8b6daf8732ba4dcf93d5b2c88082631f~mv2.jpg" alt="Autism support" loading="lazy" />
+            <img src="/assets/images/team-bench.jpg" alt="Autism support" loading="lazy" />
           </div>
         </div>
       </div>
@@ -1734,7 +1746,7 @@
 
       <!-- News Article 1 -->
       <div class="story-content reveal" style="margin-bottom:60px;">
-        <div style="background:var(--bg-card);border-radius:24px;padding:32px;border:1px solid rgba(106,70,148,0.04);">
+        <div style="background:var(--bg-card);border-radius:24px;padding:32px;border:1px solid rgba(106,70,148,0.14);">
           <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;">
             <span style="background:var(--p-uv-soft);color:var(--p-uv);padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;">Care Advice</span>
             <span style="font-size:12px;color:var(--text-muted);">01 Aug 2026</span>
@@ -1751,7 +1763,7 @@
 
       <!-- News Article 2 -->
       <div class="story-content reveal" style="margin-bottom:60px;">
-        <div style="background:var(--bg-card);border-radius:24px;padding:32px;border:1px solid rgba(106,70,148,0.04);">
+        <div style="background:var(--bg-card);border-radius:24px;padding:32px;border:1px solid rgba(106,70,148,0.14);">
           <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;">
             <span style="background:var(--p-uv-soft);color:var(--p-uv);padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;">Wellbeing</span>
             <span style="font-size:12px;color:var(--text-muted);">19 Dec 2025</span>
@@ -1767,7 +1779,7 @@
 
       <!-- News Article 3 -->
       <div class="story-content reveal">
-        <div style="background:var(--bg-card);border-radius:24px;padding:32px;border:1px solid rgba(106,70,148,0.04);">
+        <div style="background:var(--bg-card);border-radius:24px;padding:32px;border:1px solid rgba(106,70,148,0.14);">
           <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;">
             <span style="background:var(--p-uv-soft);color:var(--p-uv);padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;">Companionship</span>
             <span style="font-size:12px;color:var(--text-muted);">19 Dec 2025</span>
@@ -1834,12 +1846,13 @@
           <div class="detail"><span class="icon">📍</span>3 Spencer Parade, Northampton, NN1 5AA</div>
           <div class="detail"><span class="icon">📞</span><a href="tel:01604630916">01604 630 916</a></div>
           <div class="detail"><span class="icon">✉️</span><a href="mailto:admin@plutobvservices.co.uk">admin@plutobvservices.co.uk</a></div>
-          <div style="margin-top:24px;padding-top:24px;border-top:1px solid rgba(106,70,148,0.04);">
+          <div style="margin-top:24px;padding-top:24px;border-top:1px solid rgba(106,70,148,0.14);">
             <p style="font-size:13px;color:var(--text-secondary);opacity:0.6;">Applying for a role? Head to our <a href="#staff-portal" style="color:var(--p-uv);" data-page="staff-portal">Staff Portal</a> to start your application.</p>
           </div>
         </div>
         <div class="contact-form reveal">
-          <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+          <!-- Set data-endpoint to a real Formspree (or other) form ID before launch. Until then, the script below falls back to a pre-filled email. -->
+          <form id="contactForm" data-endpoint="" method="POST" novalidate>
             <input type="text" name="fullName" placeholder="Full Name" required />
             <input type="email" name="email" placeholder="Email Address" required />
             <input type="tel" name="phone" placeholder="Phone Number" required />
@@ -2126,10 +2139,29 @@
         contactForm.addEventListener('submit', function(e) {
           e.preventDefault();
           var btn = this.querySelector('button[type="submit"]');
+          var endpoint = contactForm.getAttribute('data-endpoint');
+          var formData = new FormData(this);
+
+          function showFallback() {
+            var name = formData.get('name') || '';
+            var email = formData.get('email') || '';
+            var phone = formData.get('phone') || '';
+            var enquiry = formData.get('enquiryType') || 'General enquiry';
+            var message = formData.get('message') || '';
+            var body = 'Name: ' + name + '\nEmail: ' + email + '\nPhone: ' + phone + '\nEnquiry type: ' + enquiry + '\n\n' + message;
+            var mailto = 'mailto:admin@plutobvservices.co.uk?subject=' + encodeURIComponent('Pluto enquiry: ' + enquiry) + '&body=' + encodeURIComponent(body);
+            formResponse.className = 'form-response success';
+            formResponse.innerHTML = 'This form isn\'t connected to a live inbox yet. <a href="' + mailto + '">Click here to send it as an email</a>, or call 01604 630 916.';
+          }
+
+          if (!endpoint) {
+            showFallback();
+            return;
+          }
+
           btn.disabled = true;
           btn.textContent = 'Sending...';
-          var formData = new FormData(this);
-          fetch(this.action, {
+          fetch(endpoint, {
             method: 'POST',
             body: formData,
             headers: { 'Accept': 'application/json' }
@@ -2143,9 +2175,8 @@
               throw new Error('Network response was not ok.');
             }
           })
-          .catch(function(error) {
-            formResponse.className = 'form-response error';
-            formResponse.textContent = '❌ Something went wrong. Please try again or call us directly.';
+          .catch(function() {
+            showFallback();
           })
           .finally(function() {
             btn.disabled = false;

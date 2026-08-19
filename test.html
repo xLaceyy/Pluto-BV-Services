@@ -1,0 +1,2162 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Pluto — Care, elevated. | Pluto BV Services</title>
+  <meta name="description" content="Pluto BV Services recruits and supplies social care professionals to the NHS, local authorities and residential homes — and supports people to live independently at home. Care, elevated." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger + Lenis for smooth scroll & animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <style>
+    /* ============================================================
+       PLUTO 2.0 — DESIGN TOKENS (visionOS 2026)
+       ============================================================ */
+    :root {
+      --p-void: #060012;
+      --p-black: #080015;
+      --p-deep: #0F0020;
+      --p-royal: #1E0540;
+      --p-mid: #3D1A6B;
+      --p-mid-2: #5C2B9E;
+      --p-uv: #8B3FE8;
+      --p-uv-2: #A866FF;
+      --p-lavender: #C9B6FF;
+      --p-lilac: #E3D6FF;
+      --p-light: #F3EEFF;
+      --p-platinum: #FBFAFF;
+      --p-silver: #C6C0D6;
+      --p-ink: #0A0012;
+
+      --glass-bg: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.10);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --glass-blur: 28px;
+      --glass-saturate: 150%;
+
+      --font-display: 'Space Grotesk', 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --container: 1360px;
+      --nav-h: 84px;
+    }
+
+    /* ---- Reset & Base ---- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+    body {
+      margin: 0;
+      background: var(--p-void);
+      color: var(--p-platinum);
+      font-family: var(--font-body);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    ::selection {
+      background: var(--p-uv);
+      color: #fff;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-display);
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    p {
+      margin: 0;
+    }
+
+    .wrap {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    @media (max-width: 768px) {
+      .wrap {
+        padding: 0 22px;
+      }
+    }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0.6;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1.5px;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    /* ---- Reveal animations ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 1s var(--ease-out), transform 1.1s var(--ease-out);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 1.1s var(--ease-out), transform 1.2s var(--ease-out);
+    }
+    .reveal-scale.is-visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .stagger>* {
+      transition-delay: calc(var(--i, 0) * 90ms);
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.02;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ---- Custom cursor (visionOS) ---- */
+    .cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(201, 182, 255, 0.4);
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s var(--ease-spring), height 0.4s var(--ease-spring),
+        background 0.3s ease, border-color 0.3s ease;
+      will-change: transform;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .cursor::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--p-uv-2);
+      opacity: 0.8;
+    }
+    .cursor.is-active {
+      width: 60px;
+      height: 60px;
+      background: rgba(157, 78, 255, 0.12);
+      border-color: rgba(201, 182, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    @media (hover:none),
+    (pointer:coarse) {
+      .cursor {
+        display: none;
+      }
+    }
+
+    /* ---- Glass system ---- */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 24px;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      border-radius: 28px;
+      padding: var(--space-xl);
+      transition: all 0.5s var(--ease-out);
+      will-change: transform, box-shadow, border-color;
+    }
+    .glass-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(201, 182, 255, 0.15);
+    }
+    .light-sweep {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.08) 50%, transparent 80%);
+      transform: translateX(-100%) skewX(-15deg);
+      transition: transform 0.8s var(--ease-out);
+      opacity: 0;
+      border-radius: inherit;
+    }
+    .glass-card:hover .light-sweep {
+      transform: translateX(100%) skewX(-15deg);
+      opacity: 1;
+    }
+
+    /* ---- Buttons ---- */
+    .btn {
+      --glow: rgba(157, 78, 255, 0.4);
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px 14px 28px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      overflow: hidden;
+      isolation: isolate;
+      transition: transform 0.45s var(--ease-spring), box-shadow 0.45s ease, background 0.45s ease;
+      will-change: transform;
+      border: 1px solid transparent;
+    }
+    .btn .arrow {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      transition: transform 0.5s var(--ease-spring);
+    }
+    .btn:hover .arrow {
+      transform: translateX(4px);
+    }
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(160deg, rgba(139, 63, 232, 0.5), rgba(61, 26, 107, 0.7));
+      border-color: rgba(201, 182, 255, 0.25);
+      box-shadow: 0 8px 32px -12px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    .btn-primary .arrow {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px -12px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      background: linear-gradient(160deg, rgba(139, 63, 232, 0.6), rgba(61, 26, 107, 0.8));
+    }
+    .btn-ghost {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .btn-ghost .arrow {
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .btn-ghost:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .magnetic {
+      display: inline-block;
+    }
+
+    /* ---- Navigation ---- */
+    .nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1240px, calc(100% - 32px));
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px 10px 20px;
+      border-radius: 999px;
+      background: rgba(10, 5, 25, 0.55);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: padding 0.5s var(--ease-out), background 0.6s var(--ease-out),
+        box-shadow 0.6s var(--ease-out), border-color 0.6s var(--ease-out);
+    }
+    .nav.is-scrolled {
+      padding: 6px 10px 6px 16px;
+      background: rgba(8, 3, 20, 0.75);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      border-color: rgba(157, 78, 255, 0.08);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      font-family: var(--font-display);
+      line-height: 1.1;
+    }
+    .nav-brand .logo-main {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #fff;
+    }
+    .nav-brand .logo-sub {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: var(--p-lavender);
+      opacity: 0.6;
+    }
+    .nav-brand .logo-tagline {
+      font-size: 7px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--p-silver);
+      opacity: 0.4;
+      margin-left: 4px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      display: block;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--p-silver);
+      border-radius: 999px;
+      transition: color 0.3s ease, background 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(201, 182, 255, 0.15);
+      color: var(--p-silver);
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.3s ease;
+    }
+    .nav-icon-btn:hover {
+      color: #fff;
+      border-color: rgba(201, 182, 255, 0.4);
+      background: rgba(157, 78, 255, 0.12);
+    }
+    .nav-toggle {
+      display: none;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-toggle {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid rgba(201, 182, 255, 0.15);
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .nav-toggle span {
+        display: block;
+        width: 16px;
+        height: 1px;
+        background: #fff;
+        position: relative;
+      }
+      .nav-toggle span::before,
+      .nav-toggle span::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 16px;
+        height: 1px;
+        background: #fff;
+        transition: transform 0.3s ease;
+      }
+      .nav-toggle span::before {
+        top: -5px;
+      }
+      .nav-toggle span::after {
+        top: 5px;
+      }
+    }
+
+    /* Mobile menu */
+    .mnav {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      background: rgba(6, 0, 18, 0.92);
+      backdrop-filter: blur(40px) saturate(150%);
+      -webkit-backdrop-filter: blur(40px) saturate(150%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+      transform: translateY(-100%);
+      transition: transform 0.6s var(--ease-out);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .mnav.is-open {
+      transform: translateY(0);
+    }
+    .mnav-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .mnav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mnav a {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 9vw, 44px);
+      font-weight: 600;
+      color: #fff;
+      padding: 8px 0;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+    .mnav a:hover {
+      opacity: 1;
+    }
+    .mnav-foot {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      color: var(--p-silver);
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    /* ---- Scroll progress ---- */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--p-uv);
+      z-index: 1001;
+      width: 0%;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 16px var(--p-uv);
+    }
+
+    /* ---- Sections ---- */
+    section {
+      position: relative;
+    }
+    .pad-xl {
+      padding: 160px 0;
+    }
+    .pad-lg {
+      padding: 120px 0;
+    }
+    @media (max-width: 768px) {
+      .pad-xl {
+        padding: 100px 0;
+      }
+      .pad-lg {
+        padding: 80px 0;
+      }
+    }
+
+    /* ---- 01 HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: var(--nav-h);
+      position: relative;
+      background: linear-gradient(160deg, #060012 0%, #0F0020 30%, #1E0540 60%, #3D1A6B 100%);
+      transition: background 0.8s ease;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+      mix-blend-mode: overlay;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(160deg, rgba(6, 0, 18, 0.6) 0%, rgba(30, 5, 64, 0.4) 50%, rgba(61, 26, 107, 0.2) 100%);
+    }
+    .hero-field {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-p {
+      position: absolute;
+      top: 50%;
+      right: -6%;
+      width: min(52vw, 760px);
+      transform: translateY(-50%);
+      filter: drop-shadow(0 0 120px rgba(157, 78, 255, 0.3));
+      opacity: 0.7;
+      will-change: transform;
+    }
+    .hero-p svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .hero-particles span {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--p-lavender);
+      opacity: 0.3;
+      box-shadow: 0 0 12px 2px rgba(201, 182, 255, 0.4);
+      animation: drift 14s ease-in-out infinite;
+    }
+    @keyframes drift {
+      0%,
+      100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.1;
+      }
+      50% {
+        transform: translateY(-40px) translateX(14px);
+        opacity: 0.6;
+      }
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+    }
+    .hero-eyebrow {
+      margin-bottom: 24px;
+      color: var(--p-lavender);
+    }
+    .hero-title {
+      font-size: clamp(72px, 15vw, 200px);
+      line-height: 0.86;
+      letter-spacing: -0.03em;
+      background: linear-gradient(180deg, #ffffff 0%, #e6dcff 50%, #c9b6ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 8px 48px rgba(157, 78, 255, 0.2));
+    }
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(20px, 3vw, 32px);
+      color: var(--p-lilac);
+      margin-top: 12px;
+      letter-spacing: -0.01em;
+      opacity: 0.85;
+    }
+    .hero-copy {
+      max-width: 520px;
+      margin-top: 28px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--p-silver);
+      opacity: 0.8;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 40px;
+    }
+    .hero-audience-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .hero-audience-links .btn {
+      padding: 10px 20px;
+      font-size: 12px;
+    }
+    .hero-scroll {
+      position: absolute;
+      left: 40px;
+      bottom: 36px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--p-silver);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 3;
+      opacity: 0.5;
+    }
+    .hero-scroll .line {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(180deg, var(--p-lavender), transparent);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-scroll .line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      animation: scrolldrop 2.4s ease-in-out infinite;
+    }
+    @keyframes scrolldrop {
+      0% {
+        top: -100%;
+      }
+      60%,
+      100% {
+        top: 100%;
+      }
+    }
+    @media (max-width: 768px) {
+      .hero-scroll {
+        display: none;
+      }
+    }
+    .hero-audience {
+      position: absolute;
+      right: 40px;
+      bottom: 40px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: right;
+    }
+    @media (max-width: 1180px) {
+      .hero-audience {
+        display: none;
+      }
+    }
+    .hero-audience .tag {
+      font-size: 11px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: var(--p-lilac);
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* ---- 02 STATEMENT ---- */
+    .statement {
+      padding: 180px 0;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #3D1A6B 0%, #2B0A4A 30%, #1E0540 60%, #0F0020 100%);
+      transition: background 0.8s ease;
+    }
+    .statement::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(50% 60% at 50% 0%, rgba(201, 182, 255, 0.08), transparent 65%);
+      pointer-events: none;
+    }
+    .statement-p-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(90vw, 1100px);
+      transform: translate(-50%, -50%);
+      opacity: 0.04;
+      pointer-events: none;
+    }
+    .statement-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: end;
+    }
+    @media (max-width: 900px) {
+      .statement-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .statement-word {
+      font-size: clamp(64px, 11vw, 160px);
+      line-height: 0.9;
+      color: #fff;
+      letter-spacing: -0.03em;
+    }
+    .statement-word span {
+      display: block;
+      overflow: hidden;
+    }
+    .statement-word em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
+    }
+    .statement-copy {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--p-lilac);
+      max-width: 440px;
+      opacity: 0.8;
+    }
+    .statement-copy+.statement-copy {
+      margin-top: 20px;
+    }
+
+    /* ---- 03 THE PEOPLE ---- */
+    .people {
+      background: linear-gradient(180deg, #1E0540 0%, #3D1A6B 20%, #8B3FE8 45%, #C9B6FF 70%, #F3EEFF 100%);
+      color: var(--p-ink);
+      padding-top: 40px;
+      transition: background 0.8s ease;
+    }
+    .people-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 80px;
+    }
+    .people-head .eyebrow {
+      color: var(--p-mid);
+      justify-content: center;
+    }
+    .people-head h2 {
+      font-size: clamp(38px, 6vw, 64px);
+      margin-top: 18px;
+      color: var(--p-ink);
+    }
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .people-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .people-card {
+      position: relative;
+      border-radius: 28px;
+      padding: 36px 28px 32px;
+      overflow: hidden;
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.6s var(--ease-spring), box-shadow 0.6s ease;
+      background-size: cover;
+      background-position: center;
+      backdrop-filter: blur(4px);
+    }
+    .people-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+    }
+    .people-card .card-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%);
+      border-radius: 28px;
+    }
+    .people-card .pmark {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 40px;
+      opacity: 0.08;
+      z-index: 1;
+    }
+    .people-card-content {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+    }
+    .people-card .num {
+      font-family: var(--font-display);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .people-card h3 {
+      font-size: 24px;
+      margin-top: 12px;
+      color: #fff;
+    }
+    .people-card p {
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* ---- 04 SERVICES ---- */
+    .services {
+      background: linear-gradient(180deg, #F3EEFF 0%, #E3D6FF 15%, #C9B6FF 35%, #8B3FE8 60%, #3D1A6B 85%, #1E0540 100%);
+      padding-top: 100px;
+      transition: background 0.8s ease;
+    }
+    .services-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+    .services-head h2 {
+      font-size: clamp(36px, 5.6vw, 58px);
+      color: #fff;
+      max-width: 640px;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    }
+    .services-head p {
+      max-width: 360px;
+      color: var(--p-lilac);
+      font-size: 15px;
+      line-height: 1.7;
+      opacity: 0.8;
+    }
+    .services-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .service-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 1fr 120px;
+      align-items: center;
+      gap: 24px;
+      padding: 30px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: padding 0.4s var(--ease-out);
+    }
+    .service-row .row-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(157, 78, 255, 0.08), transparent 60%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s var(--ease-out);
+      z-index: 0;
+    }
+    .service-row:hover .row-bg {
+      transform: scaleX(1);
+    }
+    .service-row>* {
+      position: relative;
+      z-index: 1;
+    }
+    .service-num {
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--p-lavender);
+      opacity: 0.5;
+    }
+    .service-icon-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      flex-shrink: 0;
+      transition: transform 0.4s var(--ease-spring);
+    }
+    .service-row:hover .service-icon-img {
+      transform: scale(1.05);
+    }
+    .service-name {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.4vw, 26px);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .service-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--p-lilac);
+      max-width: 420px;
+      opacity: 0.8;
+    }
+    .service-cta {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #fff;
+      opacity: 0.5;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .service-row:hover .service-cta {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+    @media (max-width: 860px) {
+      .service-row {
+        grid-template-columns: 44px 1fr;
+        grid-template-rows: auto auto auto;
+        row-gap: 8px;
+        padding: 22px 6px;
+      }
+      .service-num {
+        display: none;
+      }
+      .service-desc {
+        grid-column: 1/-1;
+      }
+      .service-cta {
+        grid-column: 1/-1;
+        justify-self: start;
+      }
+    }
+
+    /* ---- 05 TRUST ---- */
+    .trust {
+      background: linear-gradient(180deg, #1E0540 0%, #0F0020 40%, #060012 70%, #080015 100%);
+      padding: 130px 0 110px;
+      transition: background 0.8s ease;
+    }
+    .trust-head {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 70px;
+    }
+    .trust-head h2 {
+      font-size: clamp(34px, 5vw, 52px);
+      color: #fff;
+      margin-top: 16px;
+    }
+    .trust-orgs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 70px;
+    }
+    @media (max-width: 860px) {
+      .trust-orgs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .org-chip {
+      padding: 24px 18px;
+      border-radius: 20px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: transform 0.5s var(--ease-spring), background 0.3s ease;
+    }
+    .org-chip:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .org-chip svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--p-lavender);
+      opacity: 0.6;
+    }
+    .trust-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    @media (max-width: 860px) {
+      .trust-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .stat {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 34px 22px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .stat .num {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 42px);
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .stat .lbl {
+      font-size: 12px;
+      color: var(--p-silver);
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+      opacity: 0.6;
+    }
+
+    /* ---- 06 APPROACH ---- */
+    .approach {
+      background: linear-gradient(180deg, #080015 0%, #060012 30%, #0F0020 60%, #1E0540 100%);
+      padding: 130px 0 150px;
+      transition: background 0.8s ease;
+    }
+    .approach-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 80px;
+    }
+    .approach-head h2 {
+      font-size: clamp(34px, 5vw, 54px);
+      color: #fff;
+      max-width: 560px;
+    }
+    .timeline {
+      position: relative;
+    }
+    .timeline-track {
+      position: absolute;
+      top: 27px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 182, 255, 0.15) 10%, rgba(201, 182, 255, 0.15) 90%, transparent);
+    }
+    .timeline-track .fill {
+      position: absolute;
+      inset: 0;
+      width: 0;
+      background: linear-gradient(90deg, var(--p-uv), var(--p-uv-2));
+      box-shadow: 0 0 24px var(--p-uv);
+      transition: width 1.4s var(--ease-out);
+    }
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+    @media (max-width: 860px) {
+      .timeline-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .timeline-track {
+        display: none;
+      }
+    }
+    .t-step {
+      position: relative;
+      padding-top: 0;
+    }
+    .t-dot {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 28px;
+      background: linear-gradient(160deg, rgba(139, 63, 232, 0.4), rgba(61, 26, 107, 0.5));
+      border: 1px solid rgba(201, 182, 255, 0.2);
+      box-shadow: 0 0 0 6px rgba(157, 78, 255, 0.04), 0 8px 24px -8px rgba(157, 78, 255, 0.3);
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .t-step h3 {
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .t-step p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--p-silver);
+      opacity: 0.7;
+    }
+
+    /* ---- 07 PROFESSIONALS ---- */
+    .professionals {
+      background: linear-gradient(180deg, #1E0540 0%, #3D1A6B 30%, #5C2B9E 60%, #8B3FE8 100%);
+      padding: 130px 0;
+      overflow: hidden;
+      position: relative;
+      transition: background 0.8s ease;
+    }
+    .professionals::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://www.helpinghandshomecare.co.uk/wp-content/uploads/male-social-worker-taking-care-old-woman-scaled.jpg') center/cover no-repeat;
+      opacity: 0.08;
+      mix-blend-mode: overlay;
+    }
+    .prof-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 70px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 960px) {
+      .prof-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+    }
+    .prof-left h2 {
+      font-size: clamp(36px, 6vw, 56px);
+      color: #fff;
+      margin-top: 18px;
+    }
+    .prof-left p {
+      margin-top: 20px;
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: var(--p-lilac);
+      max-width: 460px;
+      opacity: 0.8;
+    }
+    .prof-cta-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .prof-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .p-step {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 18px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .p-step:last-child {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .p-step .pnum {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--p-lavender);
+      opacity: 0.4;
+    }
+    .p-step h4 {
+      font-size: 16px;
+      color: #fff;
+      font-weight: 600;
+    }
+    .p-step span {
+      display: block;
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--p-silver);
+      line-height: 1.55;
+      opacity: 0.7;
+    }
+
+    /* ---- 08 STORIES ---- */
+    .stories {
+      background: linear-gradient(180deg, #8B3FE8 0%, #C9B6FF 30%, #E3D6FF 60%, #F3EEFF 100%);
+      color: var(--p-ink);
+      padding-top: 40px;
+      transition: background 0.8s ease;
+    }
+    .stories-head {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 70px;
+    }
+    .stories-head h2 {
+      font-size: clamp(34px, 5vw, 54px);
+      margin-top: 16px;
+      color: var(--p-ink);
+    }
+    .stories-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 860px) {
+      .stories-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .story-card {
+      border-radius: 28px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    }
+    .story-quote-mark {
+      font-family: var(--font-display);
+      font-size: 56px;
+      color: var(--p-mid);
+      opacity: 0.12;
+      line-height: 1;
+    }
+    .story-card p.q {
+      font-size: 19px;
+      line-height: 1.55;
+      color: var(--p-ink);
+      margin-top: 4px;
+      font-family: var(--font-display);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .story-meta {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .story-meta .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--p-uv);
+    }
+    .story-meta span {
+      font-size: 12px;
+      color: #5b4c78;
+      letter-spacing: 0.02em;
+      opacity: 0.7;
+    }
+
+    /* ---- 09 FINAL CTA ---- */
+    .final-cta {
+      background: linear-gradient(180deg, #1E0540 0%, #0F0020 40%, #060012 70%, #080015 100%);
+      padding: 180px 0 150px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.8s ease;
+    }
+    .final-p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(70vw, 900px);
+      transform: translate(-50%, -50%);
+      opacity: 0.06;
+      filter: blur(2px);
+    }
+    .final-cta .eyebrow {
+      justify-content: center;
+      color: var(--p-lavender);
+    }
+    .final-cta h2 {
+      font-size: clamp(46px, 8vw, 110px);
+      color: #fff;
+      margin-top: 22px;
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+    }
+    .final-cta .sub {
+      max-width: 500px;
+      margin: 24px auto 0;
+      color: var(--p-silver);
+      font-size: 16px;
+      line-height: 1.7;
+      opacity: 0.7;
+    }
+    .final-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 42px;
+      flex-wrap: wrap;
+    }
+    .final-phone {
+      margin-top: 32px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--p-lilac);
+      letter-spacing: 0.02em;
+      opacity: 0.6;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: #05000D;
+      padding: 70px 0 28px;
+      position: relative;
+      border-top: 1px solid rgba(255, 255, 255, 0.02);
+    }
+    .foot-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 50px;
+    }
+    @media (max-width: 860px) {
+      .foot-top {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 38px;
+      }
+    }
+    @media (max-width: 560px) {
+      .foot-top {
+        grid-template-columns: 1fr;
+      }
+    }
+    .foot-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .foot-brand .logo-main {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+    .foot-brand .logo-sub {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      color: var(--p-lavender);
+      opacity: 0.5;
+    }
+    .foot-brand .logo-tagline {
+      font-size: 8px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--p-silver);
+      opacity: 0.3;
+      margin-top: 2px;
+    }
+    .foot-desc {
+      margin-top: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--p-silver);
+      max-width: 280px;
+      opacity: 0.5;
+    }
+    .foot-col h5 {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--p-lavender);
+      margin-bottom: 16px;
+      font-weight: 600;
+      opacity: 0.5;
+    }
+    .foot-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .foot-col a {
+      font-size: 13px;
+      color: var(--p-silver);
+      transition: color 0.3s ease;
+      opacity: 0.5;
+    }
+    .foot-col a:hover {
+      color: #fff;
+      opacity: 1;
+    }
+    .foot-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.02);
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .foot-bottom p {
+      font-size: 11px;
+      color: var(--p-silver);
+      opacity: 0.3;
+    }
+    .foot-legal {
+      display: flex;
+      gap: 20px;
+    }
+    .foot-legal a {
+      font-size: 11px;
+      color: var(--p-silver);
+      opacity: 0.3;
+      transition: opacity 0.3s ease;
+    }
+    .foot-legal a:hover {
+      opacity: 0.8;
+    }
+
+    /* ---- Smooth Purple & Glows ---- */
+    .smooth-purple {
+      background: linear-gradient(135deg, var(--p-void) 0%, var(--p-royal) 40%, var(--p-mid) 100%);
+      transition: background 0.8s ease;
+    }
+    .glow-purple {
+      box-shadow: 0 0 40px rgba(157, 78, 255, 0.08), inset 0 0 40px rgba(157, 78, 255, 0.02);
+    }
+    .star-glow::after {
+      content: '✦';
+      position: absolute;
+      font-size: 7px;
+      color: var(--p-uv);
+      animation: pulse-star 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse-star {
+      0%,
+      100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+        text-shadow: 0 0 20px var(--p-uv);
+      }
+    }
+
+    /* ---- Misc ---- */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+    }
+    .skip-link {
+      position: absolute;
+      top: -9999px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.75rem 1.5rem;
+      background: var(--p-uv);
+      color: #fff;
+      border-radius: 12px;
+      font-weight: 600;
+      z-index: 10000;
+    }
+    .skip-link:focus {
+      top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="grain"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ============ SVG BRAND ASSETS ============ -->
+  <svg class="svg-defs" style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
+    <defs>
+      <linearGradient id="pGradPrimary" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#E7DBFF" />
+        <stop offset="45%" stop-color="#B073FF" />
+        <stop offset="100%" stop-color="#5E2CA5" />
+      </linearGradient>
+      <linearGradient id="pGradGhost" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#B073FF" stop-opacity="0.35" />
+      </linearGradient>
+      <mask id="pMask" maskUnits="objectBoundingBox" maskContentUnits="userSpaceOnUse">
+        <rect x="0" y="0" width="200" height="260" fill="black" />
+        <rect x="34" y="18" width="46" height="224" rx="15" fill="white" />
+        <rect x="34" y="18" width="142" height="114" rx="40" fill="white" />
+        <rect x="77" y="51" width="65" height="48" rx="21" fill="black" />
+      </mask>
+      <symbol id="plutoP" viewBox="0 0 200 260">
+        <rect x="0" y="0" width="200" height="260" fill="url(#pGradPrimary)" mask="url(#pMask)" />
+        <rect x="0" y="0" width="90" height="260" fill="#fff" opacity=".16" mask="url(#pMask)" />
+      </symbol>
+      <symbol id="plutoPGhost" viewBox="0 0 200 260">
+        <rect x="0" y="0" width="200" height="260" fill="url(#pGradGhost)" mask="url(#pMask)" />
+      </symbol>
+      <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="16" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-brand">
+      <span class="logo-main">PLUTO</span>
+      <span class="logo-sub">BVLTD</span>
+      <span class="logo-tagline">CARE.PURPOSE.TRUST.</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services" class="magnetic">Care Services</a></li>
+      <li><a href="#trust" class="magnetic">For Organisations</a></li>
+      <li><a href="#professionals" class="magnetic">Careers</a></li>
+      <li><a href="#stories" class="magnetic">Stories</a></li>
+      <li><a href="#contact" class="magnetic">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="tel:01604630916" class="nav-icon-btn magnetic" aria-label="Call Pluto" title="01604 630 916">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <button class="nav-toggle" id="mnavOpen" aria-label="Open menu"><span></span></button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mnav" id="mnav">
+    <button class="mnav-close" id="mnavClose" aria-label="Close menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <ul>
+      <li><a href="#services">Care Services</a></li>
+      <li><a href="#trust">For Organisations</a></li>
+      <li><a href="#professionals">Careers</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="mnav-foot">
+      <span>01604 630 916</span>
+      <span>admin@plutobvservices.co.uk</span>
+      <span>3 Spencer Parade, Northampton, NN1 5AA</span>
+    </div>
+  </div>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <img class="hero-bg" src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/carer-smiling-at-elderly-customer-in-kitchen_2x3.jpg" alt="Caregiver helping a client in a home kitchen" loading="eager" />
+      <div class="hero-overlay"></div>
+      <div class="hero-field">
+        <div class="hero-p" id="heroP">
+          <svg viewBox="0 0 200 260" style="filter:url(#softGlow)">
+            <use href="#plutoP" />
+          </svg>
+        </div>
+        <div class="hero-particles" id="heroParticles"></div>
+      </div>
+      <div class="wrap hero-inner">
+        <div class="eyebrow hero-eyebrow reveal">Social care recruitment &amp; support — Northampton</div>
+        <h1 class="hero-title reveal">PLUTO</h1>
+        <div class="hero-tagline reveal">Care, elevated.</div>
+        <p class="hero-copy reveal">Pluto BV Services recruits and supplies social care professionals to the NHS, local authorities and residential homes — and supports people to live independently, on their own terms, at home.</p>
+        <div class="hero-ctas reveal">
+          <a href="#services" class="btn btn-primary magnetic">Explore Pluto <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          <a href="#contact" class="btn btn-ghost magnetic">Start a conversation <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        </div>
+        <div class="hero-audience-links reveal">
+          <a href="#families" class="btn btn-primary" style="padding:10px 20px;font-size:12px;">👨‍👩‍👧‍👦 I'm a family — Get Care</a>
+          <a href="#organisations" class="btn btn-ghost" style="padding:10px 20px;font-size:12px;">🏢 I'm an organisation — Request Staffing</a>
+          <a href="#professionals" class="btn btn-ghost" style="padding:10px 20px;font-size:12px;">👩‍⚕️ I'm a professional — Apply</a>
+        </div>
+      </div>
+      <div class="hero-audience">
+        <span class="tag">Families &amp; individuals</span>
+        <span class="tag">Care organisations &amp; the NHS</span>
+        <span class="tag">Care professionals</span>
+      </div>
+      <div class="hero-scroll"><span>Scroll</span><span class="line"></span></div>
+    </section>
+
+    <!-- ===== STATEMENT ===== -->
+    <section class="statement" id="about">
+      <div class="statement-p-bg">
+        <svg viewBox="0 0 200 260"><use href="#plutoPGhost" /></svg>
+      </div>
+      <div class="wrap statement-grid">
+        <h2 class="statement-word">
+          <span class="reveal">Care isn't</span>
+          <span class="reveal">a service.</span>
+          <span class="reveal">It's <em>a standard.</em></span>
+        </h2>
+        <div>
+          <p class="statement-copy reveal">Our mission is improving the quality of life for the people we support — vulnerable adults and children who deserve care delivered to an exceptionally high standard.</p>
+          <p class="statement-copy reveal">Every professional we place is vetted to protect the people who rely on them. Every person we support is treated as exactly that — a person, not a case number.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== THE PEOPLE ===== -->
+    <section class="people pad-xl" id="people">
+      <div class="wrap">
+        <div class="people-head">
+          <div class="eyebrow reveal">Who we're built for</div>
+          <h2 class="reveal">Care built around people.</h2>
+        </div>
+        <div class="people-grid">
+          <div class="people-card reveal-scale" style="background-image:url('https://static.wixstatic.com/media/0d4cd0_055a0cb26f464c0282d5cc311ec692c8~mv2.jpg/v1/fill/w_724%2Ch_522%2Cfp_0.63_0.31%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/DC%20Home.jpg');">
+            <div class="card-overlay"></div>
+            <svg class="pmark" viewBox="0 0 200 260"><use href="#plutoP" /></svg>
+            <div class="people-card-content">
+              <div class="num">01 — INDIVIDUALS &amp; FAMILIES</div>
+              <h3>Staying independent, at home.</h3>
+              <p>Compassionate, one-to-one support for people who want to keep living life on their own terms — in the comfort of home.</p>
+            </div>
+          </div>
+          <div class="people-card reveal-scale" style="background-image:url('https://static.wixstatic.com/media/42446d_8b6daf8732ba4dcf93d5b2c88082631f~mv2.jpg/v1/fill/w_800%2Ch_800%2Cal_c%2Cq_85/LPN-Cert-Page.jpg');">
+            <div class="card-overlay"></div>
+            <svg class="pmark" viewBox="0 0 200 260"><use href="#plutoP" /></svg>
+            <div class="people-card-content">
+              <div class="num">02 — NHS &amp; CARE ORGANISATIONS</div>
+              <h3>People they can trust.</h3>
+              <p>Vetted, dependable social care professionals for local authorities, the NHS and private residential homes, backed by 24/7 account support.</p>
+            </div>
+          </div>
+          <div class="people-card reveal-scale" style="background-image:url('https://www.helpinghandshomecare.co.uk/wp-content/uploads/2025/08/Carers_2560x2560_15.webp');">
+            <div class="card-overlay"></div>
+            <svg class="pmark" viewBox="0 0 200 260"><use href="#plutoP" /></svg>
+            <div class="people-card-content">
+              <div class="num">03 — CARE PROFESSIONALS</div>
+              <h3>A career that matters.</h3>
+              <p>Temporary and permanent placements across the NHS, local authorities and residential homes — with training and support behind you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services pad-xl" id="services">
+      <div class="wrap">
+        <div class="services-head">
+          <h2 class="reveal">Support that meets people where they are.</h2>
+          <p class="reveal">Four ways we help people stay independent, connected and well supported — at home or in the setting that suits them best.</p>
+        </div>
+        <div class="services-list">
+          <div class="service-row reveal">
+            <div class="row-bg"></div>
+            <div class="service-num">01</div>
+            <div class="service-name">
+              <img class="service-icon-img" src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/carer-smiling-at-elderly-customer-in-kitchen_2x3.jpg" alt="Live-in Care" loading="lazy" />
+              Live-in Care
+            </div>
+            <div class="service-desc">Round-the-clock support in the comfort of your own home, so you can keep living life on your terms.</div>
+            <a href="#contact" class="service-cta">Explore →</a>
+          </div>
+          <div class="service-row reveal">
+            <div class="row-bg"></div>
+            <div class="service-num">02</div>
+            <div class="service-name">
+              <img class="service-icon-img" src="https://www.helpinghandshomecare.co.uk/wp-content/uploads/male-social-worker-taking-care-old-woman-scaled.jpg" alt="Domiciliary Care" loading="lazy" />
+              Domiciliary Care
+            </div>
+            <div class="service-desc">Support with daily activities and household tasks for people who live independently at home.</div>
+            <a href="#contact" class="service-cta">Explore →</a>
+          </div>
+          <div class="service-row reveal">
+            <div class="row-bg"></div>
+            <div class="service-num">03</div>
+            <div class="service-name">
+              <img class="service-icon-img" src="https://static.wixstatic.com/media/0d4cd0_055a0cb26f464c0282d5cc311ec692c8~mv2.jpg/v1/fill/w_724%2Ch_522%2Cfp_0.63_0.31%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/DC%20Home.jpg" alt="Companionship Care" loading="lazy" />
+              Companionship Care
+            </div>
+            <div class="service-desc">Because nobody should feel alone — conversation, activities and consistent human connection.</div>
+            <a href="#contact" class="service-cta">Explore →</a>
+          </div>
+          <div class="service-row reveal">
+            <div class="row-bg"></div>
+            <div class="service-num">04</div>
+            <div class="service-name">
+              <img class="service-icon-img" src="https://static.wixstatic.com/media/42446d_8b6daf8732ba4dcf93d5b2c88082631f~mv2.jpg/v1/fill/w_800%2Ch_800%2Cal_c%2Cq_85/LPN-Cert-Page.jpg" alt="Autism Support" loading="lazy" />
+              Autism &amp; Specialist Support
+            </div>
+            <div class="service-desc">Person-centred support for individuals with autism, complex needs and behaviours that challenge others.</div>
+            <a href="#contact" class="service-cta">Explore →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TRUST ===== -->
+    <section class="trust" id="trust">
+      <div class="wrap">
+        <div class="trust-head">
+          <div class="eyebrow reveal" style="justify-content:center;">For care organisations</div>
+          <h2 class="reveal">Reliable people, for the teams that need them.</h2>
+        </div>
+        <div class="trust-orgs">
+          <div class="org-chip reveal-scale">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+            Local Authorities
+          </div>
+          <div class="org-chip reveal-scale">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+            NHS &amp; Healthcare
+          </div>
+          <div class="org-chip reveal-scale">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l9-7 9 7v11M9 21v-6h6v6"/></svg>
+            Residential Care Homes
+          </div>
+          <div class="org-chip reveal-scale">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+            Private Organisations
+          </div>
+        </div>
+        <div class="trust-stats">
+          <div class="stat reveal">
+            <div class="num">24/7</div>
+            <div class="lbl">ACCOUNT SUPPORT</div>
+          </div>
+          <div class="stat reveal">
+            <div class="num">DBS</div>
+            <div class="lbl">VETTING &amp; SCREENING</div>
+          </div>
+          <div class="stat reveal">
+            <div class="num">RTW</div>
+            <div class="lbl">RIGHT TO WORK VERIFIED</div>
+          </div>
+          <div class="stat reveal">
+            <div class="num">TUPE</div>
+            <div class="lbl">TRANSFER EXPERTISE</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== APPROACH ===== -->
+    <section class="approach" id="approach">
+      <div class="wrap">
+        <div class="approach-head">
+          <div>
+            <div class="eyebrow reveal">How support begins</div>
+            <h2 class="reveal">A considered path to the right care.</h2>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-track"><div class="fill" id="timelineFill"></div></div>
+          <div class="timeline-grid">
+            <div class="t-step reveal"><div class="t-dot">01</div><h3>Understand</h3><p>We take time to understand the person's needs, routine and circumstances.</p></div>
+            <div class="t-step reveal"><div class="t-dot">02</div><h3>Match</h3><p>We identify the right kind of support, and the right person to provide it.</p></div>
+            <div class="t-step reveal"><div class="t-dot">03</div><h3>Support</h3><p>Compassionate, professional support begins — on the schedule that works.</p></div>
+            <div class="t-step reveal"><div class="t-dot">04</div><h3>Continue</h3><p>We stay in touch, so support keeps pace as needs change.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROFESSIONALS ===== -->
+    <section class="professionals" id="professionals">
+      <div class="wrap prof-grid">
+        <div class="prof-left">
+          <div class="eyebrow reveal">For care professionals</div>
+          <h2 class="reveal">Build a career where your work matters.</h2>
+          <p class="reveal">We recruit healthcare assistants and social care professionals for temporary and permanent roles across the NHS, local authorities and private residential homes — with training and support behind you.</p>
+          <div class="prof-cta-row reveal">
+            <a href="#contact" class="btn btn-primary magnetic">Apply Now <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+            <a href="#contact" class="btn btn-ghost magnetic">Timesheets &amp; Staff Portal</a>
+          </div>
+        </div>
+        <div class="prof-steps">
+          <div class="p-step reveal"><div class="pnum">01</div><div><h4>Submit your application</h4><span>Complete the online form, or download and post a paper copy.</span></div></div>
+          <div class="p-step reveal"><div class="pnum">02</div><div><h4>Provide your documents</h4><span>Share the identification and right-to-work documents we need to process your application.</span></div></div>
+          <div class="p-step reveal"><div class="pnum">03</div><div><h4>Complete relevant checks</h4><span>Vetting and screening, DBS-related checks and UK Right to Work verification.</span></div></div>
+          <div class="p-step reveal"><div class="pnum">04</div><div><h4>Complete your training</h4><span>We make sure you have the training appropriate to the role and setting.</span></div></div>
+          <div class="p-step reveal"><div class="pnum">05</div><div><h4>Begin your Pluto journey</h4><span>Once checks and training are complete, we'll match you to a placement.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STORIES ===== -->
+    <section class="stories pad-xl" id="stories">
+      <div class="wrap">
+        <div class="stories-head">
+          <div class="eyebrow reveal" style="justify-content:center;">In their words</div>
+          <h2 class="reveal">Stories from the people we work with.</h2>
+        </div>
+        <div class="stories-grid">
+          <div class="story-card reveal-scale">
+            <div class="story-quote-mark">"</div>
+            <p class="q">The live-in care provided has been exceptional. Our mother is safe, comfortable, and genuinely happy.</p>
+            <div class="story-meta"><span class="dot"></span><span>Sarah Thompson — Family member, Northampton — Aug 2026</span></div>
+          </div>
+          <div class="story-card reveal-scale">
+            <div class="story-quote-mark">"</div>
+            <p class="q">Pluto BV Services have been a dependable staffing partner. Their team are professional, well-vetted, and genuinely care about the people they support.</p>
+            <div class="story-meta"><span class="dot"></span><span>James Carter — Care Home Manager, Milton Keynes — Jul 2026</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section class="final-cta" id="contact">
+      <div class="final-p">
+        <svg viewBox="0 0 200 260" style="filter:url(#softGlow)">
+          <use href="#plutoP" />
+        </svg>
+      </div>
+      <div class="wrap" style="position:relative;z-index:1;">
+        <div class="eyebrow reveal">Not sure where to start?</div>
+        <h2 class="reveal">Let's talk.</h2>
+        <p class="sub reveal">Whether you're looking for care, staffing support, or your next role — we're a phone call away.</p>
+        <div class="final-ctas reveal">
+          <a href="tel:01604630916" class="btn btn-primary magnetic">Get Care &amp; Support <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          <a href="mailto:admin@plutobvservices.co.uk" class="btn btn-ghost magnetic">Email Us <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        </div>
+        <div class="final-phone reveal">01604 630 916</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div>
+          <div class="foot-brand">
+            <span class="logo-main">PLUTO</span>
+            <span class="logo-sub">BVLTD</span>
+            <span class="logo-tagline">CARE.PURPOSE.TRUST.</span>
+          </div>
+          <p class="foot-desc">Recruitment of temporary and permanent social care professionals for local authorities, the NHS and private residential homes — and direct care support for individuals and families.</p>
+        </div>
+        <div class="foot-col">
+          <h5>Care Services</h5>
+          <ul>
+            <li><a href="#services">Live-in Care</a></li>
+            <li><a href="#services">Domiciliary Care</a></li>
+            <li><a href="#services">Companionship Care</a></li>
+            <li><a href="#services">Autism &amp; Specialist Support</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#trust">Areas We Support</a></li>
+            <li><a href="#professionals">Careers</a></li>
+            <li><a href="#stories">Resources</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="tel:01604630916">01604 630 916</a></li>
+            <li><a href="mailto:admin@plutobvservices.co.uk">admin@plutobvservices.co.uk</a></li>
+            <li><a href="#">3 Spencer Parade, Northampton, NN1 5AA</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <p>&copy; 2026 Pluto BV Services. All rights reserved.</p>
+        <div class="foot-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    (function() {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // ---- Nav scroll ----
+      var nav = document.getElementById('nav');
+      ScrollTrigger.create({
+        start: 'top -60',
+        onUpdate: function(self) { nav.classList.toggle('is-scrolled', self.scroll() > 60); }
+      });
+
+      // ---- Mobile menu ----
+      var mnav = document.getElementById('mnav');
+      document.getElementById('mnavOpen').addEventListener('click', function() { mnav.classList.add('is-open'); });
+      document.getElementById('mnavClose').addEventListener('click', function() { mnav.classList.remove('is-open'); });
+      mnav.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() { mnav.classList.remove('is-open'); });
+      });
+
+      // ---- Reveal ----
+      document.querySelectorAll('.reveal, .reveal-scale').forEach(function(el, i) {
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 88%',
+          onEnter: function() { el.classList.add('is-visible'); }
+        });
+      });
+
+      // ---- Stagger ----
+      document.querySelectorAll('.people-grid, .trust-orgs, .stories-grid, .timeline-grid, .prof-steps').forEach(function(
+        group) {
+        Array.prototype.forEach.call(group.children, function(child, i) {
+          child.style.setProperty('--i', i);
+        });
+      });
+
+      // ---- Hero particles ----
+      var field = document.getElementById('heroParticles');
+      if (field) {
+        for (var i = 0; i < 26; i++) {
+          var s = document.createElement('span');
+          s.style.left = (Math.random() * 100) + '%';
+          s.style.top = (Math.random() * 100) + '%';
+          s.style.animationDelay = (Math.random() * 10) + 's';
+          s.style.animationDuration = (10 + Math.random() * 10) + 's';
+          field.appendChild(s);
+        }
+      }
+
+      // ---- Hero P parallax ----
+      var heroP = document.getElementById('heroP');
+      if (heroP && !reduced) {
+        window.addEventListener('mousemove', function(e) {
+          var x = (e.clientX / window.innerWidth - .5) * 20;
+          var y = (e.clientY / window.innerHeight - .5) * 20;
+          gsap.to(heroP, { x: x, y: y, rotateZ: x * 0.12, duration: 1.1, ease: 'power3.out' });
+        });
+        gsap.to(heroP, {
+          yPercent: 16,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
+        gsap.to('.hero-inner', {
+          yPercent: -12,
+          opacity: .5,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
+      }
+
+      // ---- Statement & final P drift ----
+      if (!reduced) {
+        gsap.to('.statement-p-bg', {
+          yPercent: -12,
+          rotate: 4,
+          ease: 'none',
+          scrollTrigger: { trigger: '.statement', start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+        gsap.to('.final-p', {
+          scale: 1.1,
+          ease: 'none',
+          scrollTrigger: { trigger: '.final-cta', start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      }
+
+      // ---- Timeline fill ----
+      ScrollTrigger.create({
+        trigger: '.timeline',
+        start: 'top 70%',
+        onEnter: function() { document.getElementById('timelineFill').style.width = '100%'; }
+      });
+
+      // ---- Magnetic buttons ----
+      if (!reduced) {
+        document.querySelectorAll('.magnetic').forEach(function(btn) {
+          btn.addEventListener('mousemove', function(e) {
+            var r = btn.getBoundingClientRect();
+            var x = e.clientX - r.left - r.width / 2;
+            var y = e.clientY - r.top - r.height / 2;
+            gsap.to(btn, { x: x * 0.25, y: y * 0.4, duration: .5, ease: 'power3.out' });
+          });
+          btn.addEventListener('mouseleave', function() {
+            gsap.to(btn, { x: 0, y: 0, duration: .6, ease: 'elastic.out(1,.3)' });
+          });
+        });
+      }
+
+      // ---- Service row padding ----
+      document.querySelectorAll('.service-row').forEach(function(row) {
+        row.addEventListener('mouseenter', function() { gsap.to(row, { paddingLeft: 22, duration: .5,
+            ease: 'power3.out' }); });
+        row.addEventListener('mouseleave', function() { gsap.to(row, { paddingLeft: 10, duration: .5,
+            ease: 'power3.out' }); });
+      });
+
+      // ---- Custom cursor ----
+      var cursor = document.getElementById('cursor');
+      if (cursor && window.matchMedia('(hover:hover)').matches) {
+        window.addEventListener('mousemove', function(e) {
+          gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: .35, ease: 'power3.out' });
+        });
+        document.querySelectorAll('a, button, .service-row').forEach(function(el) {
+          el.addEventListener('mouseenter', function() { cursor.classList.add('is-active'); });
+          el.addEventListener('mouseleave', function() { cursor.classList.remove('is-active'); });
+        });
+      }
+
+      // ---- Smooth anchor scroll ----
+      document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          var id = a.getAttribute('href');
+          if (id.length > 1) {
+            var target = document.querySelector(id);
+            if (target) {
+              e.preventDefault();
+              var top = target.getBoundingClientRect().top + window.pageYOffset - 24;
+              window.scrollTo({ top: top, behavior: reduced ? 'auto' : 'smooth' });
+            }
+          }
+        });
+      });
+
+      // ---- Scroll progress ----
+      var progressBar = document.getElementById('scrollProgress');
+      if (progressBar) {
+        window.addEventListener('scroll', function() {
+          var scrollTop = window.scrollY;
+          var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+        }, { passive: true });
+      }
+
+      // ---- Contact form (simulated) ----
+      var contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('This is a demo – in production, the message would be sent to Pluto\'s team.');
+          this.reset();
+        });
+      }
+
+    })();
+  </script>
+
+</body>
+</html>

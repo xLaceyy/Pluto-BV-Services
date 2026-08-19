@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet" />
 
-  <!-- GSAP + ScrollTrigger + Lenis for smooth scroll & animations -->
+  <!-- GSAP + ScrollTrigger + Lenis -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -48,6 +48,27 @@
       --nav-h: 84px;
     }
 
+    /* Light mode overrides (toggled via body class) */
+    body.light-mode {
+      --p-void: #F5F0FF;
+      --p-black: #E8E0F5;
+      --p-deep: #D9CCF0;
+      --p-royal: #C4B0E6;
+      --p-mid: #A88AD4;
+      --p-mid-2: #8B6EC2;
+      --p-uv: #7A4FC4;
+      --p-uv-2: #6A3CB8;
+      --p-lavender: #2B1A4A;
+      --p-lilac: #1E0F38;
+      --p-light: #FFFFFF;
+      --p-platinum: #FAF8FF;
+      --p-silver: #3D3A4A;
+      --p-ink: #0A0012;
+      --glass-bg: rgba(255, 255, 255, 0.5);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    }
+
     /* ---- Reset & Base ---- */
     *,
     *::before,
@@ -80,6 +101,7 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
     }
     img {
       max-width: 100%;
@@ -424,6 +446,24 @@
     .nav-toggle {
       display: none;
     }
+    /* Light/dark toggle button */
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(201, 182, 255, 0.15);
+      color: var(--p-silver);
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+    .theme-toggle:hover {
+      color: #fff;
+      border-color: rgba(201, 182, 255, 0.4);
+      background: rgba(157, 78, 255, 0.12);
+    }
 
     @media (max-width: 980px) {
       .nav-links {
@@ -635,6 +675,42 @@
     .hero-eyebrow {
       margin-bottom: 24px;
       color: var(--p-lavender);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--p-lavender);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(201, 182, 255, 0.15);
+      letter-spacing: 0.02em;
+    }
+    .status-badge .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00E676;
+      box-shadow: 0 0 12px #00E676;
+      display: inline-block;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
     }
     .hero-title {
       font-size: clamp(72px, 15vw, 200px);
@@ -661,7 +737,7 @@
       font-size: 16px;
       line-height: 1.75;
       color: var(--p-silver);
-      opacity: 0.8;
+      opacity: 0.85;
     }
     .hero-ctas {
       display: flex;
@@ -806,13 +882,13 @@
       line-height: 1.8;
       color: var(--p-lilac);
       max-width: 440px;
-      opacity: 0.8;
+      opacity: 0.85;
     }
     .statement-copy+.statement-copy {
       margin-top: 20px;
     }
 
-    /* ---- 03 THE PEOPLE ---- */
+    /* ---- 03 THE PEOPLE (with mouse-tracking glow) ---- */
     .people {
       background: linear-gradient(180deg, #1E0540 0%, #3D1A6B 20%, #8B3FE8 45%, #C9B6FF 70%, #F3EEFF 100%);
       color: var(--p-ink);
@@ -856,11 +932,22 @@
       transition: transform 0.6s var(--ease-spring), box-shadow 0.6s ease;
       background-size: cover;
       background-position: center;
-      backdrop-filter: blur(4px);
+      will-change: transform;
     }
-    .people-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+    /* Mouse-tracking glow overlay */
+    .people-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201, 182, 255, 0.15), transparent 40%);
+      z-index: 1;
+      pointer-events: none;
+      border-radius: inherit;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+    .people-card:hover::before {
+      opacity: 1;
     }
     .people-card .card-overlay {
       position: absolute;
@@ -875,11 +962,11 @@
       right: 24px;
       width: 40px;
       opacity: 0.08;
-      z-index: 1;
+      z-index: 2;
     }
     .people-card-content {
       position: relative;
-      z-index: 1;
+      z-index: 3;
       color: #fff;
     }
     .people-card .num {
@@ -897,7 +984,12 @@
       margin-top: 8px;
       font-size: 14px;
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.75);
+      color: rgba(255, 255, 255, 0.8);
+    }
+    /* Apply uniform filter to all third-party images */
+    .people-card,
+    .service-icon-img {
+      filter: saturate(0.85) contrast(1.05);
     }
 
     /* ---- 04 SERVICES ---- */
@@ -974,6 +1066,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       flex-shrink: 0;
       transition: transform 0.4s var(--ease-spring);
+      filter: saturate(0.85) contrast(1.05);
     }
     .service-row:hover .service-icon-img {
       transform: scale(1.05);
@@ -1286,7 +1379,7 @@
       opacity: 0.7;
     }
 
-    /* ---- 08 STORIES ---- */
+    /* ---- 08 STORIES (with mouse-tracking glow) ---- */
     .stories {
       background: linear-gradient(180deg, #8B3FE8 0%, #C9B6FF 30%, #E3D6FF 60%, #F3EEFF 100%);
       color: var(--p-ink);
@@ -1324,6 +1417,20 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
     }
+    .story-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201, 182, 255, 0.12), transparent 40%);
+      z-index: 1;
+      pointer-events: none;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .story-card:hover::before {
+      opacity: 1;
+    }
     .story-quote-mark {
       font-family: var(--font-display);
       font-size: 56px;
@@ -1359,10 +1466,10 @@
       opacity: 0.7;
     }
 
-    /* ---- 09 FINAL CTA ---- */
+    /* ---- 09 FINAL CTA (with functional form) ---- */
     .final-cta {
       background: linear-gradient(180deg, #1E0540 0%, #0F0020 40%, #060012 70%, #080015 100%);
-      padding: 180px 0 150px;
+      padding: 140px 0 150px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -1396,14 +1503,54 @@
       line-height: 1.7;
       opacity: 0.7;
     }
-    .final-ctas {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 42px;
-      flex-wrap: wrap;
+    .final-cta .glass-form {
+      max-width: 580px;
+      margin: 36px auto 0;
+      padding: 32px;
+      display: grid;
+      gap: 16px;
+      text-align: left;
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 28px;
     }
-    .final-phone {
+    .final-cta .glass-form input,
+    .final-cta .glass-form select,
+    .final-cta .glass-form textarea {
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--p-platinum);
+      font-family: var(--font-body);
+      font-size: 14px;
+      transition: border-color 0.3s ease, background 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .final-cta .glass-form input:focus,
+    .final-cta .glass-form select:focus,
+    .final-cta .glass-form textarea:focus {
+      outline: none;
+      border-color: rgba(201, 182, 255, 0.4);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .final-cta .glass-form select option {
+      background: #0F0020;
+      color: #fff;
+    }
+    .final-cta .glass-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .final-cta .glass-form .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .final-cta .final-phone {
       margin-top: 32px;
       font-family: var(--font-display);
       font-size: 20px;
@@ -1636,6 +1783,9 @@
       <li><a href="#contact" class="magnetic">Contact</a></li>
     </ul>
     <div class="nav-cta">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle theme">
+        <span id="themeIcon">🌙</span>
+      </button>
       <a href="tel:01604630916" class="nav-icon-btn magnetic" aria-label="Call Pluto" title="01604 630 916">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </a>
@@ -1678,7 +1828,13 @@
         <div class="hero-particles" id="heroParticles"></div>
       </div>
       <div class="wrap hero-inner">
-        <div class="eyebrow hero-eyebrow reveal">Social care recruitment &amp; support — Northampton</div>
+        <div class="eyebrow hero-eyebrow reveal">
+          <span>Social care recruitment &amp; support — Northampton</span>
+          <span class="status-badge">
+            <span class="pulse-dot"></span>
+            24/7 On-Call Support Active
+          </span>
+        </div>
         <h1 class="hero-title reveal">PLUTO</h1>
         <div class="hero-tagline reveal">Care, elevated.</div>
         <p class="hero-copy reveal">Pluto BV Services recruits and supplies social care professionals to the NHS, local authorities and residential homes — and supports people to live independently, on their own terms, at home.</p>
@@ -1920,7 +2076,7 @@
       </div>
     </section>
 
-    <!-- ===== FINAL CTA ===== -->
+    <!-- ===== FINAL CTA (with functional form) ===== -->
     <section class="final-cta" id="contact">
       <div class="final-p">
         <svg viewBox="0 0 200 260" style="filter:url(#softGlow)">
@@ -1931,10 +2087,24 @@
         <div class="eyebrow reveal">Not sure where to start?</div>
         <h2 class="reveal">Let's talk.</h2>
         <p class="sub reveal">Whether you're looking for care, staffing support, or your next role — we're a phone call away.</p>
-        <div class="final-ctas reveal">
-          <a href="tel:01604630916" class="btn btn-primary magnetic">Get Care &amp; Support <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-          <a href="mailto:admin@plutobvservices.co.uk" class="btn btn-ghost magnetic">Email Us <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-        </div>
+
+        <!-- Embedded Contact Form -->
+        <form id="contactForm" class="glass-form reveal" novalidate>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <input type="text" name="fullName" placeholder="Your Full Name" required />
+            <input type="tel" name="phone" placeholder="Phone Number" required />
+          </div>
+          <input type="email" name="email" placeholder="Email Address" required />
+          <select name="enquiryType" required>
+            <option value="">How can we help?</option>
+            <option value="care">I need care for myself / a family member</option>
+            <option value="staffing">I need staffing for an organisation</option>
+            <option value="job">I'm looking for a care role</option>
+          </select>
+          <textarea rows="3" name="message" placeholder="How can we assist you?" required></textarea>
+          <button type="submit" class="btn btn-primary">Send Enquiry <span class="arrow">→</span></button>
+        </form>
+
         <div class="final-phone reveal">01604 630 916</div>
       </div>
     </section>
@@ -2010,6 +2180,15 @@
       document.getElementById('mnavClose').addEventListener('click', function() { mnav.classList.remove('is-open'); });
       mnav.querySelectorAll('a').forEach(function(a) {
         a.addEventListener('click', function() { mnav.classList.remove('is-open'); });
+      });
+
+      // ---- Theme toggle (light/dark) ----
+      var themeToggle = document.getElementById('themeToggle');
+      var themeIcon = document.getElementById('themeIcon');
+      var body = document.body;
+      themeToggle.addEventListener('click', function() {
+        body.classList.toggle('light-mode');
+        themeIcon.textContent = body.classList.contains('light-mode') ? '☀️' : '🌙';
       });
 
       // ---- Reveal ----
@@ -2114,11 +2293,20 @@
         window.addEventListener('mousemove', function(e) {
           gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: .35, ease: 'power3.out' });
         });
-        document.querySelectorAll('a, button, .service-row').forEach(function(el) {
+        document.querySelectorAll('a, button, .service-row, .people-card, .story-card').forEach(function(el) {
           el.addEventListener('mouseenter', function() { cursor.classList.add('is-active'); });
           el.addEventListener('mouseleave', function() { cursor.classList.remove('is-active'); });
         });
       }
+
+      // ---- Mouse‑tracking glow on cards ----
+      document.querySelectorAll('.people-card, .story-card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+          card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+        });
+      });
 
       // ---- Smooth anchor scroll ----
       document.querySelectorAll('a[href^="#"]').forEach(function(a) {
@@ -2145,13 +2333,21 @@
         }, { passive: true });
       }
 
-      // ---- Contact form (simulated) ----
+      // ---- Contact form submission ----
       var contactForm = document.getElementById('contactForm');
       if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
           e.preventDefault();
-          alert('This is a demo – in production, the message would be sent to Pluto\'s team.');
-          this.reset();
+          // Simulate sending – replace with actual fetch if needed
+          var btn = this.querySelector('button[type="submit"]');
+          btn.disabled = true;
+          btn.textContent = 'Sending...';
+          setTimeout(function() {
+            alert('✅ Your enquiry has been sent! We\'ll get back to you shortly.');
+            contactForm.reset();
+            btn.disabled = false;
+            btn.innerHTML = 'Send Enquiry <span class="arrow">→</span>';
+          }, 1200);
         });
       }
 

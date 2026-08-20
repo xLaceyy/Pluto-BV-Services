@@ -7,8 +7,9 @@
     <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.03 0"/></filter>
   </defs>
   <rect width="1200" height="900" fill="url(#bgGrad)"/>
-  <circle cx="564.4870635024206" cy="358.7845906044303" r="197.92451310312234" fill="#8B5CF6" opacity="0.25" filter="url(#b0)"/><circle cx="565.1726739284846" cy="525.3831522031617" r="240.14918589385167" fill="#8B5CF6" opacity="0.34" filter="url(#b1)"/><circle cx="282.63763692484173" cy="771.2751162458588" r="373.47457847456724" fill="#E7D9FF" opacity="0.21" filter="url(#b2)"/><circle cx="348.49171436787145" cy="169.88222014417056" r="277.3541151605002" fill="#8B5CF6" opacity="0.35" filter="url(#b3)"/>
-  <path d="M 360.0 630.0 Q 600.0 315.0 840.0 540.0" fill="none" stroke="#E7D9FF" stroke-width="2.5" opacity="0.5" stroke-dasharray="6 10"/>
+  <circle cx="430.87945423983587" cy="198.6114052256414" r="308.60184617660843" fill="#8B5CF6" opacity="0.36" filter="url(#b0)"/><circle cx="210.36484026209527" cy="509.60736425041574" r="364.4960776389101" fill="#B685FF" opacity="0.19" filter="url(#b1)"/><circle cx="536.2998563158905" cy="140.29590497372564" r="187.59401088227486" fill="#E7D9FF" opacity="0.19" filter="url(#b2)"/><circle cx="662.8355464253565" cy="772.163784509391" r="304.2151977980552" fill="#8B5CF6" opacity="0.31" filter="url(#b3)"/>
+  <path d="M 600.0 558.0 C 530.0 396.0 570.0 288.0 600.0 378.0 C 630.0 288.0 670.0 396.0 600.0 558.0 Z"
+          fill="none" stroke="#E7D9FF" stroke-width="2.5" opacity="0.5"/>
   <rect width="1200" height="900" filter="url(#grain)"/>
-  <text x="24" y="876" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#E7D9FF" opacity="0.55" letter-spacing="0.5">PLUTO — placeholder artwork — careers</text>
+  <text x="24" y="876" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#E7D9FF" opacity="0.55" letter-spacing="0.5">PLUTO — placeholder artwork — families & individuals</text>
 </svg>

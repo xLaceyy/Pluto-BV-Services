@@ -1,32 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-hidden="true">
-<defs>
-  <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="#4E2278"/>
-    <stop offset="52%" stop-color="#5B2A86"/>
-    <stop offset="100%" stop-color="#8A5CC4"/>
-  </linearGradient>
-  <radialGradient id="glow1" cx="22%" cy="18%" r="55%">
-    <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.30"/>
-    <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
-  </radialGradient>
-  <radialGradient id="glow2" cx="85%" cy="88%" r="55%">
-    <stop offset="0%" stop-color="#7C4DFF" stop-opacity="0.35"/>
-    <stop offset="100%" stop-color="#7C4DFF" stop-opacity="0"/>
-  </radialGradient>
-  <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-    <feGaussianBlur stdDeviation="26"/>
-  </filter>
-  <filter id="grain">
-    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n"/>
-    <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.02 0"/>
-  </filter>
-</defs>
-<rect width="800" height="600" fill="url(#g)"/>
-<rect width="800" height="600" fill="url(#glow1)"/>
-<rect width="800" height="600" fill="url(#glow2)"/>
-<circle cx="600" cy="150" r="150" fill="#FFFFFF" fill-opacity="0.10" filter="url(#soft)"/><path d="M300 560 V330 a140 140 0 0 1 280 0 V560 Z" fill="#FFFFFF" fill-opacity="0.14"/><path d="M300 560 V330 a140 140 0 0 1 280 0 V560" fill="none" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="3"/><rect width="800" height="600" filter="url(#grain)"/>
-<g opacity="0.55" transform="translate(736,548)">
-  <rect x="0" y="0" width="20" height="20" rx="6" fill="#FFFFFF" fill-opacity="0.16"/>
-  <circle cx="10" cy="10" r="4.4" fill="#FFFFFF"/>
-</g>
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1200" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#12002A"/><stop offset="1" stop-color="#3A1178"/>
+    </linearGradient>
+    <filter id="b0"><feGaussianBlur stdDeviation="70"/></filter><filter id="b1"><feGaussianBlur stdDeviation="70"/></filter><filter id="b2"><feGaussianBlur stdDeviation="70"/></filter><filter id="b3"><feGaussianBlur stdDeviation="70"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.03 0"/></filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bgGrad)"/>
+  <circle cx="248.9896743479052" cy="700.1522905948075" r="332.9753176989487" fill="#5E2CA5" opacity="0.21" filter="url(#b0)"/><circle cx="850.5239471160727" cy="430.016575374804" r="249.99688823792522" fill="#B685FF" opacity="0.2" filter="url(#b1)"/><circle cx="147.21357746112605" cy="691.7508748223062" r="261.4776866674916" fill="#8B5CF6" opacity="0.33" filter="url(#b2)"/><circle cx="375.6773380389692" cy="667.3149842374683" r="295.6891419602817" fill="#8B5CF6" opacity="0.38" filter="url(#b3)"/>
+  <path d="M 510.0 522.0 L 600.0 378.0 L 690.0 522.0 L 690.0 648.0 L 510.0 648.0 Z"
+          fill="none" stroke="#E7D9FF" stroke-width="2.5" opacity="0.5"/>
+  <rect width="1200" height="900" filter="url(#grain)"/>
+  <text x="24" y="876" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#E7D9FF" opacity="0.55" letter-spacing="0.5">PLUTO — placeholder artwork — hero</text>
 </svg>

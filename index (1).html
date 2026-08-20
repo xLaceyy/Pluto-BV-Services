@@ -1,0 +1,2722 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Pluto BV Ltd — Care, elevated.</title>
+  <meta name="description" content="Pluto BV Ltd – social care recruitment and direct care support, based in Northampton." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Syne:wght@400..800&display=swap" rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger + Lenis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <style>
+    /* ============================================================
+       PLUTO 2.0 — LIGHT & AIRY DESIGN TOKENS
+       ============================================================ */
+    :root {
+      /* Light, warm palette – white/cream base with purple accents */
+      --bg-body: #FCFAF8;
+      --bg-card: #FFFFFF;
+      --bg-glass: rgba(255, 255, 255, 0.6);
+      --text-primary: #1A1124;
+      --text-secondary: #4A3D5C;
+      --text-muted: #8A7D9C;
+      --border-light: rgba(106, 70, 148, 0.08);
+      --border-glass: rgba(106, 70, 148, 0.12);
+      --shadow-soft: 0 8px 40px rgba(106, 70, 148, 0.06);
+      --shadow-glass: 0 8px 32px rgba(106, 70, 148, 0.08);
+
+      /* Purple brand accents */
+      --p-uv: #6A4694;
+      --p-uv-light: #8B6EB0;
+      --p-uv-soft: #E8E0F2;
+      --p-ember: #B8865A;
+      --p-ember-light: #D4A87A;
+      --p-mint: #7AB8A8;
+
+      --glass-bg: rgba(255, 255, 255, 0.55);
+      --glass-border: rgba(106, 70, 148, 0.08);
+      --glass-shadow: 0 8px 32px rgba(106, 70, 148, 0.06);
+      --glass-blur: 24px;
+      --glass-saturate: 140%;
+
+      --font-display: 'Syne', 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --container: 1360px;
+      --nav-h: 84px;
+    }
+
+    /* ---- Reset & Base ---- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+    body {
+      margin: 0;
+      background: var(--bg-body);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      line-height: 1.6;
+      transition: background 0.4s ease;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    ::selection {
+      background: var(--p-uv);
+      color: #fff;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-display);
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .wrap {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 768px) {
+      .wrap {
+        padding: 0 22px;
+      }
+    }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0.6;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+    }
+    .eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--p-uv);
+      opacity: 0.4;
+    }
+
+    /* ---- Reveal animations ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 1.2s var(--ease-out), transform 1.3s var(--ease-out);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 1.2s var(--ease-out), transform 1.3s var(--ease-out);
+    }
+    .reveal-scale.is-visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .stagger>* {
+      transition-delay: calc(var(--i, 0) * 100ms);
+    }
+
+    /* ---- Grain texture (subtle) ---- */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.012;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.3'/%3E%3C/svg%3E");
+    }
+
+    /* ---- Floating gradient orbs (soft pastel) ---- */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: screen;
+      opacity: 0.15;
+      will-change: transform, opacity;
+    }
+    .orb-1 {
+      width: 60vw;
+      height: 60vw;
+      top: -20%;
+      right: -10%;
+      background: radial-gradient(circle, rgba(106, 70, 148, 0.12), transparent 70%);
+      animation: orbFloat 18s ease-in-out infinite alternate;
+    }
+    .orb-2 {
+      width: 50vw;
+      height: 50vw;
+      bottom: -10%;
+      left: -15%;
+      background: radial-gradient(circle, rgba(184, 134, 90, 0.08), transparent 70%);
+      animation: orbFloat 22s ease-in-out infinite alternate-reverse;
+    }
+    .orb-3 {
+      width: 40vw;
+      height: 40vw;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(122, 184, 168, 0.06), transparent 70%);
+      animation: orbFloat 26s ease-in-out infinite alternate;
+    }
+    @keyframes orbFloat {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        transform: translate(3%, 3%) scale(1.08);
+      }
+    }
+
+    /* ---- Custom cursor (light version) ---- */
+    .cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--p-uv);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s var(--ease-spring), height 0.4s var(--ease-spring),
+        background 0.3s ease, box-shadow 0.3s ease;
+      will-change: transform;
+      box-shadow: 0 0 16px rgba(106, 70, 148, 0.1);
+    }
+    .cursor.is-active {
+      width: 32px;
+      height: 32px;
+      background: rgba(106, 70, 148, 0.08);
+      box-shadow: 0 0 24px rgba(106, 70, 148, 0.05);
+      border: 1px solid rgba(106, 70, 148, 0.1);
+    }
+    .cursor .label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 7px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-weight: 500;
+    }
+    .cursor.is-active .label {
+      opacity: 1;
+    }
+    @media (hover:none),
+    (pointer:coarse) {
+      .cursor {
+        display: none;
+      }
+    }
+
+    /* ---- Glass system ---- */
+    .glass {
+      background: var(--bg-glass);
+      backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      border: 1px solid var(--border-glass);
+      box-shadow: var(--shadow-glass);
+      border-radius: 24px;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid rgba(106, 70, 148, 0.06);
+      box-shadow: 0 8px 32px rgba(106, 70, 148, 0.04);
+      border-radius: 28px;
+      padding: var(--space-xl);
+      transition: all 0.6s var(--ease-out);
+      will-change: transform, box-shadow, border-color;
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(106, 70, 148, 0.06);
+      border-color: rgba(106, 70, 148, 0.1);
+    }
+
+    /* ---- Buttons (purple) ---- */
+    .btn {
+      --glow: rgba(106, 70, 148, 0.2);
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px 14px 28px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      overflow: hidden;
+      isolation: isolate;
+      transition: transform 0.5s var(--ease-spring), box-shadow 0.5s ease, background 0.5s ease;
+      will-change: transform;
+      border: 1px solid transparent;
+      font-family: var(--font-body);
+      color: #fff;
+    }
+    .btn .arrow {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      transition: transform 0.5s var(--ease-spring);
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .btn:hover .arrow {
+      transform: translateX(4px);
+    }
+    .btn-primary {
+      background: var(--p-uv);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px -6px var(--glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px -8px rgba(106, 70, 148, 0.25);
+      background: #7A56A0;
+    }
+    .btn-ghost {
+      background: transparent;
+      border-color: rgba(106, 70, 148, 0.15);
+      color: var(--p-uv);
+    }
+    .btn-ghost .arrow {
+      background: rgba(106, 70, 148, 0.06);
+    }
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      border-color: rgba(106, 70, 148, 0.25);
+      background: rgba(106, 70, 148, 0.02);
+    }
+    .btn-ember {
+      background: var(--p-ember);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px -6px rgba(184, 134, 90, 0.2);
+    }
+    .btn-ember:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px -8px rgba(184, 134, 90, 0.25);
+      background: #C9996A;
+    }
+    .magnetic {
+      display: inline-block;
+    }
+
+    /* ---- Navigation (light) ---- */
+    .nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1240px, calc(100% - 32px));
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px 10px 20px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(24px) saturate(140%);
+      -webkit-backdrop-filter: blur(24px) saturate(140%);
+      border: 1px solid rgba(106, 70, 148, 0.06);
+      box-shadow: 0 4px 24px rgba(106, 70, 148, 0.04);
+      transition: padding 0.5s var(--ease-out), background 0.6s var(--ease-out),
+        box-shadow 0.6s var(--ease-out), border-color 0.6s var(--ease-out);
+    }
+    .nav.is-scrolled {
+      padding: 6px 10px 6px 16px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 40px rgba(106, 70, 148, 0.06);
+      border-color: rgba(106, 70, 148, 0.08);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      font-family: var(--font-display);
+      line-height: 1.1;
+    }
+    .nav-brand .logo-main {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+    }
+    .nav-brand .logo-sub {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+    .nav-brand .logo-tagline {
+      font-size: 6px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      opacity: 0.3;
+      margin-left: 4px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      display: block;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-radius: 999px;
+      transition: color 0.3s ease, background 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: var(--p-uv);
+      background: rgba(106, 70, 148, 0.04);
+    }
+    .nav-links .active-link {
+      color: var(--p-uv);
+      background: rgba(106, 70, 148, 0.04);
+    }
+    .nav-indicator {
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 1.5px;
+      background: var(--p-uv);
+      border-radius: 2px;
+      transition: width 0.4s var(--ease-out), opacity 0.3s ease;
+      width: 0;
+      opacity: 0;
+    }
+    .nav-links a:hover .nav-indicator {
+      width: 60%;
+      opacity: 1;
+    }
+    .nav-links .active-link .nav-indicator {
+      width: 60%;
+      opacity: 1;
+    }
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-icon-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(106, 70, 148, 0.06);
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.01);
+      transition: all 0.3s ease;
+    }
+    .nav-icon-btn:hover {
+      color: var(--p-uv);
+      border-color: rgba(106, 70, 148, 0.12);
+      background: rgba(106, 70, 148, 0.02);
+    }
+    .nav-toggle {
+      display: none;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-toggle {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid rgba(106, 70, 148, 0.06);
+        background: rgba(255, 255, 255, 0.01);
+      }
+      .nav-toggle span {
+        display: block;
+        width: 16px;
+        height: 1px;
+        background: var(--text-primary);
+        position: relative;
+      }
+      .nav-toggle span::before,
+      .nav-toggle span::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 16px;
+        height: 1px;
+        background: var(--text-primary);
+        transition: transform 0.3s ease;
+      }
+      .nav-toggle span::before {
+        top: -5px;
+      }
+      .nav-toggle span::after {
+        top: 5px;
+      }
+    }
+
+    /* Mobile menu (light) */
+    .mnav {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(40px) saturate(140%);
+      -webkit-backdrop-filter: blur(40px) saturate(140%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+      transform: translateY(-100%);
+      transition: transform 0.6s var(--ease-out);
+      border: 1px solid rgba(106, 70, 148, 0.04);
+    }
+    .mnav.is-open {
+      transform: translateY(0);
+    }
+    .mnav-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(106, 70, 148, 0.06);
+      display: grid;
+      place-items: center;
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .mnav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mnav a {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 9vw, 44px);
+      font-weight: 600;
+      color: var(--text-primary);
+      padding: 8px 0;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    .mnav a:hover {
+      opacity: 1;
+    }
+    .mnav-foot {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      color: var(--text-muted);
+      font-size: 13px;
+      opacity: 0.5;
+    }
+
+    /* ---- Scroll progress (purple) ---- */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--p-uv);
+      z-index: 1001;
+      width: 0%;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 20px rgba(106, 70, 148, 0.1);
+    }
+
+    /* ---- Sections ---- */
+    section {
+      position: relative;
+    }
+    .pad-xl {
+      padding: 140px 0;
+    }
+    .pad-lg {
+      padding: 100px 0;
+    }
+    @media (max-width: 768px) {
+      .pad-xl {
+        padding: 80px 0;
+      }
+      .pad-lg {
+        padding: 60px 0;
+      }
+    }
+
+    /* ---- 01 HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: var(--nav-h);
+      position: relative;
+      background: var(--bg-body);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+      mix-blend-mode: multiply;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
+    }
+    .hero-field {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-p {
+      position: absolute;
+      top: 50%;
+      right: -6%;
+      width: min(48vw, 700px);
+      transform: translateY(-50%);
+      filter: drop-shadow(0 0 80px rgba(106, 70, 148, 0.06));
+      opacity: 0.15;
+      will-change: transform;
+    }
+    .hero-p svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .hero-particles span {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: var(--p-uv);
+      opacity: 0.08;
+      box-shadow: 0 0 8px 1px rgba(106, 70, 148, 0.05);
+      animation: drift 18s ease-in-out infinite;
+    }
+    @keyframes drift {
+      0%,
+      100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.03;
+      }
+      50% {
+        transform: translateY(-50px) translateX(18px);
+        opacity: 0.15;
+      }
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+    }
+    .hero-eyebrow {
+      margin-bottom: 24px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      color: var(--text-muted);
+      background: rgba(106, 70, 148, 0.04);
+      padding: 3px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(106, 70, 148, 0.04);
+      letter-spacing: 0.04em;
+      opacity: 0.7;
+    }
+    .status-badge .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--p-mint);
+      box-shadow: 0 0 12px rgba(122, 184, 168, 0.2);
+      display: inline-block;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.4;
+        transform: scale(0.7);
+      }
+    }
+    .hero-title {
+      font-size: clamp(72px, 15vw, 200px);
+      line-height: 0.84;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      color: var(--text-primary);
+      filter: drop-shadow(0 4px 32px rgba(106, 70, 148, 0.02));
+    }
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--p-uv), var(--p-uv-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(20px, 3vw, 32px);
+      color: var(--text-secondary);
+      margin-top: 12px;
+      letter-spacing: -0.01em;
+      opacity: 0.5;
+    }
+    .hero-copy {
+      max-width: 520px;
+      margin-top: 28px;
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      opacity: 0.7;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 40px;
+    }
+    .hero-audience-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .hero-audience-links .btn {
+      padding: 10px 20px;
+      font-size: 11.5px;
+    }
+    .hero-scroll {
+      position: absolute;
+      left: 40px;
+      bottom: 36px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 3;
+      opacity: 0.3;
+    }
+    .hero-scroll .line {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(180deg, var(--p-uv), transparent);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-scroll .line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--p-uv);
+      animation: scrolldrop 2.4s ease-in-out infinite;
+    }
+    @keyframes scrolldrop {
+      0% {
+        top: -100%;
+      }
+      60%,
+      100% {
+        top: 100%;
+      }
+    }
+    @media (max-width: 768px) {
+      .hero-scroll {
+        display: none;
+      }
+    }
+    .hero-audience {
+      position: absolute;
+      right: 40px;
+      bottom: 40px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: right;
+    }
+    @media (max-width: 1180px) {
+      .hero-audience {
+        display: none;
+      }
+    }
+    .hero-audience .tag {
+      font-size: 10px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(106, 70, 148, 0.04);
+    }
+
+    /* ---- 02 STATEMENT ---- */
+    .statement {
+      padding: 160px 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-body);
+    }
+    .statement::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(50% 60% at 50% 0%, rgba(106, 70, 148, 0.02), transparent 65%);
+      pointer-events: none;
+    }
+    .statement-p-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(90vw, 1100px);
+      transform: translate(-50%, -50%);
+      opacity: 0.02;
+      pointer-events: none;
+    }
+    .statement-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: end;
+    }
+    @media (max-width: 900px) {
+      .statement-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .statement-word {
+      font-size: clamp(64px, 11vw, 160px);
+      line-height: 0.88;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      font-weight: 600;
+    }
+    .statement-word span {
+      display: block;
+      overflow: hidden;
+    }
+    .statement-word em {
+      font-style: normal;
+      color: var(--p-uv);
+      opacity: 0.5;
+    }
+    .statement-copy {
+      font-size: 16.5px;
+      line-height: 1.85;
+      color: var(--text-secondary);
+      max-width: 440px;
+      opacity: 0.7;
+    }
+    .statement-copy+.statement-copy {
+      margin-top: 20px;
+    }
+
+    /* ---- 03 THE PEOPLE ---- */
+    .people {
+      background: var(--bg-body);
+      padding-top: 40px;
+    }
+    .people-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 80px;
+    }
+    .people-head .eyebrow {
+      color: var(--text-muted);
+      justify-content: center;
+    }
+    .people-head h2 {
+      font-size: clamp(38px, 6vw, 64px);
+      margin-top: 18px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .people-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .people-card {
+      position: relative;
+      border-radius: 28px;
+      padding: 36px 28px 32px;
+      overflow: hidden;
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border: 1px solid rgba(106, 70, 148, 0.06);
+      transition: transform 0.7s var(--ease-spring), box-shadow 0.7s ease;
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      perspective: 600px;
+      background-color: #ffffff;
+    }
+    .people-card .card-inner {
+      position: relative;
+      z-index: 2;
+      transform: translateZ(10px);
+    }
+    .people-card:hover {
+      transform: translateY(-6px) rotateX(2deg) rotateY(1deg);
+      box-shadow: 0 16px 60px rgba(106, 70, 148, 0.06);
+    }
+    .people-card .card-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
+      border-radius: 28px;
+    }
+    .people-card .pmark {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 36px;
+      opacity: 0.04;
+      z-index: 1;
+    }
+    .people-card-content {
+      position: relative;
+      z-index: 3;
+      color: var(--text-primary);
+    }
+    .people-card .num {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .people-card h3 {
+      font-size: 22px;
+      margin-top: 12px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .people-card p {
+      margin-top: 8px;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      opacity: 0.8;
+    }
+    .people-card img,
+    .service-icon-img {
+      filter: saturate(0.9) contrast(1.05) brightness(1.02);
+    }
+
+    /* ---- 04 SERVICES ---- */
+    .services {
+      background: var(--bg-body);
+      padding-top: 100px;
+    }
+    .services-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+    .services-head h2 {
+      font-size: clamp(36px, 5.6vw, 58px);
+      color: var(--text-primary);
+      max-width: 640px;
+      font-weight: 600;
+    }
+    .services-head p {
+      max-width: 360px;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.7;
+      opacity: 0.6;
+    }
+    .services-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid rgba(106, 70, 148, 0.04);
+    }
+    .service-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 1fr 120px;
+      align-items: center;
+      gap: 24px;
+      padding: 30px 10px;
+      border-bottom: 1px solid rgba(106, 70, 148, 0.04);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: padding 0.5s var(--ease-out);
+    }
+    .service-row .row-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(106, 70, 148, 0.03), transparent 60%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.7s var(--ease-out);
+      z-index: 0;
+    }
+    .service-row:hover .row-bg {
+      transform: scaleX(1);
+    }
+    .service-row>* {
+      position: relative;
+      z-index: 1;
+    }
+    .service-num {
+      font-family: var(--font-display);
+      font-size: 12px;
+      color: var(--text-muted);
+      opacity: 0.3;
+      font-weight: 600;
+    }
+    .service-icon-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 1px solid rgba(106, 70, 148, 0.04);
+      flex-shrink: 0;
+      transition: transform 0.5s var(--ease-spring);
+    }
+    .service-row:hover .service-icon-img {
+      transform: scale(1.04);
+    }
+    .service-name {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.4vw, 26px);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 600;
+    }
+    .service-desc {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 420px;
+      opacity: 0.6;
+    }
+    .service-cta {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--p-uv);
+      opacity: 0.5;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      font-weight: 500;
+    }
+    .service-row:hover .service-cta {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+    @media (max-width: 860px) {
+      .service-row {
+        grid-template-columns: 44px 1fr;
+        grid-template-rows: auto auto auto;
+        row-gap: 8px;
+        padding: 22px 6px;
+      }
+      .service-num {
+        display: none;
+      }
+      .service-desc {
+        grid-column: 1/-1;
+      }
+      .service-cta {
+        grid-column: 1/-1;
+        justify-self: start;
+      }
+    }
+
+    /* ---- 05 TRUST ---- */
+    .trust {
+      background: var(--bg-body);
+      padding: 130px 0 110px;
+    }
+    .trust-head {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 70px;
+    }
+    .trust-head h2 {
+      font-size: clamp(34px, 5vw, 52px);
+      color: var(--text-primary);
+      margin-top: 16px;
+      font-weight: 600;
+    }
+    .trust-orgs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 70px;
+    }
+    @media (max-width: 860px) {
+      .trust-orgs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .org-chip {
+      padding: 24px 18px;
+      border-radius: 20px;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(106, 70, 148, 0.04);
+      transition: transform 0.5s var(--ease-spring), background 0.3s ease;
+    }
+    .org-chip:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.8);
+    }
+    .org-chip svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--p-uv);
+      opacity: 0.3;
+    }
+    .trust-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(106, 70, 148, 0.02);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(106, 70, 148, 0.04);
+    }
+    @media (max-width: 860px) {
+      .trust-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .stat {
+      background: rgba(255, 255, 255, 0.5);
+      padding: 34px 22px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .stat .num {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      font-weight: 600;
+    }
+    .stat .lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+      opacity: 0.5;
+    }
+
+    /* ---- 06 APPROACH ---- */
+    .approach {
+      background: var(--bg-body);
+      padding: 130px 0 150px;
+    }
+    .approach-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 80px;
+    }
+    .approach-head h2 {
+      font-size: clamp(34px, 5vw, 54px);
+      color: var(--text-primary);
+      max-width: 560px;
+      font-weight: 600;
+    }
+    .timeline {
+      position: relative;
+    }
+    .timeline-track {
+      position: absolute;
+      top: 27px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(106, 70, 148, 0.06) 10%, rgba(106, 70, 148, 0.06) 90%, transparent);
+    }
+    .timeline-track .fill {
+      position: absolute;
+      inset: 0;
+      width: 0;
+      background: var(--p-uv);
+      box-shadow: 0 0 20px rgba(106, 70, 148, 0.05);
+      transition: width 1.5s var(--ease-out);
+    }
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+    @media (max-width: 860px) {
+      .timeline-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .timeline-track {
+        display: none;
+      }
+    }
+    .t-step {
+      position: relative;
+      padding-top: 0;
+    }
+    .t-dot {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: #fff;
+      margin-bottom: 28px;
+      background: var(--p-uv);
+      box-shadow: 0 4px 16px rgba(106, 70, 148, 0.1);
+      position: relative;
+      z-index: 2;
+    }
+    .t-step h3 {
+      font-size: 19px;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .t-step p {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      opacity: 0.5;
+    }
+
+    /* ---- 07 PROFESSIONALS ---- */
+    .professionals {
+      background: var(--bg-body);
+      padding: 130px 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .professionals::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('images/placeholders/hero.svg') center/cover no-repeat;
+      opacity: 0.03;
+      mix-blend-mode: multiply;
+    }
+    .prof-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 70px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 960px) {
+      .prof-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+    }
+    .prof-left h2 {
+      font-size: clamp(36px, 6vw, 56px);
+      color: var(--text-primary);
+      margin-top: 18px;
+      font-weight: 600;
+    }
+    .prof-left p {
+      margin-top: 20px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      max-width: 460px;
+      opacity: 0.7;
+    }
+    .prof-cta-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .prof-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .p-step {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 18px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(106, 70, 148, 0.04);
+    }
+    .p-step:last-child {
+      border-bottom: 1px solid rgba(106, 70, 148, 0.04);
+    }
+    .p-step .pnum {
+      font-family: var(--font-display);
+      font-size: 18px;
+      color: var(--text-muted);
+      opacity: 0.3;
+      font-weight: 600;
+    }
+    .p-step h4 {
+      font-size: 15.5px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .p-step span {
+      display: block;
+      margin-top: 4px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      opacity: 0.5;
+    }
+
+    /* ---- 08 STORIES ---- */
+    .stories {
+      background: var(--bg-body);
+      padding-top: 40px;
+    }
+    .stories-head {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 70px;
+    }
+    .stories-head h2 {
+      font-size: clamp(34px, 5vw, 54px);
+      margin-top: 16px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .stories-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 860px) {
+      .stories-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .story-card {
+      border-radius: 28px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(106, 70, 148, 0.04);
+      box-shadow: 0 8px 32px rgba(106, 70, 148, 0.02);
+    }
+    .story-quote-mark {
+      font-family: var(--font-display);
+      font-size: 48px;
+      color: var(--p-uv);
+      opacity: 0.1;
+      line-height: 1;
+    }
+    .story-card p.q {
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--text-primary);
+      margin-top: 4px;
+      font-family: var(--font-display);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      opacity: 0.8;
+    }
+    .story-meta {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .story-meta .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--p-uv);
+    }
+    .story-meta span {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+      opacity: 0.5;
+    }
+
+    /* ---- 09 FINAL CTA ---- */
+    .final-cta {
+      background: var(--bg-body);
+      padding: 140px 0 150px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(70vw, 900px);
+      transform: translate(-50%, -50%);
+      opacity: 0.02;
+      filter: blur(3px);
+    }
+    .final-cta .eyebrow {
+      justify-content: center;
+      color: var(--text-muted);
+    }
+    .final-cta h2 {
+      font-size: clamp(46px, 8vw, 110px);
+      color: var(--text-primary);
+      margin-top: 22px;
+      line-height: 0.96;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+    }
+    .final-cta .sub {
+      max-width: 500px;
+      margin: 24px auto 0;
+      color: var(--text-secondary);
+      font-size: 15.5px;
+      line-height: 1.7;
+      opacity: 0.6;
+    }
+    .final-cta .glass-form {
+      max-width: 560px;
+      margin: 36px auto 0;
+      padding: 32px;
+      display: grid;
+      gap: 16px;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(24px) saturate(140%);
+      -webkit-backdrop-filter: blur(24px) saturate(140%);
+      border: 1px solid rgba(106, 70, 148, 0.06);
+      box-shadow: 0 8px 32px rgba(106, 70, 148, 0.02);
+      border-radius: 28px;
+    }
+    .final-cta .glass-form input,
+    .final-cta .glass-form select,
+    .final-cta .glass-form textarea {
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(106, 70, 148, 0.06);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      transition: border-color 0.3s ease, background 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .final-cta .glass-form input:focus,
+    .final-cta .glass-form select:focus,
+    .final-cta .glass-form textarea:focus {
+      outline: none;
+      border-color: var(--p-uv);
+      background: rgba(255, 255, 255, 0.8);
+    }
+    .final-cta .glass-form select option {
+      background: #ffffff;
+      color: var(--text-primary);
+    }
+    .final-cta .glass-form textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+    .final-cta .glass-form .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .final-cta .final-phone {
+      margin-top: 32px;
+      font-family: var(--font-display);
+      font-size: 18px;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+      opacity: 0.4;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--bg-body);
+      padding: 70px 0 28px;
+      border-top: 1px solid rgba(106, 70, 148, 0.04);
+    }
+    .foot-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 50px;
+    }
+    @media (max-width: 860px) {
+      .foot-top {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 38px;
+      }
+    }
+    @media (max-width: 560px) {
+      .foot-top {
+        grid-template-columns: 1fr;
+      }
+    }
+    .foot-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .foot-brand .logo-main {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+    }
+    .foot-brand .logo-sub {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      opacity: 0.4;
+    }
+    .foot-brand .logo-tagline {
+      font-size: 7px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      opacity: 0.2;
+      margin-top: 2px;
+    }
+    .foot-desc {
+      margin-top: 16px;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 280px;
+      opacity: 0.5;
+    }
+    .foot-col h5 {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-weight: 600;
+      opacity: 0.4;
+    }
+    .foot-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .foot-col a {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      transition: color 0.3s ease;
+      opacity: 0.5;
+    }
+    .foot-col a:hover {
+      color: var(--p-uv);
+      opacity: 1;
+    }
+    .foot-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 28px;
+      border-top: 1px solid rgba(106, 70, 148, 0.04);
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .foot-bottom p {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      opacity: 0.3;
+    }
+    .foot-legal {
+      display: flex;
+      gap: 20px;
+    }
+    .foot-legal a {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      opacity: 0.3;
+      transition: opacity 0.3s ease;
+    }
+    .foot-legal a:hover {
+      opacity: 0.6;
+    }
+
+    /* ---- Architectural grid lines (light) ---- */
+    .grid-lines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.015;
+      background-image:
+        linear-gradient(rgba(106, 70, 148, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(106, 70, 148, 0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    /* ---- Misc ---- */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+    }
+    .skip-link {
+      position: absolute;
+      top: -9999px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.75rem 1.5rem;
+      background: var(--p-uv);
+      color: #fff;
+      border-radius: 12px;
+      font-weight: 600;
+      z-index: 10000;
+    }
+    .skip-link:focus {
+      top: 20px;
+    }
+    .role-node { padding:10px 16px; border-radius:999px; background:rgba(139,92,246,0.08); border:1px solid rgba(139,92,246,0.16); }
+    .role-node-brand { background:var(--p-uv,#8B5CF6); color:#fff; border-color:transparent; }
+    .role-arrow { opacity:.5; }
+    .sector-chip { padding:9px 16px; border-radius:999px; background:rgba(139,92,246,0.06); border:1px solid rgba(139,92,246,0.14); font-size:13px; font-weight:600; }
+    @media (max-width:640px){ .role-node,.role-arrow{ font-size:12.5px; } }
+    .field-error { display:none; color:#B3261E; font-size:12px; margin-top:-8px; }
+    .field-error.show { display:block; }
+    .glass-form input.invalid, .glass-form select.invalid, .glass-form textarea.invalid { border-color:#B3261E !important; }
+    .form-status { font-size:13.5px; padding:12px 16px; border-radius:12px; display:none; line-height:1.55; }
+    .form-status.show { display:block; }
+    .form-status.success { background:rgba(139,92,246,0.10); color:var(--text-primary,#24172c); border:1px solid rgba(139,92,246,0.25); }
+    .form-status.error { background:rgba(179,38,30,0.08); color:#B3261E; border:1px solid rgba(179,38,30,0.2); }
+    .glass-form .btn[disabled] { opacity:.6; cursor:not-allowed; transform:none !important; }
+
+    /* ============ STAFF PORTAL ============ */
+    .staff-portal { padding: 100px 0; background: var(--lavender, #F1EBFA); }
+    .staff-portal .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .staff-portal .portal-card { background: rgba(255,255,255,0.75); backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%); border: 1px solid rgba(106,70,148,0.08); border-radius: 28px; padding: 36px; }
+    .staff-portal .portal-card + .portal-card { margin-top: 20px; }
+    .upload-drop { border: 1.5px dashed rgba(106,70,148,0.3); border-radius: 16px; padding: 28px; text-align: center; cursor: pointer; transition: border-color .25s ease, background .25s ease; }
+    .upload-drop:hover, .upload-drop.dragover { border-color: var(--p-uv, #8B5CF6); background: rgba(139,92,246,0.05); }
+    .upload-drop input[type="file"] { display:none; }
+    .upload-filename { font-size: 13px; margin-top: 10px; color: var(--text-secondary,#68616F); word-break: break-all; }
+    .upload-note { font-size:12px; color:var(--text-secondary,#68616F); margin-top:8px; }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="grid-lines"></div>
+  <div class="grain"></div>
+  <div class="cursor" id="cursor"><span class="label" id="cursorLabel">Explore</span></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Floating gradient orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ============ SVG BRAND ASSETS ============ -->
+  <svg class="svg-defs" style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
+    <defs>
+      <linearGradient id="pGradPrimary" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#E7DBFF" />
+        <stop offset="45%" stop-color="#B088D4" />
+        <stop offset="100%" stop-color="#6B3F8A" />
+      </linearGradient>
+      <linearGradient id="pGradGhost" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+        <stop offset="100%" stop-color="#B088D4" stop-opacity="0.15" />
+      </linearGradient>
+      <mask id="pMask" maskUnits="objectBoundingBox" maskContentUnits="userSpaceOnUse">
+        <rect x="0" y="0" width="200" height="260" fill="black" />
+        <rect x="34" y="18" width="46" height="224" rx="15" fill="white" />
+        <rect x="34" y="18" width="142" height="114" rx="40" fill="white" />
+        <rect x="77" y="51" width="65" height="48" rx="21" fill="black" />
+      </mask>
+      <symbol id="plutoP" viewBox="0 0 200 260">
+        <rect x="0" y="0" width="200" height="260" fill="url(#pGradPrimary)" mask="url(#pMask)" />
+        <rect x="0" y="0" width="90" height="260" fill="#fff" opacity="0.08" mask="url(#pMask)" />
+      </symbol>
+      <symbol id="plutoPGhost" viewBox="0 0 200 260">
+        <rect x="0" y="0" width="200" height="260" fill="url(#pGradGhost)" mask="url(#pMask)" />
+      </symbol>
+      <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="16" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-brand">
+      <span class="logo-main">PLUTO</span>
+      <span class="logo-sub">BVLTD</span>
+      <span class="logo-tagline">CARE.PURPOSE.TRUST.</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about" class="magnetic">About <span class="nav-indicator"></span></a></li>
+      <li><a href="#how-we-work" class="magnetic">How We Work <span class="nav-indicator"></span></a></li>
+      <li><a href="#services" class="magnetic">Care <span class="nav-indicator"></span></a></li>
+      <li><a href="#trust" class="magnetic">For Organisations <span class="nav-indicator"></span></a></li>
+      <li><a href="#professionals" class="magnetic">Careers <span class="nav-indicator"></span></a></li>
+      <li><a href="#staff-portal" class="magnetic">Staff Portal <span class="nav-indicator"></span></a></li>
+      <li><a href="#stories" class="magnetic">Stories <span class="nav-indicator"></span></a></li>
+      <li><a href="#contact" class="magnetic">Contact <span class="nav-indicator"></span></a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="tel:01604630916" class="nav-icon-btn magnetic" aria-label="Call Pluto" title="01604 630 916">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <button class="nav-toggle" id="mnavOpen" aria-label="Open menu"><span></span></button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mnav" id="mnav">
+    <button class="mnav-close" id="mnavClose" aria-label="Close menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#how-we-work">How We Work</a></li>
+      <li><a href="#services">Care Services</a></li>
+      <li><a href="#trust">For Organisations</a></li>
+      <li><a href="#professionals">Careers</a></li>
+      <li><a href="#staff-portal">Staff Portal</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="mnav-foot">
+      <span>01604 630 916</span>
+      <span>admin@plutobvservices.co.uk</span>
+      <span>3 Spencer Parade, Northampton, NN1 5AA</span>
+    </div>
+  </div>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <img class="hero-bg" src="images/placeholders/hero.svg" alt="" loading="eager" />
+      <div class="hero-overlay"></div>
+      <div class="hero-field">
+        <div class="hero-p" id="heroP">
+          <svg viewBox="0 0 200 260" style="filter:url(#softGlow)">
+            <use href="#plutoP" />
+          </svg>
+        </div>
+        <div class="hero-particles" id="heroParticles"></div>
+      </div>
+      <div class="wrap hero-inner">
+        <div class="eyebrow hero-eyebrow reveal">
+          <span>Social care recruitment &amp; support — Northampton</span>
+          <span class="status-badge">
+            <span class="pulse-dot"></span>
+            24/7 On-Call
+          </span>
+        </div>
+        <h1 class="hero-title reveal">PLUTO <span class="highlight">Care, elevated.</span></h1>
+        <div class="hero-tagline reveal">Care, elevated.</div>
+        <p class="hero-copy reveal">Pluto BV Ltd recruits and supplies social care professionals to the NHS, local authorities and residential homes — and supports people to live independently, on their own terms, at home.</p>
+        <div class="hero-ctas reveal">
+          <a href="#services" class="btn btn-primary magnetic">Explore <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          <a href="#contact" class="btn btn-ghost magnetic">Start a conversation <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        </div>
+        <div class="hero-audience-links reveal">
+          <a href="#families" class="btn btn-primary" style="padding:10px 20px;font-size:11.5px;">👨‍👩‍👧‍👦 Family Care</a>
+          <a href="#organisations" class="btn btn-ghost" style="padding:10px 20px;font-size:11.5px;">🏢 Staffing</a>
+          <a href="#professionals" class="btn btn-ghost" style="padding:10px 20px;font-size:11.5px;">👩‍⚕️ Apply</a>
+        </div>
+      </div>
+      <div class="hero-audience">
+        <span class="tag">Individuals &amp; Families</span>
+        <span class="tag">NHS &amp; Care Organisations</span>
+        <span class="tag">Care Professionals</span>
+      </div>
+      <div class="hero-scroll"><span>Scroll</span><span class="line"></span></div>
+    </section>
+
+    <!-- ===== STATEMENT ===== -->
+    <section class="statement" id="about">
+      <div class="statement-p-bg">
+        <svg viewBox="0 0 200 260"><use href="#plutoPGhost" /></svg>
+      </div>
+      <div class="wrap statement-grid">
+        <h2 class="statement-word">
+          <span class="reveal">Care isn't</span>
+          <span class="reveal">a service.</span>
+          <span class="reveal">It's <em>a standard.</em></span>
+        </h2>
+        <div>
+          <p class="statement-copy reveal">Our mission is improving the quality of life for the people we support — vulnerable adults and children who deserve care delivered to an exceptionally high standard.</p>
+          <p class="statement-copy reveal">Every professional we place is vetted to protect the people who rely on them. Every person we support is treated as exactly that — a person, not a case number.</p>
+        </div>
+      </div>
+
+      <div class="wrap" style="margin-top:90px; max-width:820px;">
+        <div class="eyebrow reveal">Who we are</div>
+        <p class="statement-copy reveal" style="margin-top:14px; font-size:17px;">Pluto BV Ltd recruits temporary and permanent social care professionals for the public and private sectors, and supplies them to local authorities, the NHS and private residential homes. Alongside that recruitment work, we provide care support directly to individuals and families who want to stay independent at home. Every person we place — whether into an organisation's team or into someone's home — is vetted first, because the people relying on them are often vulnerable adults and children.</p>
+      </div>
+
+      <div class="wrap reveal" style="margin-top:64px;">
+        <div class="eyebrow" style="margin-bottom:20px;">Our role</div>
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px; font-size:14px; font-weight:650;">
+          <span class="role-node">Organisations &amp; families</span>
+          <span class="role-arrow">→</span>
+          <span class="role-node role-node-brand">Pluto BV Ltd</span>
+          <span class="role-arrow">→</span>
+          <span class="role-node">Vetted care professionals</span>
+          <span class="role-arrow">→</span>
+          <span class="role-node">People receiving care</span>
+        </div>
+        <p class="statement-copy reveal" style="margin-top:22px; max-width:640px; font-size:14.5px;">We sit between the people who need care or staffing and the professionals who can provide it — recruiting, vetting and placing, then staying involved once a placement begins rather than stepping away.</p>
+      </div>
+
+      <div class="wrap reveal" style="margin-top:56px; display:flex; flex-wrap:wrap; gap:12px;">
+        <span class="sector-chip">Local Authorities</span>
+        <span class="sector-chip">NHS &amp; Healthcare</span>
+        <span class="sector-chip">Private Residential Homes</span>
+        <span class="sector-chip">Individuals &amp; Families</span>
+      </div>
+    </section>
+
+    <!-- ===== HOW PLUTO WORKS ===== -->
+    <section class="pad-xl" id="how-we-work" style="background:#fff;">
+      <div class="wrap">
+        <div class="section-head reveal" style="max-width:640px;">
+          <div class="eyebrow">How we work</div>
+          <h2 style="margin-top:10px;">From requirement to placement — and beyond.</h2>
+        </div>
+        <div class="timeline-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); margin-top:44px;">
+          <div class="t-step reveal"><div class="t-dot">01</div><h3>Understand</h3><p>We take time to understand the requirement — whether that's an organisation's staffing gap or a person's care needs at home.</p></div>
+          <div class="t-step reveal"><div class="t-dot">02</div><h3>Source</h3><p>We identify care professionals with the right experience for the setting and discipline involved.</p></div>
+          <div class="t-step reveal"><div class="t-dot">03</div><h3>Vet</h3><p>Every professional undergoes vetting and screening, including DBS-related checks and UK Right to Work verification.</p></div>
+          <div class="t-step reveal"><div class="t-dot">04</div><h3>Match</h3><p>We match the professional to the requirement — temporary or permanent, and to the sector involved.</p></div>
+          <div class="t-step reveal"><div class="t-dot">05</div><h3>Support</h3><p>A dedicated account manager stays involved once a placement begins, available around the clock.</p></div>
+          <div class="t-step reveal"><div class="t-dot">06</div><h3>Review</h3><p>We keep track of how a placement is going, using client feedback and management information to keep it working.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== THE PEOPLE ===== -->
+    <section class="people pad-xl" id="people">
+      <div class="wrap">
+        <div class="people-head">
+          <div class="eyebrow reveal">Who we're built for</div>
+          <h2 class="reveal">Care built around people.</h2>
+        </div>
+        <div class="people-grid">
+          <div class="people-card reveal-scale" style="background-image:url('images/placeholders/families.svg');">
+            <div class="card-overlay"></div>
+            <svg class="pmark" viewBox="0 0 200 260"><use href="#plutoP" /></svg>
+            <div class="card-inner people-card-content">
+              <div class="num">01 — INDIVIDUALS &amp; FAMILIES</div>
+              <h3>Staying independent, at home.</h3>
+              <p>Compassionate, one-to-one support for people who want to keep living life on their own terms — in the comfort of home.</p>
+            </div>
+          </div>
+          <div class="people-card reveal-scale" style="background-image:url('images/placeholders/organisations.svg');">
+            <div class="card-overlay"></div>
+            <svg class="pmark" viewBox="0 0 200 260"><use href="#plutoP" /></svg>
+            <div class="card-inner people-card-content">
+              <div class="num">02 — NHS &amp; CARE ORGANISATIONS</div>
+              <h3>People they can trust.</h3>
+              <p>Vetted, dependable social care professionals for local authorities, the NHS and private residential homes, backed by 24/7 account support.</p>
+            </div>
+          </div>
+          <div class="people-card reveal-scale" style="background-image:url('images/placeholders/careers.svg');">
+            <div class="card-overlay"></div>
+            <svg class="pmark" viewBox="0 0 200 260"><use href="#plutoP" /></svg>
+            <div class="card-inner people-card-content">
+              <div class="num">03 — CARE PROFESSIONALS</div>
+              <h3>A career that matters.</h3>
+              <p>Temporary and permanent placements across the NHS, local authorities and residential homes — with training and support behind you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services pad-xl" id="services">
+      <div class="wrap">
+        <div class="services-head">
+          <h2 class="reveal">Support that meets people where they are.</h2>
+          <p class="reveal">Four ways we help people stay independent, connected and well supported — at home or in the setting that suits them best.</p>
+        </div>
+        <div class="services-list">
+          <div class="service-row reveal">
+            <div class="row-bg"></div>
+            <div class="service-num">01</div>
+            <div class="service-name">
+              <img class="service-icon-img" src="images/placeholders/live-in-care.svg" alt="" loading="lazy" />
+              Live-in Care
+            </div>
+            <div class="service-desc">Round-the-clock support in the comfort of your own home, so you can keep living life on your terms.</div>
+            <a href="#contact" class="service-cta">Explore →</a>
+          </div>
+          <div class="service-row reveal">
+            <div class="row-bg"></div>
+            <div class="service-num">02</div>
+            <div class="service-name">
+              <img class="service-icon-img" src="images/placeholders/domiciliary-care.svg" alt="" loading="lazy" />
+              Domiciliary Care
+            </div>
+            <div class="service-desc">Support with daily activities and household tasks for people who live independently at home.</div>
+            <a href="#contact" class="service-cta">Explore →</a>
+          </div>
+          <div class="service-row reveal">
+            <div class="row-bg"></div>
+            <div class="service-num">03</div>
+            <div class="service-name">
+              <img class="service-icon-img" src="images/placeholders/companionship.svg" alt="" loading="lazy" />
+              Companionship Care
+            </div>
+            <div class="service-desc">Because nobody should feel alone — conversation, activities and consistent human connection.</div>
+            <a href="#contact" class="service-cta">Explore →</a>
+          </div>
+          <div class="service-row reveal">
+            <div class="row-bg"></div>
+            <div class="service-num">04</div>
+            <div class="service-name">
+              <img class="service-icon-img" src="images/placeholders/specialist-support.svg" alt="" loading="lazy" />
+              Autism &amp; Specialist Support
+            </div>
+            <div class="service-desc">Person-centred support for individuals with autism, complex needs and behaviours that challenge others.</div>
+            <a href="#contact" class="service-cta">Explore →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TRUST ===== -->
+    <section class="trust" id="trust">
+      <div class="wrap">
+        <div class="trust-head">
+          <div class="eyebrow reveal" style="justify-content:center;">For care organisations</div>
+          <h2 class="reveal">Reliable people, for the teams that need them.</h2>
+        </div>
+        <div class="trust-orgs">
+          <div class="org-chip reveal-scale">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+            Local Authorities
+          </div>
+          <div class="org-chip reveal-scale">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+            NHS &amp; Healthcare
+          </div>
+          <div class="org-chip reveal-scale">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l9-7 9 7v11M9 21v-6h6v6"/></svg>
+            Residential Care Homes
+          </div>
+          <div class="org-chip reveal-scale">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+            Private Organisations
+          </div>
+        </div>
+        <div class="trust-stats">
+          <div class="stat reveal">
+            <div class="num" data-count="24">0</div>
+            <div class="lbl">/7 ACCOUNT SUPPORT</div>
+          </div>
+          <div class="stat reveal">
+            <div class="num">DBS</div>
+            <div class="lbl">VETTING &amp; SCREENING</div>
+          </div>
+          <div class="stat reveal">
+            <div class="num">RTW</div>
+            <div class="lbl">RIGHT TO WORK</div>
+          </div>
+          <div class="stat reveal">
+            <div class="num">TUPE</div>
+            <div class="lbl">TRANSFER EXPERTISE</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== APPROACH ===== -->
+    <section class="approach" id="approach">
+      <div class="wrap">
+        <div class="approach-head">
+          <div>
+            <div class="eyebrow reveal">How support begins</div>
+            <h2 class="reveal">A considered path to the right care.</h2>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-track"><div class="fill" id="timelineFill"></div></div>
+          <div class="timeline-grid">
+            <div class="t-step reveal"><div class="t-dot">01</div><h3>Understand</h3><p>We take time to understand the person's needs, routine and circumstances.</p></div>
+            <div class="t-step reveal"><div class="t-dot">02</div><h3>Match</h3><p>We identify the right kind of support, and the right person to provide it.</p></div>
+            <div class="t-step reveal"><div class="t-dot">03</div><h3>Support</h3><p>Compassionate, professional support begins — on the schedule that works.</p></div>
+            <div class="t-step reveal"><div class="t-dot">04</div><h3>Continue</h3><p>We stay in touch, so support keeps pace as needs change.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROFESSIONALS ===== -->
+    <section class="professionals" id="professionals">
+      <div class="wrap prof-grid">
+        <div class="prof-left">
+          <div class="eyebrow reveal">For care professionals</div>
+          <h2 class="reveal">Build a career where your work matters.</h2>
+          <p class="reveal">We recruit healthcare assistants and social care professionals for temporary and permanent roles across the NHS, local authorities and private residential homes — with training and support behind you.</p>
+          <div class="prof-cta-row reveal">
+            <a href="#staff-portal" class="btn btn-primary magnetic">Apply Now <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+            <a href="#staff-portal" class="btn btn-ghost magnetic">Staff Portal</a>
+          </div>
+        </div>
+        <div class="prof-steps">
+          <div class="p-step reveal"><div class="pnum">01</div><div><h4>Submit your application</h4><span>Complete the online form, or download and post a paper copy.</span></div></div>
+          <div class="p-step reveal"><div class="pnum">02</div><div><h4>Provide your documents</h4><span>Share the identification and right-to-work documents we need to process your application.</span></div></div>
+          <div class="p-step reveal"><div class="pnum">03</div><div><h4>Complete relevant checks</h4><span>Vetting and screening, DBS-related checks and UK Right to Work verification.</span></div></div>
+          <div class="p-step reveal"><div class="pnum">04</div><div><h4>Complete your training</h4><span>We make sure you have the training appropriate to the role and setting.</span></div></div>
+          <div class="p-step reveal"><div class="pnum">05</div><div><h4>Begin your Pluto journey</h4><span>Once checks and training are complete, we'll match you to a placement.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STAFF PORTAL ===== -->
+    <section class="staff-portal" id="staff-portal">
+      <div class="wrap">
+        <div class="eyebrow reveal">Current &amp; prospective staff</div>
+        <h2 class="reveal" style="margin-top:8px;">Staff Portal</h2>
+        <p class="reveal" style="margin-top:12px; color:var(--text-secondary,#68616F); max-width:52ch;">Apply for a role, or submit a timesheet if you're already placed with us. This portal isn't connected to a live submission system yet — every action below tells you exactly what happens when you use it.</p>
+
+        <div class="portal-card reveal" style="margin-top:32px;">
+          <h3 style="margin:0 0 6px;">Apply for a role</h3>
+          <p style="color:var(--text-secondary,#68616F); font-size:13.5px; margin-bottom:20px;">Tell us a bit about yourself and we'll follow up by phone or email.</p>
+          <form id="applyForm" class="glass-form" novalidate>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div>
+                <input type="text" name="fullName" id="ap-name" placeholder="Full name" required>
+                <div class="field-error" id="ap-name-err">Please enter your name.</div>
+              </div>
+              <div>
+                <input type="tel" name="phone" id="ap-phone" placeholder="Phone number" required>
+                <div class="field-error" id="ap-phone-err">Please enter a contact number.</div>
+              </div>
+            </div>
+            <div>
+              <input type="email" name="email" id="ap-email" placeholder="Email address" required>
+              <div class="field-error" id="ap-email-err">Please enter a valid email address.</div>
+            </div>
+            <div>
+              <select name="role" id="ap-role" required>
+                <option value="">Which role are you applying for?</option>
+                <option value="live-in">Live-in Carer</option>
+                <option value="domiciliary">Domiciliary Carer</option>
+                <option value="companionship">Companionship Support Worker</option>
+                <option value="autism">Autism / Specialist Support Worker</option>
+                <option value="other">Other social care role</option>
+              </select>
+              <div class="field-error" id="ap-role-err">Please select a role.</div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="ap-submit">Send application <span class="arrow">→</span></button>
+            <div class="form-status" id="ap-status" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <div class="portal-card reveal">
+          <h3 style="margin:0 0 6px;">Submit a timesheet</h3>
+          <p style="color:var(--text-secondary,#68616F); font-size:13.5px; margin-bottom:20px;">PDF or photo of your completed timesheet, up to 10MB.</p>
+          <label class="upload-drop" id="ts-drop" for="ts-file">
+            <input type="file" id="ts-file" accept="application/pdf,image/*">
+            <div>Click to choose a file, or drag one here</div>
+            <div class="upload-filename" id="ts-filename"></div>
+          </label>
+          <button type="button" class="btn btn-primary" id="ts-submit" style="margin-top:16px;" disabled>Submit timesheet</button>
+          <div class="form-status" id="ts-status" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STORIES ===== -->
+    <section class="stories pad-xl" id="stories">
+      <div class="wrap">
+        <div class="stories-head">
+          <div class="eyebrow reveal" style="justify-content:center;">In their words</div>
+          <h2 class="reveal">Stories from the people we work with.</h2>
+        </div>
+        <div class="stories-grid">
+          <div class="story-card reveal-scale">
+            <div class="story-quote-mark">"</div>
+            <p class="q">Wow! What a great service.</p>
+            <div class="story-meta"><span class="dot"></span><span>Service Manager</span></div>
+          </div>
+          <div class="story-card reveal-scale">
+            <div class="story-quote-mark">"</div>
+            <p class="q">PlutoBV Services is the real deal.</p>
+            <div class="story-meta"><span class="dot"></span><span>Home Manager</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section class="final-cta" id="contact">
+      <div class="final-p">
+        <svg viewBox="0 0 200 260" style="filter:url(#softGlow)">
+          <use href="#plutoP" />
+        </svg>
+      </div>
+      <div class="wrap" style="position:relative;z-index:1;">
+        <div class="eyebrow reveal">Not sure where to start?</div>
+        <h2 class="reveal">Let's talk.</h2>
+        <p class="sub reveal">Whether you're looking for care, staffing support, or your next role — we're a phone call away.</p>
+
+        <form id="contactForm" class="glass-form reveal" novalidate>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <input type="text" name="fullName" placeholder="Full Name" required />
+            <input type="tel" name="phone" placeholder="Phone Number" required />
+          </div>
+          <input type="email" name="email" placeholder="Email Address" required />
+          <select name="enquiryType" required>
+            <option value="">How can we help?</option>
+            <option value="care">I need care for myself / a family member</option>
+            <option value="staffing">I need staffing for an organisation</option>
+            <option value="job">I'm looking for a care role</option>
+          </select>
+          <textarea rows="3" name="message" placeholder="How can we assist you?" required></textarea>
+          <button type="submit" class="btn btn-primary" id="contact-submit">Send Enquiry <span class="arrow">→</span></button>
+          <div class="form-status" id="contact-status" role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="final-phone reveal">01604 630 916</div>
+      </div>
+    </section>
+
+    <!-- ===== LEGAL ===== -->
+    <section class="pad-xl" id="legal" style="background:#fff;">
+      <div class="wrap" style="max-width:760px;">
+        <h2 class="reveal">Legal</h2>
+        <div id="legal-privacy" class="reveal" style="margin-top:32px;">
+          <h3>Privacy Policy</h3>
+          <p style="color:var(--text-secondary,#68616F); margin-top:10px; line-height:1.7;">Pluto BV Ltd collects only the information you give us directly — such as through the contact or application forms on this site — in order to respond to your enquiry, process an application, or arrange care or staffing support. We don't sell or share your details with third parties for marketing. For any question about what we hold or to request its removal, contact <a href="mailto:admin@plutobvservices.co.uk">admin@plutobvservices.co.uk</a>.</p>
+        </div>
+        <div id="legal-terms" class="reveal" style="margin-top:32px;">
+          <h3>Terms</h3>
+          <p style="color:var(--text-secondary,#68616F); margin-top:10px; line-height:1.7;">This website provides information about Pluto BV Ltd's care and staffing services. It doesn't form a contract for services — any placement or care arrangement is agreed separately in writing. Content here is kept accurate to the best of our knowledge; contact us if anything looks out of date.</p>
+        </div>
+        <div id="legal-cookies" class="reveal" style="margin-top:32px;">
+          <h3>Cookies</h3>
+          <p style="color:var(--text-secondary,#68616F); margin-top:10px; line-height:1.7;">This site does not currently set analytics or marketing cookies. Fonts and animation libraries are loaded from third-party CDNs (Google Fonts, cdnjs, jsDelivr), which may set their own technical cookies as part of delivering those files.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div>
+          <div class="foot-brand">
+            <span class="logo-main">PLUTO</span>
+            <span class="logo-sub">BVLTD</span>
+            <span class="logo-tagline">CARE.PURPOSE.TRUST.</span>
+          </div>
+          <p class="foot-desc">Recruitment of temporary and permanent social care professionals for local authorities, the NHS and private residential homes — and direct care support for individuals and families.</p>
+        </div>
+        <div class="foot-col">
+          <h5>Care Services</h5>
+          <ul>
+            <li><a href="#services">Live-in Care</a></li>
+            <li><a href="#services">Domiciliary Care</a></li>
+            <li><a href="#services">Companionship Care</a></li>
+            <li><a href="#services">Autism &amp; Specialist Support</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#about">About</a></li>
+      <li><a href="#how-we-work">How We Work</a></li>
+            <li><a href="#trust">Areas We Support</a></li>
+            <li><a href="#professionals">Careers</a></li>
+            <li><a href="#stories">Resources</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="tel:01604630916">01604 630 916</a></li>
+            <li><a href="mailto:admin@plutobvservices.co.uk">admin@plutobvservices.co.uk</a></li>
+            <li>3 Spencer Parade, Northampton, NN1 5AA</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <p>&copy; 2026 Pluto BV Ltd. All rights reserved.</p>
+        <div class="foot-legal">
+          <a href="#legal-privacy">Privacy Policy</a>
+          <a href="#legal-terms">Terms</a>
+          <a href="#legal-cookies">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    (function() {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // ---- Lenis smooth scrolling ----
+      var lenis;
+      if (!reduced) {
+        lenis = new Lenis({
+          duration: 1.4,
+          easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+          smoothWheel: true,
+          wheelMultiplier: 1,
+          touchMultiplier: 1.5
+        });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+        window.lenis = lenis;
+      }
+
+      // ---- Nav scroll ----
+      var nav = document.getElementById('nav');
+      ScrollTrigger.create({
+        start: 'top -60',
+        onUpdate: function(self) { nav.classList.toggle('is-scrolled', self.scroll() > 60); }
+      });
+
+      // ---- Mobile menu ----
+      var mnav = document.getElementById('mnav');
+      document.getElementById('mnavOpen').addEventListener('click', function() { mnav.classList.add('is-open'); });
+      document.getElementById('mnavClose').addEventListener('click', function() { mnav.classList.remove('is-open'); });
+      mnav.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() { mnav.classList.remove('is-open'); });
+      });
+
+      // ---- Reveal ----
+      document.querySelectorAll('.reveal, .reveal-scale').forEach(function(el, i) {
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 88%',
+          onEnter: function() { el.classList.add('is-visible'); }
+        });
+      });
+
+      // ---- Stagger ----
+      document.querySelectorAll('.people-grid, .trust-orgs, .stories-grid, .timeline-grid, .prof-steps').forEach(function(
+        group) {
+        Array.prototype.forEach.call(group.children, function(child, i) {
+          child.style.setProperty('--i', i);
+        });
+      });
+
+      // ---- Hero particles ----
+      var field = document.getElementById('heroParticles');
+      if (field) {
+        for (var i = 0; i < 26; i++) {
+          var s = document.createElement('span');
+          s.style.left = (Math.random() * 100) + '%';
+          s.style.top = (Math.random() * 100) + '%';
+          s.style.animationDelay = (Math.random() * 12) + 's';
+          s.style.animationDuration = (14 + Math.random() * 12) + 's';
+          field.appendChild(s);
+        }
+      }
+
+      // ---- Hero P parallax ----
+      var heroP = document.getElementById('heroP');
+      if (heroP && !reduced) {
+        window.addEventListener('mousemove', function(e) {
+          var x = (e.clientX / window.innerWidth - .5) * 18;
+          var y = (e.clientY / window.innerHeight - .5) * 18;
+          gsap.to(heroP, { x: x, y: y, rotateZ: x * 0.08, duration: 1.2, ease: 'power3.out' });
+        });
+        gsap.to(heroP, {
+          yPercent: 14,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
+        gsap.to('.hero-inner', {
+          yPercent: -10,
+          opacity: 0.6,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
+      }
+
+      // ---- Statement & final P drift ----
+      if (!reduced) {
+        gsap.to('.statement-p-bg', {
+          yPercent: -10,
+          rotate: 3,
+          ease: 'none',
+          scrollTrigger: { trigger: '.statement', start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+        gsap.to('.final-p', {
+          scale: 1.08,
+          ease: 'none',
+          scrollTrigger: { trigger: '.final-cta', start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      }
+
+      // ---- Timeline fill ----
+      ScrollTrigger.create({
+        trigger: '.timeline',
+        start: 'top 70%',
+        onEnter: function() { document.getElementById('timelineFill').style.width = '100%'; }
+      });
+
+      // ---- Magnetic buttons (refined) ----
+      if (!reduced) {
+        document.querySelectorAll('.magnetic').forEach(function(btn) {
+          btn.addEventListener('mousemove', function(e) {
+            var r = btn.getBoundingClientRect();
+            var x = e.clientX - r.left - r.width / 2;
+            var y = e.clientY - r.top - r.height / 2;
+            gsap.to(btn, { x: x * 0.2, y: y * 0.3, duration: 0.6, ease: 'power3.out' });
+          });
+          btn.addEventListener('mouseleave', function() {
+            gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1,0.3)' });
+          });
+        });
+      }
+
+      // ---- Service row padding ----
+      document.querySelectorAll('.service-row').forEach(function(row) {
+        row.addEventListener('mouseenter', function() { gsap.to(row, { paddingLeft: 20, duration: 0.6,
+            ease: 'power3.out' }); });
+        row.addEventListener('mouseleave', function() { gsap.to(row, { paddingLeft: 10, duration: 0.6,
+            ease: 'power3.out' }); });
+      });
+
+      // ---- Refined custom cursor ----
+      var cursor = document.getElementById('cursor');
+      var cursorLabel = document.getElementById('cursorLabel');
+      if (cursor && window.matchMedia('(hover:hover)').matches) {
+        window.addEventListener('mousemove', function(e) {
+          gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.3, ease: 'power2.out' });
+        });
+        document.querySelectorAll('a, button, .service-row, .people-card, .story-card').forEach(function(el) {
+          el.addEventListener('mouseenter', function() {
+            cursor.classList.add('is-active');
+            if (el.classList.contains('service-row')) {
+              cursorLabel.textContent = 'Explore';
+            } else if (el.classList.contains('people-card')) {
+              cursorLabel.textContent = 'Learn';
+            } else if (el.classList.contains('story-card')) {
+              cursorLabel.textContent = 'Read';
+            } else {
+              cursorLabel.textContent = 'View';
+            }
+          });
+          el.addEventListener('mouseleave', function() {
+            cursor.classList.remove('is-active');
+          });
+        });
+      }
+
+      // ---- 3D card tilt for people cards ----
+      document.querySelectorAll('.people-card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          var x = (e.clientX - rect.left) / rect.width - 0.5;
+          var y = (e.clientY - rect.top) / rect.height - 0.5;
+          var rotateX = y * 4;
+          var rotateY = x * 4;
+          gsap.to(card, { rotateX: rotateX, rotateY: rotateY, duration: 0.6, ease: 'power2.out' });
+          var inner = card.querySelector('.card-inner');
+          if (inner) {
+            gsap.to(inner, { x: x * 6, y: y * 4, duration: 0.6, ease: 'power2.out' });
+          }
+        });
+        card.addEventListener('mouseleave', function() {
+          gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.8, ease: 'elastic.out(1,0.3)' });
+          var inner = card.querySelector('.card-inner');
+          if (inner) {
+            gsap.to(inner, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1,0.3)' });
+          }
+        });
+      });
+
+      // ---- Count-up stats ----
+      document.querySelectorAll('.stat .num[data-count]').forEach(function(el) {
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        if (isNaN(target)) return;
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 90%',
+          onEnter: function() {
+            gsap.fromTo(el, { textContent: 0 }, {
+              textContent: target,
+              duration: 1.8,
+              ease: 'power2.out',
+              snap: { textContent: 1 },
+              onUpdate: function() {
+                el.textContent = Math.round(this.targets()[0].textContent);
+              }
+            });
+          }
+        });
+      });
+
+      // ---- Smooth anchor scroll ----
+      document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          var id = a.getAttribute('href');
+          if (id.length > 1) {
+            var target = document.querySelector(id);
+            if (target) {
+              e.preventDefault();
+              var top = target.getBoundingClientRect().top + window.pageYOffset - 24;
+              if (window.lenis) {
+                window.lenis.scrollTo(top, { duration: 1.4 });
+              } else {
+                window.scrollTo({ top: top, behavior: reduced ? 'auto' : 'smooth' });
+              }
+            }
+          }
+        });
+      });
+
+      // ---- Scroll progress ----
+      var progressBar = document.getElementById('scrollProgress');
+      if (progressBar) {
+        window.addEventListener('scroll', function() {
+          var scrollTop = window.scrollY;
+          var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+        }, { passive: true });
+      }
+
+      // ---- Contact form ----
+      // NOTE: there is no backend/API wired up here. Rather than fake a
+      // "sent" state, this validates the form locally then hands the
+      // enquiry to the visitor's own email client via a pre-filled
+      // mailto: link addressed to admin@plutobvservices.co.uk — that
+      // genuinely sends, it just goes through their mail app rather than
+      // silently in the background. Swap this for a real fetch() to your
+      // form-handling endpoint (Formspree, a serverless function, etc.)
+      // when one exists — the validation and UI states below don't need
+      // to change, only the submit handler's body.
+      (function() {
+        var isEmail = function(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); };
+        var contactForm = document.getElementById('contactForm');
+        if (!contactForm) return;
+        var status = document.getElementById('contact-status');
+        var btn = document.getElementById('contact-submit');
+
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          status.className = 'form-status';
+          var fd = new FormData(contactForm);
+          var name = (fd.get('fullName') || '').trim();
+          var phone = (fd.get('phone') || '').trim();
+          var email = (fd.get('email') || '').trim();
+          var type = fd.get('enquiryType') || '';
+          var message = (fd.get('message') || '').trim();
+
+          contactForm.querySelectorAll('.invalid').forEach(function(el) { el.classList.remove('invalid'); });
+
+          var problems = [];
+          if (!name) { problems.push(contactForm.querySelector('[name="fullName"]')); }
+          if (!phone) { problems.push(contactForm.querySelector('[name="phone"]')); }
+          if (!email || !isEmail(email)) { problems.push(contactForm.querySelector('[name="email"]')); }
+          if (!type) { problems.push(contactForm.querySelector('[name="enquiryType"]')); }
+          if (!message) { problems.push(contactForm.querySelector('[name="message"]')); }
+
+          if (problems.length) {
+            problems.forEach(function(el) { if (el) el.classList.add('invalid'); });
+            status.textContent = 'Please fill in every field with a valid value before sending.';
+            status.classList.add('show', 'error');
+            return;
+          }
+
+          btn.disabled = true;
+          btn.textContent = 'Opening your email…';
+
+          var subject = 'Website enquiry — ' + type;
+          var body = 'Name: ' + name + '\nPhone: ' + phone + '\nEmail: ' + email + '\nEnquiry type: ' + type + '\n\n' + message;
+          var mailto = 'mailto:admin@plutobvservices.co.uk?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+          window.location.href = mailto;
+
+          status.textContent = 'Your email app should now be open with this enquiry pre-filled to admin@plutobvservices.co.uk — hit send there to reach us. Nothing was sent automatically from this page.';
+          status.classList.add('show', 'success');
+          btn.disabled = false;
+          btn.innerHTML = 'Send Enquiry <span class="arrow">→</span>';
+        });
+      })();
+
+      // ---- Staff Portal: application form ----
+      (function() {
+        var isEmail = function(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); };
+        var form = document.getElementById('applyForm');
+        if (!form) return;
+        var status = document.getElementById('ap-status');
+        var btn = document.getElementById('ap-submit');
+        var fields = ['name', 'phone', 'email', 'role'];
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          status.className = 'form-status';
+          var name = document.getElementById('ap-name');
+          var phone = document.getElementById('ap-phone');
+          var email = document.getElementById('ap-email');
+          var role = document.getElementById('ap-role');
+          [name, phone, email, role].forEach(function(el) { el.classList.remove('invalid'); });
+          fields.forEach(function(f) { document.getElementById('ap-' + f + '-err').classList.remove('show'); });
+
+          var ok = true;
+          if (!name.value.trim()) { name.classList.add('invalid'); document.getElementById('ap-name-err').classList.add('show'); ok = false; }
+          if (!phone.value.trim()) { phone.classList.add('invalid'); document.getElementById('ap-phone-err').classList.add('show'); ok = false; }
+          if (!isEmail(email.value.trim())) { email.classList.add('invalid'); document.getElementById('ap-email-err').classList.add('show'); ok = false; }
+          if (!role.value) { role.classList.add('invalid'); document.getElementById('ap-role-err').classList.add('show'); ok = false; }
+          if (!ok) return;
+
+          btn.disabled = true;
+          btn.textContent = 'Opening your email…';
+          var subject = 'Job application — ' + role.options[role.selectedIndex].text;
+          var body = 'Name: ' + name.value.trim() + '\nPhone: ' + phone.value.trim() + '\nEmail: ' + email.value.trim() + '\nRole: ' + role.options[role.selectedIndex].text;
+          window.location.href = 'mailto:admin@plutobvservices.co.uk?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+          status.textContent = 'Your email app should now be open with this application pre-filled to admin@plutobvservices.co.uk — hit send there to apply. There is no live application database behind this form yet.';
+          status.classList.add('show', 'success');
+          btn.disabled = false;
+          btn.innerHTML = 'Send application <span class="arrow">→</span>';
+        });
+      })();
+
+      // ---- Staff Portal: timesheet upload ----
+      (function() {
+        var drop = document.getElementById('ts-drop');
+        var input = document.getElementById('ts-file');
+        var filename = document.getElementById('ts-filename');
+        var submit = document.getElementById('ts-submit');
+        var status = document.getElementById('ts-status');
+        if (!drop || !input) return;
+        var maxBytes = 10 * 1024 * 1024;
+        var chosen = null;
+
+        function handleFile(file) {
+          status.className = 'form-status';
+          if (!file) return;
+          var okType = file.type === 'application/pdf' || file.type.indexOf('image/') === 0;
+          if (!okType) {
+            filename.textContent = '';
+            status.textContent = file.name + ' isn\'t a PDF or image — please choose a different file.';
+            status.classList.add('show', 'error');
+            submit.disabled = true;
+            chosen = null;
+            return;
+          }
+          if (file.size > maxBytes) {
+            filename.textContent = '';
+            status.textContent = file.name + ' is over 10MB — please choose a smaller file.';
+            status.classList.add('show', 'error');
+            submit.disabled = true;
+            chosen = null;
+            return;
+          }
+          chosen = file;
+          filename.textContent = file.name + ' (' + Math.round(file.size / 1024) + ' KB) — ready to send.';
+          submit.disabled = false;
+        }
+
+        input.addEventListener('change', function() { handleFile(input.files[0]); });
+        drop.addEventListener('dragover', function(e) { e.preventDefault(); drop.classList.add('dragover'); });
+        drop.addEventListener('dragleave', function() { drop.classList.remove('dragover'); });
+        drop.addEventListener('drop', function(e) {
+          e.preventDefault();
+          drop.classList.remove('dragover');
+          if (e.dataTransfer.files[0]) { input.files = e.dataTransfer.files; handleFile(e.dataTransfer.files[0]); }
+        });
+
+        submit.addEventListener('click', function() {
+          if (!chosen) return;
+          status.className = 'form-status';
+          // No upload endpoint exists in this build — mailto: cannot attach
+          // files reliably across browsers, so the honest action here is
+          // to tell the person to attach it themselves rather than fake
+          // a successful upload. Wire this button to a real POST to your
+          // storage/API when one exists.
+          status.textContent = 'There\'s no live upload endpoint connected yet — please attach "' + chosen.name + '" to an email and send it to admin@plutobvservices.co.uk directly.';
+          status.classList.add('show', 'error');
+        });
+      })();
+
+      // ---- Refresh ScrollTrigger on load ----
+      window.addEventListener('load', function() {
+        ScrollTrigger.refresh();
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

@@ -19,7 +19,6 @@
        PLUTO 2.0 — LIGHT & AIRY DESIGN TOKENS
        ============================================================ */
     :root {
-      /* Light, warm palette – white/cream base with purple accents */
       --bg-body: #FCFAF8;
       --bg-card: #FFFFFF;
       --bg-glass: rgba(255, 255, 255, 0.6);
@@ -1851,7 +1850,7 @@
     <div class="mnav-foot">
       <span>01604 630 916</span>
       <span>admin@plutobvservices.co.uk</span>
-      <span>NN1 FBS FLAT 2 WEST STREET WALK/span>
+      <span>NN1 5BS FLAT 2 WEST STREET WALK</span>
     </div>
   </div>
 
@@ -1860,7 +1859,7 @@
 
     <!-- ===== HERO ===== -->
     <section class="hero" id="hero">
-      <img class="hero-bg" src="images/placeholders/hero.svg" alt="" loading="eager" />
+      <img class="hero-bg" src="images/photos/hero.jpg" alt="A carer supporting an elderly client at home" loading="eager" />
       <div class="hero-overlay"></div>
       <div class="hero-field">
         <div class="hero-p" id="heroP">
@@ -2012,7 +2011,7 @@
             <div class="row-bg"></div>
             <div class="service-num">01</div>
             <div class="service-name">
-              <img class="service-icon-img" src="images/photos/live-in-care.jpg" alt="" loading="lazy" />
+              <img class="service-icon-img" src="images/photos/live-in-care.jpg" alt="Live-in Care" loading="lazy" />
               Live-in Care
             </div>
             <div class="service-desc">Round-the-clock support in the comfort of your own home, so you can keep living life on your terms.</div>
@@ -2022,7 +2021,7 @@
             <div class="row-bg"></div>
             <div class="service-num">02</div>
             <div class="service-name">
-              <img class="service-icon-img" src="images/photos/domiciliary-care.jpg" alt="" loading="lazy" />
+              <img class="service-icon-img" src="images/photos/domiciliary-care.jpg" alt="Domiciliary Care" loading="lazy" />
               Domiciliary Care
             </div>
             <div class="service-desc">Support with daily activities and household tasks for people who live independently at home.</div>
@@ -2032,7 +2031,7 @@
             <div class="row-bg"></div>
             <div class="service-num">03</div>
             <div class="service-name">
-              <img class="service-icon-img" src="images/photos/companionship.jpg" alt="" loading="lazy" />
+              <img class="service-icon-img" src="images/photos/companionship.jpg" alt="Companionship Care" loading="lazy" />
               Companionship Care
             </div>
             <div class="service-desc">Because nobody should feel alone — conversation, activities and consistent human connection.</div>
@@ -2042,7 +2041,7 @@
             <div class="row-bg"></div>
             <div class="service-num">04</div>
             <div class="service-name">
-              <img class="service-icon-img" src="images/photos/specialist-support.jpg" alt="" loading="lazy" />
+              <img class="service-icon-img" src="images/photos/specialist-support.jpg" alt="Autism & Specialist Support" loading="lazy" />
               Autism &amp; Specialist Support
             </div>
             <div class="service-desc">Person-centred support for individuals with autism, complex needs and behaviours that challenge others.</div>
@@ -2297,7 +2296,7 @@
           <h5>Company</h5>
           <ul>
             <li><a href="#about">About</a></li>
-      <li><a href="#how-we-work">How We Work</a></li>
+            <li><a href="#how-we-work">How We Work</a></li>
             <li><a href="#trust">Areas We Support</a></li>
             <li><a href="#professionals">Careers</a></li>
             <li><a href="#stories">Resources</a></li>
@@ -2555,16 +2554,7 @@
         }, { passive: true });
       }
 
-      // ---- Contact form ----
-      // NOTE: there is no backend/API wired up here. Rather than fake a
-      // "sent" state, this validates the form locally then hands the
-      // enquiry to the visitor's own email client via a pre-filled
-      // mailto: link addressed to admin@plutobvservices.co.uk — that
-      // genuinely sends, it just goes through their mail app rather than
-      // silently in the background. Swap this for a real fetch() to your
-      // form-handling endpoint (Formspree, a serverless function, etc.)
-      // when one exists — the validation and UI states below don't need
-      // to change, only the submit handler's body.
+      // ---- Contact form (mailto – no backend) ----
       (function() {
         var isEmail = function(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); };
         var contactForm = document.getElementById('contactForm');
@@ -2700,11 +2690,6 @@
         submit.addEventListener('click', function() {
           if (!chosen) return;
           status.className = 'form-status';
-          // No upload endpoint exists in this build — mailto: cannot attach
-          // files reliably across browsers, so the honest action here is
-          // to tell the person to attach it themselves rather than fake
-          // a successful upload. Wire this button to a real POST to your
-          // storage/API when one exists.
           status.textContent = 'There\'s no live upload endpoint connected yet — please attach "' + chosen.name + '" to an email and send it to admin@plutobvservices.co.uk directly.';
           status.classList.add('show', 'error');
         });

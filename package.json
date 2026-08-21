@@ -1,6 +1,6 @@
 {
-  "name": "pluto-bv-LTD",
+  "name": "pluto-bv-services",
   "version": "1.0.0",
-  "description": "Pluto BV Ltd – social care recruitment and support",
+  "description": "Static site for Pluto BV Ltd",
   "main": "index.html"
 }

@@ -1,9 +1,0 @@
-{
-  "version": 2,
-  "routes": [
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
-    { "src": "/images/(.*)", "dest": "/images/$1" },
-    { "src": "/(.*\\.html)", "dest": "/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
-}
